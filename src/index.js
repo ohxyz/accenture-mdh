@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
 const LatestTransactions 
     = require("./latest-transactions.js").LatestTransactions;
     
 const controls = require('./ui-controls.js');
+
 const TextBox = controls.TextBox;
 const DropdownBox = controls.DropdownBox;
 
@@ -95,8 +97,8 @@ class AdvancedSearch extends React.Component {
                     <li><DropdownBox value="Receiving Participant" /></li>
                     <li><DropdownBox value="Unsolicited Responses" /></li>
                     <li style={ {visibility: 'hidden' } }><TextBox value="Place Holder" /></li>
-                    <li><TextBox value="Date Created from" /></li>
-                    <li><TextBox value="Date Created to" /></li>
+                    <li><TextBox inputId="date-created-from" value="Date Created from" /></li>
+                    <li><TextBox inputId="date-created-to" value="Date Created to" /></li>
                     <li><TextBox value="Time Created from" /></li>
                     <li><TextBox value="Time Created to" /></li>
                     <li><DropdownBox value="Service Order Type" /></li>

@@ -34,7 +34,7 @@ export class TextBox extends React.Component {
             <div className="text-box">
                 <input type="text"
                        size="1"
-                       id={ this.props.id } 
+                       id={ this.props.inputId } 
                        name={ this.props.name }
                        defaultValue={ this.props.value }
                        onFocus={ this.handleFocus }
