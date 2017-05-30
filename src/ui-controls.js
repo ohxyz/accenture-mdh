@@ -1,6 +1,6 @@
 import React from 'react'
 
-function isDescendant( parentElem, childElem ) {
+function isDescendant( childElem, parentElem ) {
 	
 	let node = childElem.parentNode;
 	while ( node !== null ) {
@@ -85,8 +85,9 @@ export class DropdownBox extends React.Component {
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
 		
-		let self = this;
-		DropdownBox.ids.push( props.id );
+        this.dom = null;
+		DropdownBox.dropdownBoxes.push( this );
+        
     }
     
     
@@ -133,7 +134,8 @@ export class DropdownBox extends React.Component {
         return (
         
             <div id={ this.props.id } 
-				 className={ 'dropdown-box ' + this.state.isOpenedClass }
+				 className={ 'dropdown-box ' + this.state.isOpenedClass } 
+                 ref={ self => this.dom = self }
 		    >
                 
 				<div className="dropdown-selected"
@@ -159,21 +161,18 @@ export class DropdownBox extends React.Component {
 }
 
 /* Global events */
-
-DropdownBox.ids = [];
+DropdownBox.dropdownBoxes = [];
 
 document.addEventListener( 'mouseup', ( event ) => {
+    
+	DropdownBox.dropdownBoxes.forEach( ( box ) => {
+        
+        if ( isDescendant( event.target, box.dom ) === false ){
+            
+            // box.closeDropdownList();
+        }
 
-	DropdownBox.ids.forEach( ( id ) => {
-		
-		let elem = document.getElementById( id );
-		let classList = elem.classList;
-		
-		if ( classList.contains( 'is-opened' ) ){
-			classList.remove( 'is-opened' ); 
-		}
 	} );
-	
 } );
 
 
