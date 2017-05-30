@@ -13,7 +13,6 @@ class SearchResultsHeader extends React.Component {
                 <h2 id="displaying-heading">Displaying 15 Items</h2>
                 <button id="customise">Customise</button>
                 <button id="export-all">Export all to CSV</button>
-
             </div>
         )
     }

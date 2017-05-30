@@ -1,15 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { LatestTransactions } from './latest-transactions';
+import { TextBox, DropdownBox } from './ui-controls';
 import './index.css';
-
-
-const LatestTransactions 
-    = require("./latest-transactions.js").LatestTransactions;
-    
-const controls = require('./ui-controls.js');
-
-const TextBox = controls.TextBox;
-const DropdownBox = controls.DropdownBox;
 
 class BasicSearch extends React.Component {
     
@@ -58,7 +51,9 @@ class BasicSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <DropdownBox value="Fuel Type"/>
+                        <DropdownBox 
+							id="fuel-type"
+							value="Fuel Type"/>
                     </li>
                     <li>
                         <TextBox id={ this.textBoxes[2].id }
@@ -67,13 +62,19 @@ class BasicSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <DropdownBox value="Transaction Group" />
+                        <DropdownBox
+							id="transaction-group"
+							value="Transaction Group" />
                     </li>
                     <li>
-                        <DropdownBox value="Transaction Type" />
+                        <DropdownBox
+							id="transaction-type"
+							value="Transaction Type" />
                     </li>
                     <li>
-                        <DropdownBox value="Transaction Status" />
+                        <DropdownBox 
+							id="transaction-status"
+							value="Transaction Status" />
                     </li>
                 </ul>
             </div>
@@ -93,18 +94,46 @@ class AdvancedSearch extends React.Component {
         return (
             <div id="advanced-search" style={ style} >
                 <ul className="control-list clearfix">
-                    <li><DropdownBox value="Sending Participant" /></li>
-                    <li><DropdownBox value="Receiving Participant" /></li>
-                    <li><DropdownBox value="Unsolicited Responses" /></li>
-                    <li style={ {visibility: 'hidden' } }><TextBox value="Place Holder" /></li>
-                    <li><TextBox inputId="date-created-from" value="Date Created from" /></li>
-                    <li><TextBox inputId="date-created-to" value="Date Created to" /></li>
+                    <li>
+						<DropdownBox 
+							id="sending-participants"
+					        value="Sending Participant" />
+				    </li>
+                    <li>
+						<DropdownBox
+							id="receiving-participants"
+							value="Receiving Participant" />
+				    </li>
+                    <li>
+						<DropdownBox
+							id="unsolicited-responses"
+							value="Unsolicited Responses" />
+				    </li>
+                    <li style={ {visibility: 'hidden' } }>
+						<TextBox value="Place Holder" />
+				    </li>
+                    <li><TextBox id="date-created-from" value="Date Created from" /></li>
+                    <li><TextBox id="date-created-to" value="Date Created to" /></li>
                     <li><TextBox value="Time Created from" /></li>
                     <li><TextBox value="Time Created to" /></li>
-                    <li><DropdownBox value="Service Order Type" /></li>
-                    <li><DropdownBox value="Service Order SubType" /></li>
-                    <li><DropdownBox value="Service Order Number" /></li>
-                    <li><DropdownBox value="CR Code" /></li>
+                    <li>
+						<DropdownBox 
+							id="service-order-type"
+							value="Service Order Type" />
+					</li>
+                    <li><DropdownBox 
+							id="service-order-subtype"
+							value="Service Order SubType" />
+					</li>
+                    <li><DropdownBox 
+							id="service-order-number"
+							value="Service Order Number" />
+					</li>
+                    <li>
+						<DropdownBox 
+							id="cr-code" 
+							value="CR Code" />
+				    </li>
                 </ul>
             </div>
         )
