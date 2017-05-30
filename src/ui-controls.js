@@ -169,7 +169,7 @@ document.addEventListener( 'mouseup', ( event ) => {
         
         if ( isDescendant( event.target, box.dom ) === false ){
             
-            // box.closeDropdownList();
+            box.closeDropdownList();
         }
 
 	} );
