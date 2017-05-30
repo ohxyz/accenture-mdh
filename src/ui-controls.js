@@ -31,9 +31,9 @@ export class TextBox extends React.Component {
     render() {
         return (
         
-            <div className="text-box">
-                <input type="text"
-                       size="1"
+
+                <input className="text-box" type="text"
+
                        id={ this.props.inputId } 
                        name={ this.props.name }
                        defaultValue={ this.props.value }
@@ -41,7 +41,7 @@ export class TextBox extends React.Component {
                        onBlur={ this.handleBlur }
                 
                 />
-            </div>
+
         );
     }
 

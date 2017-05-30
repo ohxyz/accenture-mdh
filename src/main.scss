@@ -8,7 +8,7 @@ $font-m: 14px;
 $font-l: 20px;
 
 $textBoxPaddingTop: 8px;
-$textBoxHeight: 30px;
+$textBoxHeight: 48px;
 $borderSize: 1px;
 $dropDownPadding: 16px 8px;
 
@@ -17,6 +17,7 @@ $defaultBorder: 1px solid $defaultColor;
 $defaultBoxShadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
 $defaultFontColor: #9f9f9f;
 $defaultBorderRadius: 6px;
+$defaultFontFamily: "Open Sans", arial, sans-serif;
 
 $fontFamilyBold: "Open Sans Bold", arial, sans-serif;
 $tablePadding: 24px;
@@ -148,12 +149,15 @@ header {
                 }
                 
                 .text-box {
-                    display: flex;
                     border-radius: $defaultBorderRadius;
                     border: 1px solid $defaultColor;
                     padding: $textBoxPaddingTop 8px;
-                    flex: 3;
                     height: $textBoxHeight;
+					box-sizing: border-box;
+					width: 100%;
+					color: $defaultFontColor;
+					font-family: $defaultFontFamily;
+					font-size: $font-m;
                 }
                 
                     .text-box input[type=text] {

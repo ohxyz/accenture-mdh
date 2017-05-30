@@ -144,12 +144,15 @@ header {
   margin-bottom: 6px; }
 
 .text-box {
-  display: flex;
   border-radius: 6px;
   border: 1px solid #d4d4d4;
   padding: 8px 8px;
-  flex: 3;
-  height: 30px; }
+  height: 48px;
+  box-sizing: border-box;
+  width: 100%;
+  color: #9f9f9f;
+  font-family: "Open Sans", arial, sans-serif;
+  font-size: 14px; }
 
 .text-box input[type=text] {
   font-family: "Open Sans";
