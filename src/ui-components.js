@@ -101,7 +101,8 @@ export class DropdownBox extends React.Component {
         this.listItems = [ 'One', 'Two', 'Three', 'Four' ];
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
-		
+		this.closeDropdownList = this.closeDropdownList.bind( this );
+        
         this.dom = null;
 		DropdownBox.dropdownBoxes.push( this );
 		
@@ -117,9 +118,8 @@ export class DropdownBox extends React.Component {
 	}
 
     handleClick() {
-        if ( this.state.isOpenedClass === 'is-opened'
-				&& this.isSingleDropdownBox() === true ) {
-
+        if ( this.state.isOpenedClass === 'is-opened' ) {
+            
             this.setState( {
             
                 isOpenedClass: ''
@@ -196,20 +196,18 @@ export class DropdownBox extends React.Component {
 		let numOfSelected = this.itemsSelected.length;
 		
 		let selectedLiteral = numOfSelected > 1
-			? numOfSelected + ' items'
-			: numOfSelected + ' item';
+			? numOfSelected + ' items selected'
+			: numOfSelected + ' item selected';
 		
 		return (
-			<li>
-				<span>{ selectedLiteral }</span>
-				<span className="done">Done</span>
+			<li className="dropdown-list-footer">
+				<span className="num-of-selected">{ selectedLiteral }</span>
+				<span className="done" onClick={ this.closeDropdownList }>Done</span>
 			</li>
 		)
 	}
 	
     render() {
-		
-		
 
         return (
         
@@ -219,14 +217,14 @@ export class DropdownBox extends React.Component {
 					+ this.state.isOpenedClass + ' '
 					+ this.state.isSelectedClass
 				}
-				onClick={ this.handleClick }
                 ref={ self => this.dom = self }
-		    >
-                <div className="dropdown-name">{ this.props.value }</div>
-				<div className="dropdown-selected">
-                    { this.state.selected }
-                </div>
-				
+		    >   
+                <div className="dropdown-header" onClick={ this.handleClick } >
+                    <div className="dropdown-name">{ this.props.value }</div>
+                    <div className="dropdown-selected">
+                        { this.state.selected }
+                    </div>
+				</div>
                 <ul className="dropdown-list">
 					{ 
 						this.listItems.map( item => 
