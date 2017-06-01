@@ -49,9 +49,11 @@ class BasicSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <DropdownBox 
+                        <DropdownBox
+							type="single"
 							id="fuel-type"
-							value="Fuel Type"/>
+							value="Fuel Type"
+						/>
                     </li>
                     <li>
                         <TextBox id={ this.textBoxes[2].id }
@@ -61,16 +63,19 @@ class BasicSearch extends React.Component {
                     </li>
                     <li>
                         <DropdownBox
+							type="multiple"
 							id="transaction-group"
 							value="Transaction Group" />
                     </li>
                     <li>
                         <DropdownBox
+							type="multiple"
 							id="transaction-type"
 							value="Transaction Type" />
                     </li>
                     <li>
-                        <DropdownBox 
+                        <DropdownBox
+							type="multiple"
 							id="transaction-status"
 							value="Transaction Status" />
                     </li>

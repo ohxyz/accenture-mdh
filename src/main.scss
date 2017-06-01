@@ -23,7 +23,7 @@ $fontFamilyBold: "Open Sans Bold", arial, sans-serif;
 $tablePadding: 24px;
 $fontBoldColor: #2a2a2a;
 
-
+/* START: Global */
 @font-face {
     font-family: "Open Sans";
     src: url("./OpenSans-Regular.ttf"), url("./OpenSans-Regular.woff");
@@ -85,6 +85,13 @@ button {
     max-width: 980px;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/* END: Global */
+
+/* START: Specific */
 header {
     margin-bottom: 24px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1 );
@@ -159,15 +166,8 @@ header {
 					font-family: $defaultFontFamily;
 					font-size: $font-m;
                 }
-                
-                    .text-box input[type=text] {
-                        font-family: "Open Sans";
-                        border: none;
-                        color: $defaultFontColor;
-                        font-size: $font-m;
-                        flex: 1;
-                    }
-                    
+				
+				
                     
                 .dropdown-box {
                     height: 50px;
@@ -225,6 +225,15 @@ header {
                         border-top: 1px solid $defaultColor;
                         
                     }
+						
+						.dropdown-list .done {
+							float: right;
+							font-size: $font-s;
+							border: 1px solid #1d92ed;
+							color: #1d92ed;
+							padding: 6px 12px;
+							border-radius: $defaultBorderRadius;
+						}
         
         #advanced-search {
             padding-top: 24px;

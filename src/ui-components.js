@@ -15,6 +15,21 @@ function isDescendant( childElem, parentElem ) {
 	return false;
 }
 
+function toggleArrayItem( item, array ){
+	
+	let index = array.indexOf( item );
+	
+	if ( index === -1 ) {
+		
+		array.push( item );
+	}
+	else {
+		
+		array.splice( index, 1 );
+	}
+	
+}
+
 export class TextBox extends React.Component {
     
     constructor() {
@@ -75,6 +90,7 @@ export class DropdownBox extends React.Component {
     constructor( props ) {
         
         super( props );
+		
         this.state = {
             
             isOpenedClass: '',
@@ -82,18 +98,27 @@ export class DropdownBox extends React.Component {
             selected: null
         };
 
-        this.listItems = [ 'One', 'Two', 'Three' ];
+        this.listItems = [ 'One', 'Two', 'Three', 'Four' ];
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
 		
         this.dom = null;
 		DropdownBox.dropdownBoxes.push( this );
+		
+		this.itemsSelected = [];
         
     }
-    
-    
+	
+	isSingleDropdownBox() {
+		
+		return ( this.props.type === 'single' || this.props.type === undefined )
+			? true
+			: false;
+	}
+
     handleClick() {
-        if ( this.state.isOpenedClass === 'is-opened' ) {
+        if ( this.state.isOpenedClass === 'is-opened'
+				&& this.isSingleDropdownBox() === true ) {
 
             this.setState( {
             
@@ -113,14 +138,45 @@ export class DropdownBox extends React.Component {
     
     handleItemSelected( event ) {
         
-        this.setState( {
+		if ( this.props.type === undefined 
+				|| this.props.type === 'single' ) {
+			
+			this.handleItemSelectedSingle( event );
+		}
+		else if ( this.props.type === 'multiple' ) {
+			
+			this.handleItemSelectedMultiple( event );
+		}
+        
+    }
+	
+	handleItemSelectedSingle( event ) {
+		
+		this.setState( {
             
             selected: event.target.innerHTML,
             isOpenedClass: '',
 			isSelectedClass: 'is-selected'
             
         } );
-    }
+	}
+	
+	handleItemSelectedMultiple( event ) {
+		
+		let item = event.target.innerHTML;
+		
+		toggleArrayItem( item, this.itemsSelected );
+		//console.log( 'item', item, this.itemsSelected);
+		
+		let numOfSelected = this.itemsSelected.length;
+
+		this.setState( {
+			
+			selected: numOfSelected + ' selected',
+			isSelectedClass: 'is-selected'
+		
+		} );
+	}
     
 	closeDropdownList( ) {
 		
@@ -130,7 +186,30 @@ export class DropdownBox extends React.Component {
 		} );
 	}
 	
+	getDropdownListFooter() {
+		
+		if ( this.isSingleDropdownBox() === true ) {
+			
+			return '';
+		}
+			
+		let numOfSelected = this.itemsSelected.length;
+		
+		let selectedLiteral = numOfSelected > 1
+			? numOfSelected + ' items'
+			: numOfSelected + ' item';
+		
+		return (
+			<li>
+				<span>{ selectedLiteral }</span>
+				<span className="done">Done</span>
+			</li>
+		)
+	}
+	
     render() {
+		
+		
 
         return (
         
@@ -144,9 +223,7 @@ export class DropdownBox extends React.Component {
                 ref={ self => this.dom = self }
 		    >
                 <div className="dropdown-name">{ this.props.value }</div>
-				<div className="dropdown-selected"
-                     
-                >
+				<div className="dropdown-selected">
                     { this.state.selected }
                 </div>
 				
@@ -158,8 +235,9 @@ export class DropdownBox extends React.Component {
 								key={ item } 
 								item={ item } 
 								onClick={ this.handleItemSelected } /> 
-					   ) 
+					   )
 					}
+					{ this.getDropdownListFooter() }
                 </ul>
             </div>
         );
@@ -172,7 +250,7 @@ DropdownBox.dropdownBoxes = [];
 document.addEventListener( 'mouseup', ( event ) => {
     
 	DropdownBox.dropdownBoxes.forEach( ( box ) => {
-        console.log( 'box', DropdownBox.dropdownBoxes );
+        // console.log( 'box', DropdownBox.dropdownBoxes );
         if ( isDescendant( event.target, box.dom ) === false ){
             
             box.closeDropdownList();
