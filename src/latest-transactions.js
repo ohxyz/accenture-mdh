@@ -1,7 +1,5 @@
 import React from 'react';
-
-const controls = require('./ui-controls.js');
-const DropdownBox = controls.DropdownBox;
+import { DropdownBox } from './ui-components';
 
 class SearchResultsHeader extends React.Component {
     

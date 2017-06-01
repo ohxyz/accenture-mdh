@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { LatestTransactions } from './latest-transactions';
-import { TextBox, DropdownBox } from './ui-controls';
+import { TextBox, DropdownBox } from './ui-components';
 import './index.css';
 
 class BasicSearch extends React.Component {
@@ -30,8 +30,6 @@ class BasicSearch extends React.Component {
             }
             
         ];
-        
-        console.log( this.textBoxes[0].id );
     }
     
     render() {

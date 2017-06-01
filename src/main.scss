@@ -8,13 +8,13 @@ $font-m: 14px;
 $font-l: 20px;
 
 $textBoxPaddingTop: 8px;
-$textBoxHeight: 48px;
+$textBoxHeight: 52px;
 $borderSize: 1px;
 $dropDownPadding: 16px 8px;
 
 $defaultColor: #d4d4d4;
 $defaultBorder: 1px solid $defaultColor;
-$defaultBoxShadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
+$defaultBoxShadow: 0px 2px 4px 0 rgba( 174, 176, 177, 0.3 );
 $defaultFontColor: #9f9f9f;
 $defaultBorderRadius: 6px;
 $defaultFontFamily: "Open Sans", arial, sans-serif;
@@ -82,7 +82,7 @@ button {
 
 .section-box {
     margin: 0 auto;
-    max-width: 1180px;
+    max-width: 980px;
 }
 
 header {
@@ -97,7 +97,7 @@ header {
     
     #top-nav li {
         display: inline-block;
-        width: 15%;
+        width: 17%;
         margin-right: 5%;
         padding-top: 24px;
         padding-bottom: 12px;
@@ -170,7 +170,7 @@ header {
                     
                     
                 .dropdown-box {
-                    height: auto;
+                    height: 50px;
                     display: block;
                     padding: 0;
                     border-radius: $defaultBorderRadius;
@@ -187,13 +187,24 @@ header {
                     .dropdown-box.is-opened .dropdown-list {
                         display: block;
                     }
+					
+					.dropdown-name {
+						padding: 18px 12px;
+						color: $defaultFontColor;
+					}
+					
+					.is-selected .dropdown-name {
+						padding: 8px 8px 4px 8px;
+						font-size: $font-s;
+					}
                                 
-                    .dropdown-selected {
+                    .is-selected .dropdown-selected {
                         padding: $dropDownPadding;
-                        color: $defaultFontColor;
-                        padding: 16px 8px;
+                        color: black;
+                        padding: 4px 8px 8px 8px;
                         user-select: none;
                     }
+					
                 
                     .dropdown-list {
                         display: none;
@@ -210,7 +221,6 @@ header {
                     }
                     
                     .dropdown-list  > li {
-                        font-family: "Open Sans Bold";
                         padding: $dropDownPadding;
                         border-top: 1px solid $defaultColor;
                         
@@ -293,13 +303,11 @@ header {
     #search-results-table {
         background-color: white;
         box-shadow: $defaultBoxShadow;
-        padding: 12px 24px;
+        padding: 12px 0;
         border-radius: $defaultBorderRadius;
         margin-bottom: 12px;
     }
         #search-results-table  li{
-            margin-left: -$tablePadding;
-            margin-right: -$tablePadding;
             padding: 16px 36px;
             color: #9f9f9f;
         }

@@ -78,7 +78,8 @@ export class DropdownBox extends React.Component {
         this.state = {
             
             isOpenedClass: '',
-            selected: props.value
+			isSelectedClass: '',
+            selected: null
         };
 
         this.listItems = [ 'One', 'Two', 'Three' ];
@@ -92,7 +93,6 @@ export class DropdownBox extends React.Component {
     
     
     handleClick() {
-		// console.log( DropdownBox.doms );
         if ( this.state.isOpenedClass === 'is-opened' ) {
 
             this.setState( {
@@ -116,7 +116,8 @@ export class DropdownBox extends React.Component {
         this.setState( {
             
             selected: event.target.innerHTML,
-            isOpenedClass: ''
+            isOpenedClass: '',
+			isSelectedClass: 'is-selected'
             
         } );
     }
@@ -134,12 +135,17 @@ export class DropdownBox extends React.Component {
         return (
         
             <div id={ this.props.id } 
-				 className={ 'dropdown-box ' + this.state.isOpenedClass } 
-                 ref={ self => this.dom = self }
+				 className={ 
+					'dropdown-box ' 
+					+ this.state.isOpenedClass + ' '
+					+ this.state.isSelectedClass
+				}
+				onClick={ this.handleClick }
+                ref={ self => this.dom = self }
 		    >
-                
+                <div className="dropdown-name">{ this.props.value }</div>
 				<div className="dropdown-selected"
-                     onClick={ this.handleClick }
+                     
                 >
                     { this.state.selected }
                 </div>
@@ -166,7 +172,7 @@ DropdownBox.dropdownBoxes = [];
 document.addEventListener( 'mouseup', ( event ) => {
     
 	DropdownBox.dropdownBoxes.forEach( ( box ) => {
-        
+        console.log( 'box', DropdownBox.dropdownBoxes );
         if ( isDescendant( event.target, box.dom ) === false ){
             
             box.closeDropdownList();
