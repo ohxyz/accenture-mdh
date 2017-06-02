@@ -13,7 +13,6 @@
 }
 
 .dropdown-box {
-	height: 50px;
 	display: block;
 	padding: 0;
 	border-radius: $defaultBorderRadius;
@@ -45,7 +44,7 @@
 			right: 4px;
 			width: 30px;
 			height: 10px;
-			background-position: 0 -17px;
+			background-position: 0 -16px;
 			background-size: 100%;
 			background-repeat: no-repeat;
 			background-image: url("assets/icons/dropdown-icon.svg");
@@ -54,8 +53,6 @@
 		.is-opened .dropdown-icon {
 			background-position: 0 -8px;
 		}
-		
-		
 		
 		.dropdown-name {
 			padding: 18px 0;
