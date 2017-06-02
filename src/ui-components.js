@@ -80,7 +80,11 @@ class DropdownListItem extends React.Component {
         
         return (
         
-            <li onClick={ this.props.onClick } >{ this.props.item }</li>
+            <li className={ this.props.className }
+					onClick={ this.props.onClick } 
+			>
+				{ this.props.item }
+			</li>
         );
     } 
 }
@@ -95,7 +99,8 @@ export class DropdownBox extends React.Component {
             
             isOpenedClass: '',
 			isSelectedClass: '',
-            selected: null
+            selectedLiteralHeader: null,
+			itemsSelected: []
         };
 
         this.listItems = [ 'One', 'Two', 'Three', 'Four' ];
@@ -154,9 +159,10 @@ export class DropdownBox extends React.Component {
 		
 		this.setState( {
             
-            selected: event.target.innerHTML,
+            selectedLiteralHeader: event.target.innerHTML,
             isOpenedClass: '',
 			isSelectedClass: 'is-selected'
+			
             
         } );
 	}
@@ -172,10 +178,12 @@ export class DropdownBox extends React.Component {
 
 		this.setState( {
 			
-			selected: numOfSelected + ' selected',
-			isSelectedClass: 'is-selected'
-		
+			selectedLiteralHeader: numOfSelected + ' selected',
+			isSelectedClass: 'is-selected',
+			itemsSelected: this.itemsSelected
+
 		} );
+		
 	}
     
 	closeDropdownList( ) {
@@ -208,7 +216,7 @@ export class DropdownBox extends React.Component {
 	}
 	
     render() {
-
+		
         return (
         
             <div id={ this.props.id } 
@@ -220,20 +228,30 @@ export class DropdownBox extends React.Component {
                 ref={ self => this.dom = self }
 		    >   
                 <div className="dropdown-header" onClick={ this.handleClick } >
+					<div className="dropdown-icon"></div>
                     <div className="dropdown-name">{ this.props.value }</div>
                     <div className="dropdown-selected">
-                        { this.state.selected }
+                        { this.state.selectedLiteralHeader }
                     </div>
 				</div>
                 <ul className="dropdown-list">
 					{ 
-						this.listItems.map( item => 
+						this.listItems.map( item => {
 							
-							<DropdownListItem 
-								key={ item } 
-								item={ item } 
-								onClick={ this.handleItemSelected } /> 
-					   )
+                            let className = this.state.itemsSelected.indexOf( item ) >= 0
+                                ? 'item-selected'
+                                : '';
+							
+                            return ( 
+                                <DropdownListItem
+                                    className={ className }
+                                    key={ item } 
+                                    item={ item } 
+                                    onClick={ this.handleItemSelected }
+                                />
+                            );
+                            
+                        } )
 					}
 					{ this.getDropdownListFooter() }
                 </ul>

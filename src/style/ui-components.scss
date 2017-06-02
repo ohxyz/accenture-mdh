@@ -1,0 +1,136 @@
+@import "variables";
+
+.text-box {
+	border-radius: $defaultBorderRadius;
+	border: 1px solid $defaultColor;
+	padding: $textBoxPaddingTop 12px;
+	height: $textBoxHeight;
+	box-sizing: border-box;
+	width: 100%;
+	color: $defaultFontColor;
+	font-family: $defaultFontFamily;
+	font-size: $font-m;
+}
+
+.dropdown-box {
+	height: 50px;
+	display: block;
+	padding: 0;
+	border-radius: $defaultBorderRadius;
+	position: relative;
+	border: $defaultBorder;
+	background-color: white;
+	cursor: pointer;
+	user-select: none;
+}
+	
+	.dropdown-box.is-opened {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		box-shadow: $dropdownBoxShadow;
+	}
+	
+	.dropdown-box.is-opened .dropdown-list {
+		display: block;
+		box-shadow: $dropdownBoxShadow;
+	}
+	.dropdown-header {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+		.dropdown-icon {
+			
+			position: absolute;
+			top: 20px;
+			right: 4px;
+			width: 30px;
+			height: 10px;
+			background-position: 0 -15px;
+			background-size: 100%;
+			background-repeat: no-repeat;
+			background-image: url("assets/icons/dropdown-icon.svg");
+		}
+		
+		.is-opened .dropdown-icon {
+			background-position: 0 -6px;
+		}
+		
+		
+		
+		.dropdown-name {
+			padding: 18px 0;
+			color: $defaultFontColor;
+		}
+		
+		.is-selected .dropdown-name {
+			padding: 8px 0 4px 0;
+			font-size: $font-s;
+			
+		}
+					
+		.is-selected .dropdown-selected {
+			padding: $dropdownPadding;
+			color: #3a4350;
+			padding: 4px 0 8px 0;
+			user-select: none;
+		}
+
+	.dropdown-list {
+		display: none;
+		position: absolute;
+		z-index: 1;
+		left: -1px;
+		right: -1px;
+		border-left: $defaultBorder;
+		border-right: $defaultBorder;
+		border-bottom: $defaultBorder;
+		border-bottom-left-radius: $defaultBorderRadius;
+		border-bottom-right-radius: $defaultBorderRadius;
+		background-color: white;
+		
+	}
+	
+		.dropdown-list  > li {
+			padding: $dropdownPadding;
+			border-top: 1px solid $defaultColor;
+			color: #2a2a2a;
+			
+		}
+		
+			.is-opened .item-selected {
+				
+                background-image: url("assets/icons/selected-mark.svg");
+                background-repeat: no-repeat;
+                padding-left: 40px;
+                background-size: 12%;
+                background-position: 6px center;
+			}
+			
+			
+		.dropdown-list .dropdown-list-footer {
+			position: relative;
+			padding: 20px 12px;
+		}
+		
+			.dropdown-list .num-of-selected {
+				color: $defaultFontColor;
+				font-size: $font-s;
+			}
+			
+			.dropdown-list .done {
+				position: absolute;
+				right: 16px;
+				top: 16px;
+				font-size: $font-s;
+				border: 1px solid #1d92ed;
+				color: #1d92ed;
+				padding: 5px 15px;
+				border-radius: $defaultBorderRadius;
+				
+			}
+			
+			.dropdown-list .done:hover {
+				
+				 box-shadow: 0 0 4px 0 #1d92ed;
+			}
+        

@@ -1,37 +1,19 @@
 @import "reset";
+@import "variables";
+@import "ui-components";
 
 /* START: MDH CSS */
 
 
-$font-s: 12px;
-$font-m: 14px;
-$font-l: 20px;
-
-$textBoxPaddingTop: 8px;
-$textBoxHeight: 52px;
-$borderSize: 1px;
-$dropDownPadding: 16px 12px;
-
-$defaultColor: #d4d4d4;
-$defaultBorder: 1px solid $defaultColor;
-$defaultBoxShadow: 0px 2px 4px 0 rgba( 174, 176, 177, 0.3 );
-$defaultFontColor: #9f9f9f;
-$defaultBorderRadius: 6px;
-$defaultFontFamily: "Open Sans", arial, sans-serif;
-
-$fontFamilyBold: "Open Sans Bold", arial, sans-serif;
-$tablePadding: 24px;
-$fontBoldColor: #2a2a2a;
-
 /* START: Global */
 @font-face {
     font-family: "Open Sans";
-    src: url("./OpenSans-Regular.ttf"), url("./OpenSans-Regular.woff");
+    src: url("assets/fonts/OpenSans-Regular.ttf"), url("assets/fonts/OpenSans-Regular.woff");
 }
 
 @font-face {
     font-family: "Open Sans Bold";
-    src: url("./OpenSans-Bold.ttf");
+    src: url("assets/fonts/OpenSans-Bold.ttf");
 }
 
 
@@ -100,8 +82,7 @@ header {
     #top-nav {
         margin-bottom: -2px;
     }
-    
-    
+
     #top-nav li {
         display: inline-block;
         width: 17%;
@@ -155,108 +136,7 @@ header {
                     margin-bottom: 6px;
                 }
                 
-                .text-box {
-                    border-radius: $defaultBorderRadius;
-                    border: 1px solid $defaultColor;
-                    padding: $textBoxPaddingTop 12px;
-                    height: $textBoxHeight;
-                    box-sizing: border-box;
-                    width: 100%;
-                    color: $defaultFontColor;
-                    font-family: $defaultFontFamily;
-                    font-size: $font-m;
-                }
                 
-                .dropdown-box {
-                    height: 50px;
-                    display: block;
-                    padding: 0;
-                    border-radius: $defaultBorderRadius;
-                    position: relative;
-                    border: $defaultBorder;
-                    background-color: white;
-                    cursor: pointer;
-                }
-                    
-                    .dropdown-box.is-opened {
-                        border-bottom-left-radius: 0;
-                        border-bottom-right-radius: 0;
-                    }
-                    
-                    .dropdown-box.is-opened .dropdown-list {
-                        display: block;
-                        
-                    }
-                    .dropdown-header {
-                        padding-left: 12px;
-                        padding-right: 12px;
-                    }
-                        .dropdown-name {
-                            padding: 18px 0;
-                            color: $defaultFontColor;
-                        }
-                        
-                        .is-selected .dropdown-name {
-                            padding: 8px 0 4px 0;
-                            font-size: $font-s;
-                            
-                        }
-                                    
-                        .is-selected .dropdown-selected {
-                            padding: $dropDownPadding;
-                            color: #3a4350;
-                            padding: 4px 0 8px 0;
-                            user-select: none;
-                        }
-
-                    .dropdown-list {
-                        display: none;
-                        position: absolute;
-                        z-index: 1;
-                        left: -1px;
-                        right: -1px;
-                        border-left: $defaultBorder;
-                        border-right: $defaultBorder;
-                        border-bottom: $defaultBorder;
-                        border-bottom-left-radius: $defaultBorderRadius;
-                        border-bottom-right-radius: $defaultBorderRadius;
-                        background-color: white;
-                        
-                    }
-                    
-                    .dropdown-list  > li {
-                        padding: $dropDownPadding;
-                        border-top: 1px solid $defaultColor;
-                        color: #2a2a2a;
-                        
-                    }
-                        .dropdown-list .dropdown-list-footer {
-                            position: relative;
-                            padding: 20px 12px;
-                        }
-                        
-                            .dropdown-list .num-of-selected {
-                                color: $defaultFontColor;
-                                font-size: $font-s;
-                            }
-                            
-                            .dropdown-list .done {
-                                position: absolute;
-                                right: 16px;
-                                top: 16px;
-                                font-size: $font-s;
-                                border: 1px solid #1d92ed;
-                                color: #1d92ed;
-                                padding: 5px 15px;
-                                border-radius: $defaultBorderRadius;
-                                
-                            }
-                            
-                            .dropdown-list .done:hover {
-                                
-                                 box-shadow: 0 0 4px 0 #1d92ed;
-                            }
-        
         #advanced-search {
             padding-top: 24px;
             border-top: 1px solid rgba(0, 0, 0, 0.1);

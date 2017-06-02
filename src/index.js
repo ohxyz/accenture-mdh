@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { LatestTransactions } from './latest-transactions';
 import { TextBox, DropdownBox } from './ui-components';
-import './index.css';
+import './style/index.css';
 
 class BasicSearch extends React.Component {
     
