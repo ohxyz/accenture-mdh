@@ -133,4 +133,100 @@
 				
 				 box-shadow: 0 0 4px 0 #1d92ed;
 			}
+            
+/* END: DropdownBox */
+
+            
+/* START: Table */
+
+#search-results-table {
+    background-color: white;
+    box-shadow: $defaultBoxShadow;
+    padding: 12px 0;
+    border-radius: $defaultBorderRadius;
+    margin-bottom: 12px;
+    border: $defaultBorder;
+}
+    #search-results-table  li{
+        padding: 16px 36px;
+        color: #9f9f9f;
+    }
+    
+    #search-results-table .table-header {
+        font-family: $fontFamilyBold;
+        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+        color: $fontBoldColor;
         
+    }
+    
+    #search-results-table label {
+        
+        display: inline-block;
+        width: 20%;
+        
+    }
+    
+#search-results-footer {
+    
+    height: 200px;
+}
+    #per-page {
+        float: left;
+        background-color: white;
+        border-radius: $defaultBorderRadius;
+        padding-left: 12px;
+        color: $defaultFontColor;
+        box-shadow: $defaultBoxShadow;
+        border: $defaultBorder;
+
+    }
+        #num-per-page {
+            
+            margin-left: 20px;
+            display: inline-block;
+            width: 60px;
+            border: none;
+            border-left: 1px solid rgba( 0, 0, 0, 0.1 );
+            border-radius: 0;
+            border-top-right-radius: $defaultBorderRadius;
+            border-bottom-right-radius: $defaultBorderRadius;
+            
+        }
+        
+        #num-per-page.is-opened {
+            border-bottom-right-radius: 0;
+        }
+        
+        #num-per-page .dropdown-list {
+            box-shadow: $defaultBoxShadow;
+            border:0;
+            left: 0;
+            right: 0;
+        }
+        
+        #num-per-page .dropdown-list > li {
+            border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+        }
+        
+    .pager {
+        float: right;
+        padding: 18px 0;
+        background-color: white;
+        border-radius: $defaultBorderRadius;
+        box-shadow: $defaultBoxShadow;
+        border: $defaultBorder;
+    }
+        
+        .pager-prev, .pager-next, .pager-current {
+            
+            padding: 0 18px;
+        }
+        
+        .pager-prev {
+            border-right: $defaultBorder2;
+        }
+        
+        .pager-next {
+            border-left: $defaultBorder2;
+        }
+    
