@@ -183,7 +183,7 @@ header {
 }
 
 #latest-transactions-section button{
-    border: none;
+    border: $defaultBorder;
     box-shadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
 }
     #search-results-header {
@@ -205,6 +205,7 @@ header {
             float: right;
             margin-right: 20px;
             width: 220px;
+
         }
         
         #customise {
