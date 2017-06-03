@@ -93,16 +93,28 @@
 			color: #2a2a2a;
 			
 		}
-		
+            
 			.is-opened .item-selected {
-				
-                background-image: url("assets/icons/selected-mark.svg");
-                background-repeat: no-repeat;
+
                 padding-left: 40px;
-                background-size: 12%;
-                background-position: 6px center;
+
 			}
-			
+            
+                .svg-selected-icon {
+                    display: none;
+                    position: absolute;
+                    left: 14px;
+                }
+                    
+                    .svg-selected-icon path {
+                        fill:#47CE87;
+                    }
+                
+                .item-selected .svg-selected-icon {
+
+                    display: block;    
+                }
+                
 			
 		.dropdown-list .dropdown-list-footer {
 			position: relative;

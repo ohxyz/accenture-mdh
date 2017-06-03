@@ -75,6 +75,17 @@ export class TextBox extends React.Component {
 }
 
 class DropdownListItem extends React.Component {
+
+    renderMarkIcon() {
+        
+        return (
+        
+            <svg className="svg-selected-icon" viewBox="7 8 20 20" width="14" height="14">
+                <path d="M24.9,10.5c-0.8-0.5-1.9-0.2-2.3,0.6l-7.4,11.1l-4.1-3.4c-0.7-0.6-1.7-0.6-2.4,0c-0.7,0.6-0.7,1.6,0,2.3
+                    l5.6,4.8c0.7,0.6,1.7,0.6,2.4,0c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0,0l8.5-12.7C26,11.9,25.7,10.9,24.9,10.5z"/>
+            </svg>
+        )
+    }
     
     render() {
         
@@ -83,7 +94,8 @@ class DropdownListItem extends React.Component {
             <li className={ this.props.className }
 					onClick={ this.props.onClick } 
 			>
-				{ this.props.item }
+                { this.renderMarkIcon() }
+                { this.props.item }
 			</li>
         );
     } 
@@ -168,12 +180,10 @@ export class DropdownBox extends React.Component {
 	}
 	
 	handleItemSelectedMultiple( event ) {
-		
-		let item = event.target.innerHTML;
-		
+        
+		let item = event.target.textContent;
 		toggleArrayItem( item, this.itemsSelected );
-		//console.log( 'item', item, this.itemsSelected);
-		
+
 		let numOfSelected = this.itemsSelected.length;
 
 		this.setState( {
