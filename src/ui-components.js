@@ -171,7 +171,7 @@ export class DropdownBox extends React.Component {
 		
 		this.setState( {
             
-            selectedLiteralHeader: event.target.innerHTML,
+            selectedLiteralHeader: event.target.textContent,
             isOpenedClass: '',
 			isSelectedClass: 'is-selected'
 			
