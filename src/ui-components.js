@@ -80,7 +80,7 @@ class DropdownListItem extends React.Component {
         
         return (
         
-            <svg className="svg-selected-icon" viewBox="7 8 20 20" width="14" height="14">
+            <svg className="svg-selected-icon" viewBox="0 0 34 36.5" width="25" height="25">
                 <path d="M24.9,10.5c-0.8-0.5-1.9-0.2-2.3,0.6l-7.4,11.1l-4.1-3.4c-0.7-0.6-1.7-0.6-2.4,0c-0.7,0.6-0.7,1.6,0,2.3
                     l5.6,4.8c0.7,0.6,1.7,0.6,2.4,0c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0,0l8.5-12.7C26,11.9,25.7,10.9,24.9,10.5z"/>
             </svg>
@@ -224,7 +224,17 @@ export class DropdownBox extends React.Component {
 			</li>
 		)
 	}
-	
+
+	renderDropdownIcon() {
+        return (
+            
+            <svg className="svg-dropdown-icon" viewBox="0 0 34 36.5" width="30" height="30">
+                <path d="M17,10.6l-5.8,5.8h11.7L17,10.6z M17,25.9l5.9-5.8H11.2L17,25.9z"/>
+            </svg>
+        
+        )
+    }
+    
     render() {
 		
         return (
@@ -238,7 +248,9 @@ export class DropdownBox extends React.Component {
                 ref={ self => this.dom = self }
 		    >   
                 <div className="dropdown-header" onClick={ this.handleClick } >
-					<div className="dropdown-icon"></div>
+					<div className="dropdown-icon">
+                        { this.renderDropdownIcon() }
+                    </div>
                     <div className="dropdown-name">{ this.props.value }</div>
                     <div className="dropdown-selected">
                         { this.state.selectedLiteralHeader }
