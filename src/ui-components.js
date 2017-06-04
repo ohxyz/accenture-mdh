@@ -101,7 +101,7 @@ class DropdownListItem extends React.Component {
     } 
 }
 
-export class DropdownBox extends React.Component {
+class DropdownBox extends React.Component {
     
     constructor( props ) {
         
@@ -115,7 +115,6 @@ export class DropdownBox extends React.Component {
 			itemsSelected: []
         };
 
-        this.listItems = [ 'One', 'Two', 'Three', 'Four' ];
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
 		this.closeDropdownList = this.closeDropdownList.bind( this );
@@ -155,8 +154,13 @@ export class DropdownBox extends React.Component {
     
     handleItemSelected( event ) {
         
-		if ( this.props.type === undefined 
-				|| this.props.type === 'single' ) {
+        if ( this.props.type === undefined
+                || this.props.type === 'basic' ) {
+            
+            this.handleItemSelectedBasic( event );
+                
+        }
+		else if ( this.props.type === 'single' ) {
 			
 			this.handleItemSelectedSingle( event );
 		}
@@ -166,6 +170,18 @@ export class DropdownBox extends React.Component {
 		}
         
     }
+    
+    handleItemSelectedBasic( event ) {
+        
+        this.setState( {
+            
+            selectedLiteralHeader: event.target.textContent,
+            isOpenedClass: '',
+			isSelectedClass: 'is-selected-basic'
+            
+        } );
+    }
+    
 	
 	handleItemSelectedSingle( event ) {
 		
@@ -174,7 +190,6 @@ export class DropdownBox extends React.Component {
             selectedLiteralHeader: event.target.textContent,
             isOpenedClass: '',
 			isSelectedClass: 'is-selected'
-			
             
         } );
 	}
@@ -204,7 +219,7 @@ export class DropdownBox extends React.Component {
 		} );
 	}
 	
-	getDropdownListFooter() {
+	renderDropdownListFooter() {
 		
 		if ( this.isSingleDropdownBox() === true ) {
 			
@@ -236,7 +251,7 @@ export class DropdownBox extends React.Component {
     }
     
     render() {
-		
+		console.log( 'li', this.props.listItems );
         return (
         
             <div id={ this.props.id } 
@@ -251,14 +266,14 @@ export class DropdownBox extends React.Component {
 					<div className="dropdown-icon">
                         { this.renderDropdownIcon() }
                     </div>
-                    <div className="dropdown-name">{ this.props.value }</div>
+                    <div className="dropdown-name">{ this.props.name }</div>
                     <div className="dropdown-selected">
                         { this.state.selectedLiteralHeader }
                     </div>
 				</div>
                 <ul className="dropdown-list">
 					{ 
-						this.listItems.map( item => {
+						this.props.listItems.map( item => {
 							
                             let className = this.state.itemsSelected.indexOf( item ) >= 0
                                 ? 'item-selected'
@@ -275,12 +290,17 @@ export class DropdownBox extends React.Component {
                             
                         } )
 					}
-					{ this.getDropdownListFooter() }
+					{ this.renderDropdownListFooter() }
                 </ul>
             </div>
         );
     }
 }
+
+class DropdownBoxGroup extends React.Component {
+    
+}
+
 
 /* Global events */
 DropdownBox.dropdownBoxes = [];
@@ -297,6 +317,7 @@ document.addEventListener( 'mouseup', ( event ) => {
 	} );
 } );
 
+export { DropdownBox, DropdownBoxGroup };
 
 
 

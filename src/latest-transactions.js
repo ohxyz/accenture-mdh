@@ -90,13 +90,16 @@ class SearchResultsTable extends React.Component {
 class SearchResultsFooter extends React.Component {
     
     render() {
+        const rowsPerPage = [ 15, 30, 50 ];
+        
         return (
             <div id="search-results-footer">
                 <div id="per-page">
                     No. of items per page 
                     <DropdownBox 
                         id="num-per-page" 
-                        value={ this.props.numPerPage }
+                        name={ this.props.numPerPage }
+                        listItems={ rowsPerPage }
                     />
                 </div>
                 <div className="pager">

@@ -33,6 +33,9 @@ class BasicSearch extends React.Component {
     }
     
     render() {
+        
+        const listItems = [ 'Basic One', 'Basic Two', 'Basic Three' ];
+        
         return (
             <div id="basic-search">
                 <ul className="control-list clearfix">
@@ -52,7 +55,8 @@ class BasicSearch extends React.Component {
                         <DropdownBox
 							type="single"
 							id="fuel-type"
-							value="Fuel Type"
+							name="Fuel Type"
+                            listItems={ listItems }
 						/>
                     </li>
                     <li>
@@ -65,19 +69,25 @@ class BasicSearch extends React.Component {
                         <DropdownBox
 							type="multiple"
 							id="transaction-group"
-							value="Transaction Group" />
+							name="Transaction Group"
+                            listItems={ listItems }
+                        />
                     </li>
                     <li>
                         <DropdownBox
 							type="multiple"
 							id="transaction-type"
-							value="Transaction Type" />
+							name="Transaction Type"
+                            listItems={ listItems }
+                        />
                     </li>
                     <li>
                         <DropdownBox
 							type="multiple"
 							id="transaction-status"
-							value="Transaction Status" />
+							name="Transaction Status"
+                            listItems={ listItems }
+                        />
                     </li>
                 </ul>
             </div>
@@ -90,27 +100,36 @@ class AdvancedSearch extends React.Component {
     
     render() {
        
-        let style = this.props.display 
+        const style = this.props.display 
             ? { display: 'block' } 
             : { display: 'none' };
         
+        const listItems = [ 'Advanced One', 'Advanced Two', 'Advanced Three'];
+        
         return (
+
             <div id="advanced-search" style={ style} >
                 <ul className="control-list clearfix">
                     <li>
 						<DropdownBox 
 							id="sending-participants"
-					        value="Sending Participant" />
+					        name="Sending Participant"
+                            listItems={ listItems }
+                        />
 				    </li>
                     <li>
 						<DropdownBox
 							id="receiving-participants"
-							value="Receiving Participant" />
+							name="Receiving Participant"
+                            listItems={ listItems }
+                        />
 				    </li>
                     <li>
-						<DropdownBox
+						<TextBox
 							id="unsolicited-responses"
-							value="Unsolicited Responses" />
+							value="Unsolicited Responses"
+                            listItems={ listItems }
+                        />
 				    </li>
                     <li style={ {visibility: 'hidden' } }>
 						<TextBox value="Place Holder" />
@@ -122,20 +141,28 @@ class AdvancedSearch extends React.Component {
                     <li>
 						<DropdownBox 
 							id="service-order-type"
-							value="Service Order Type" />
+							name="Service Order Type"
+                            listItems={ listItems }
+                        />
 					</li>
                     <li><DropdownBox 
 							id="service-order-subtype"
-							value="Service Order SubType" />
+							name="Service Order SubType"
+                            listItems={ listItems }
+                        />
 					</li>
                     <li><DropdownBox 
 							id="service-order-number"
-							value="Service Order Number" />
+							name="Service Order Number"
+                            listItems={ listItems }
+                        />
 					</li>
                     <li>
 						<DropdownBox 
 							id="cr-code" 
-							value="CR Code" />
+							name="CR Code"
+                            listItems={ listItems }
+                        />
 				    </li>
                 </ul>
             </div>
