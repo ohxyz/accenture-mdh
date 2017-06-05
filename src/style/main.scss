@@ -42,7 +42,6 @@ h2 {
 button {
     display: inline-block;
     padding: 10px 30px;
-    border: none;
     border-radius: 6px;
     font-size: $font-m;
     cursor: pointer;
@@ -177,12 +176,12 @@ header {
             border: 1px solid #7ace4c;
         }
     
-#latest-transactions-section {
+#search-results-section {
     background-color: #edf0f2;
     padding-top: 30px;
 }
 
-#latest-transactions-section button{
+#search-results-section button{
     border: $defaultBorder;
     box-shadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
 }
