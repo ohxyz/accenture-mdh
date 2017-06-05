@@ -284,6 +284,16 @@ class DropdownBox extends React.Component {
         )
     }
     
+    getSelectedClassName() {
+        
+        if ( this.itemsSelected.length > 0 ) {
+            
+            return 'is-selected'
+        }
+        
+        return '';
+    }
+    
     render() {
         
         this.syncSelectedWithListed();
@@ -294,7 +304,7 @@ class DropdownBox extends React.Component {
                  className={ 
                     'dropdown-box ' 
                     + this.state.isOpenedClass + ' '
-                    + this.state.isSelectedClass
+                    + this.getSelectedClassName()
                 }
                 ref={ self => this.dom = self }
             >   
