@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LatestTransactions } from './latest-transactions';
+import { SearchResults } from './search-results';
 import { TextBox, DropdownBox, DropdownBoxGroup } from './ui-components';
 import './style/index.css';
 
@@ -252,7 +252,7 @@ ReactDOM.render(
 
 ReactDOM.render(
     
-    <LatestTransactions />,
-    document.getElementById( 'latest-transactions-section' )
+    <SearchResults />,
+    document.getElementById( 'search-results-section' )
 );
 

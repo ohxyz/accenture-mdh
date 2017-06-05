@@ -109,7 +109,7 @@ class SearchResultsFooter extends React.Component {
     }
 }
 
-export class LatestTransactions extends React.Component {
+class SearchResults extends React.Component {
     
     constructor() {
         
@@ -162,4 +162,4 @@ export class LatestTransactions extends React.Component {
     }
 }
 
-
+export { SearchResults }
