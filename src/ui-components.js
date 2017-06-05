@@ -1,34 +1,6 @@
 import React from 'react'
 
-function isDescendant( childElem, parentElem ) {
-    
-    let node = childElem.parentNode;
-    while ( node !== null ) {
-        
-        if ( node === parentElem ) {
-            return true;
-        }
-        
-        node = node.parentNode;
-    }
-    
-    return false;
-}
-
-function toggleArrayItem( item, array ){
-    
-    let index = array.indexOf( item );
-    
-    if ( index === -1 ) {
-        
-        array.push( item );
-    }
-    else {
-        
-        array.splice( index, 1 );
-    }
-    
-}
+const UTILS = require( './utils.js' );
 
 export class TextBox extends React.Component {
     
@@ -195,7 +167,7 @@ class DropdownBox extends React.Component {
     handleItemSelectedMultiple( event ) {
         
         let item = event.target.textContent;
-        toggleArrayItem( item, this.itemsSelected );
+        UTILS.toggleArrayItem( item, this.itemsSelected );
 
         let numOfSelected = this.itemsSelected.length;
 
@@ -335,7 +307,7 @@ document.addEventListener( 'mouseup', ( event ) => {
     
     DropdownBox.dropdownBoxes.forEach( ( box ) => {
         // console.log( 'box', DropdownBox.dropdownBoxes );
-        if ( isDescendant( event.target, box.dom ) === false ){
+        if ( UTILS.isDescendant( event.target, box.dom ) === false ){
             
             box.closeDropdownList();
         }

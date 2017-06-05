@@ -1,8 +1,6 @@
 import React from 'react';
 import { DropdownBox } from './ui-components';
 
-
-
 class SearchResultsHeader extends React.Component {
     
     render() {
