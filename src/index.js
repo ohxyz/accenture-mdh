@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { LatestTransactions } from './latest-transactions';
-import { TextBox, DropdownBox } from './ui-components';
+import { TextBox, DropdownBox, DropdownBoxGroup } from './ui-components';
 import './style/index.css';
 
 class BasicSearch extends React.Component {
@@ -35,6 +35,31 @@ class BasicSearch extends React.Component {
     render() {
         
         const listItems = [ 'Basic One', 'Basic Two', 'Basic Three' ];
+        const dropdownBoxAttrs = 
+        [
+            {
+                type: 'multiple',
+                id: 'transaction-group',
+                name: 'Transaction Group',
+                listItems: listItems
+            },
+            
+            
+            {        
+                type: 'multiple',
+                id: 'transaction-type',
+                name: 'Transaction Type',
+                listItems: listItems
+            },
+            
+            {        
+                type: 'multiple',
+                id: 'transaction-status',
+                name: 'Transaction Status',
+                listItems: listItems
+            },
+        ];
+        
         
         return (
             <div id="basic-search">
@@ -65,31 +90,10 @@ class BasicSearch extends React.Component {
                                  value={ this.textBoxes[2].value }
                         />
                     </li>
-                    <li>
-                        <DropdownBox
-							type="multiple"
-							id="transaction-group"
-							name="Transaction Group"
-                            listItems={ listItems }
-                        />
-                    </li>
-                    <li>
-                        <DropdownBox
-							type="multiple"
-							id="transaction-type"
-							name="Transaction Type"
-                            listItems={ listItems }
-                        />
-                    </li>
-                    <li>
-                        <DropdownBox
-							type="multiple"
-							id="transaction-status"
-							name="Transaction Status"
-                            listItems={ listItems }
-                        />
-                    </li>
                 </ul>
+                <DropdownBoxGroup
+                    children= { dropdownBoxAttrs }
+                />
             </div>
             
         );

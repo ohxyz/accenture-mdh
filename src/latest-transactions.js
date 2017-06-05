@@ -30,11 +30,6 @@ class TableData extends React.Component {
 
 class TableRow extends React.Component {
     
-    constructor() {
-        super();
-
-    }
-    
     render() {
         
         let cssClass = '';
