@@ -30,7 +30,41 @@ class BasicSearch extends React.Component {
             }
             
         ];
+                
+        this.cascadedData = {
+            
+            "Group A": {
+                
+                "Group A Type A1": {
+                    "G A T A1 Status I": true,
+                    "G A T A1 Status II": true,
+                    "G A T A1 Status III": true
+                },
+                
+                "Group A Type A2": {
+                    "G A T A2 Status I": true,
+                    "G A T A2 Status II": true,
+                    "G A T A2 Status III": true
+                } 
+            },
+            
+            "Group B": {
+                
+                "Group B Type B1": {
+                    "G B T B1 Status I": true,
+                    "G B T B1 Status II": true,
+                    "G B T B1 Status III": true
+                },
+                
+                "Group B Type B2": {
+                    "G B T B2 Status I": true,
+                    "G B T B2 Status II": true,
+                    "G B T B2 Status III": true
+                } 
+            },
+        }
     }
+
     
     render() {
         
@@ -59,8 +93,7 @@ class BasicSearch extends React.Component {
                 listItems: listItems
             },
         ];
-        
-        
+
         return (
             <div id="basic-search">
                 <ul className="control-list clearfix">
@@ -93,6 +126,7 @@ class BasicSearch extends React.Component {
                 </ul>
                 <DropdownBoxGroup
                     children= { dropdownBoxAttrs }
+                    data = { this.cascadedData }
                 />
             </div>
             
@@ -217,7 +251,6 @@ class SearchTransactionsSection extends React.Component {
             });
         }
         else {
-            console.log('f',this.state.enableAdvancedSearch )
             
             this.setState( { 
                 

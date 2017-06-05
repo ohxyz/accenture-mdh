@@ -1,4 +1,3 @@
-
 /* Utils */
 
 
@@ -32,24 +31,51 @@ function toggleArrayItem( item, array ) {
     
 }
 
-function getSelectedChildren( itemsSelected, fromObject) {
+function getMappedKeys( keysSelected, fromObject ) {
     
-    let children = [];
+    let keys = [];
     
-    itemsSelected.map( item => {
+    keysSelected.map( key => {
         
-        if ( item in fromObject ) {
+        if ( key in fromObject ) {
             
-            children = children.concat( Object.keys( fromObject[ item ] ) );
+            keys = keys.concat( Object.keys( fromObject[ key ] ) );
             
         }
+        
+        return null;
     } );
     
-    return children;
+    return keys;
+}
+
+function getMappedObjects( keysSelected, fromObject ) {
+    
+    let objects = {};
+    
+    keysSelected.map( key => {
+        
+        if ( key in fromObject ) {
+            
+            let objectFromKey = fromObject[ key ];
+            
+            for ( let subKey in objectFromKey ) {
+                
+                objects[ subKey ] = objectFromKey[ subKey ];
+            }
+        }
+        
+        return null;
+        
+    } );
+    
+    return objects;
+    
 }
 
 module.exports = {
     isDescendant: isDescendant,
     toggleArrayItem: toggleArrayItem,
-    getSelectedChildren: getSelectedChildren
+    getMappedKeys: getMappedKeys,
+    getMappedObjects: getMappedObjects
 };

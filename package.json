@@ -8,6 +8,8 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "chai": "^4.0.1",
+    "mocha": "^3.4.2",
     "react-scripts": "1.0.6"
   },
   "scripts": {

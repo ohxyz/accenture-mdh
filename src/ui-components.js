@@ -90,6 +90,7 @@ class DropdownBox extends React.Component {
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
         this.closeDropdownList = this.closeDropdownList.bind( this );
+        this.handleDone = this.handleDone.bind( this );
         
         this.dom = null;
         DropdownBox.dropdownBoxes.push( this );
@@ -106,11 +107,7 @@ class DropdownBox extends React.Component {
     handleClick() {
         if ( this.state.isOpenedClass === 'is-opened' ) {
             
-            this.setState( {
-            
-                isOpenedClass: ''
-            
-            } );
+            this.handleDone();
         }
         else {
             
@@ -189,6 +186,11 @@ class DropdownBox extends React.Component {
         } );
     }
     
+    handleDone() {
+        
+        this.closeDropdownList();
+    }
+    
     renderDropdownListFooter() {
         
         if ( this.isSingleDropdownBox() === true ) {
@@ -205,7 +207,7 @@ class DropdownBox extends React.Component {
         return (
             <li className="dropdown-list-footer">
                 <span className="num-of-selected">{ selectedLiteral }</span>
-                <span className="done" onClick={ this.closeDropdownList }>Done</span>
+                <span className="done" onClick={ this.handleDone }>Done</span>
             </li>
         )
     }
@@ -221,6 +223,7 @@ class DropdownBox extends React.Component {
     }
     
     render() {
+        //console.log( this.props.onSelect, typeof this.props.onSelect )
         
         return (
         
@@ -269,11 +272,31 @@ class DropdownBox extends React.Component {
 
 class DropdownBoxGroup extends React.Component {
     
+    constructor( props ) {
+        
+        super();
+        
+        let full = props.data;
+        let firstTierKeys = Object.keys( full );
+        let secondTierObject = UTILS.getMappedObjects( firstTierKeys, full );
+        let secondTierKeys = Object.keys( secondTierObject );
+        let thirdTierObject = UTILS.getMappedObjects( secondTierKeys, secondTierObject );
+        let thirdTierKeys = Object.keys( thirdTierObject );
+        
+        this.state = {
+            
+            data: [
+                firstTierKeys,
+                secondTierKeys,
+                thirdTierKeys
+            ]
+        };
+    }
     
     renderDropdownBox( attr ) {
         
         return (
-            <li>
+            <li key={ attr.id } >
                 <DropdownBox
                     type={ attr.type }
                     id={ attr.id }
@@ -283,14 +306,15 @@ class DropdownBoxGroup extends React.Component {
             </li>
         );
     }
-    
+
     render() {
-        
+
         return (
             <ul className="control-list clearfix">
-                { this.props.children.map( child => {
+                { 
+                    this.props.children.map( ( child, index ) => {
                         
-                        console.log( child );
+                        child.listItems = this.state.data[ index ];
                         return this.renderDropdownBox( child );
                     } )
                 }
@@ -316,10 +340,6 @@ document.addEventListener( 'mouseup', ( event ) => {
 } );
 
 export { DropdownBox, DropdownBoxGroup };
-
-// Test
-
-
 
 
 
