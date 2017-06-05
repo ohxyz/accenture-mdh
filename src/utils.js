@@ -70,12 +70,38 @@ function getMappedObjects( keysSelected, fromObject ) {
     } );
     
     return objects;
+}
+
+function getObjectsByDepth( depth, fromObject ) {
+    
+    
     
 }
+
+function JSONCopy( obj ) {
+    
+    return JSON.parse( JSON.stringify( obj ) );
+}
+
+function intersectArrays( array, array2 ) {
+    
+    let newArray = array.filter( el => {
+        
+        if ( array2.indexOf( el ) !== -1  ) {
+            
+            return true;
+        }
+    } );
+    
+    return newArray;
+}
+
 
 module.exports = {
     isDescendant: isDescendant,
     toggleArrayItem: toggleArrayItem,
     getMappedKeys: getMappedKeys,
-    getMappedObjects: getMappedObjects
+    getMappedObjects: getMappedObjects,
+    JSONCopy: JSONCopy,
+    intersectArrays: intersectArrays
 };

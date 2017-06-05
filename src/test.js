@@ -87,5 +87,30 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
         
     } );
     
+    describe( 'Utils: intersectArrays', () => {
+        
+        it( 'should be b and c', () => {
+            
+            let a1 = [ 'a', 'b', 'c' ];
+            let a2 = [ 'b', 'c', 'd' ];
+            
+            let result = UTILS.intersectArrays( a1, a2 );
+            
+            expect( result ).to.eql( ['b', 'c'] );
+            
+        } );
+        
+        it( 'should be b and c again', () => {
+            
+            let a1 = [ 'a', 'b', 'c' ];
+            let a2 = [ 'b', 'c', 'd' ];
+            
+            let result = UTILS.intersectArrays( a2, a1 );
+
+            expect( result ).to.eql( ['b', 'c'] );
+            
+        } );
+        
+    } );
     
 } );

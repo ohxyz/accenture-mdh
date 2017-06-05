@@ -35,31 +35,31 @@ class BasicSearch extends React.Component {
             
             "Group A": {
                 
-                "Group A Type A1": {
-                    "G A T A1 Status I": true,
-                    "G A T A1 Status II": true,
-                    "G A T A1 Status III": true
+                "Group A Type 1": {
+                    "A1 Status I": true,
+                    "A1 Status II": true,
+                    "A1 Status III": true
                 },
                 
-                "Group A Type A2": {
-                    "G A T A2 Status I": true,
-                    "G A T A2 Status II": true,
-                    "G A T A2 Status III": true
+                "Group A Type 2": {
+                    "A2 Status I": true,
+                    "A2 Status II": true,
+                    "A2 Status III": true
                 } 
             },
             
             "Group B": {
                 
-                "Group B Type B1": {
-                    "G B T B1 Status I": true,
-                    "G B T B1 Status II": true,
-                    "G B T B1 Status III": true
+                "Group B Type 1": {
+                    "B1 Status I": true,
+                    "B1 Status II": true,
+                    "B1 Status III": true
                 },
                 
-                "Group B Type B2": {
-                    "G B T B2 Status I": true,
-                    "G B T B2 Status II": true,
-                    "G B T B2 Status III": true
+                "Group B Type 2": {
+                    "B2 Status I": true,
+                    "B2 Status II": true,
+                    "B2 Status III": true
                 } 
             },
         }
@@ -114,6 +114,7 @@ class BasicSearch extends React.Component {
 							type="single"
 							id="fuel-type"
 							name="Fuel Type"
+                            itemsSelected= { [ 'Basic Two' ] }
                             listItems={ listItems }
 						/>
                     </li>
@@ -177,9 +178,11 @@ class AdvancedSearch extends React.Component {
                     <li><TextBox value="Time Created from" /></li>
                     <li><TextBox value="Time Created to" /></li>
                     <li>
-						<DropdownBox 
+						<DropdownBox
+                            type="multiple"
 							id="service-order-type"
 							name="Service Order Type"
+                            itemsSelected={ ['Advanced Two', 'Advanced Three']}
                             listItems={ listItems }
                         />
 					</li>

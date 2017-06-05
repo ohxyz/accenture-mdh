@@ -78,25 +78,55 @@ class DropdownBox extends React.Component {
     constructor( props ) {
         
         super( props );
+
+        this.itemsSelected = this.props.itemsSelected === undefined
+            ? []
+            : this.props.itemsSelected
+            
+        let selectedLiteralHeader = ''
+        let isSelectedClass = ''
+        
+        if ( this.itemsSelected.length > 0 ) {
+            
+            isSelectedClass = 'is-selected';
+            
+            if ( this.props.type === 'multiple') { 
+                selectedLiteralHeader = this.itemsSelected.length + ' selected';
+            }
+            else {
+                selectedLiteralHeader = this.itemsSelected[0];
+            }
+        }
+
         
         this.state = {
             
             isOpenedClass: '',
-            isSelectedClass: '',
-            selectedLiteralHeader: null,
-            itemsSelected: []
+            isSelectedClass: isSelectedClass,
+            selectedLiteralHeader: selectedLiteralHeader,
+            itemsSelected: this.itemsSelected
         };
-
+        
+        
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
         this.closeDropdownList = this.closeDropdownList.bind( this );
         this.handleDone = this.handleDone.bind( this );
         
+                
         this.dom = null;
         DropdownBox.dropdownBoxes.push( this );
+    }
+    
+    syncSelectedWithListed() {
         
-        this.itemsSelected = [];
-        
+        if ( this.itemsSelected.length > 0 ) {
+            
+            this.itemsSelected 
+                = UTILS.intersectArrays( this.itemsSelected, this.props.listItems );
+            
+        }
+ 
     }
     
     isSingleDropdownBox() {
@@ -121,6 +151,11 @@ class DropdownBox extends React.Component {
     
     handleItemSelected( event ) {
         
+        if ( this.props.onSelect !== undefined ) {
+            
+            this.props.onSelect( event );
+        }
+
         if ( this.props.type === undefined
                 || this.props.type === 'basic' ) {
             
@@ -167,11 +202,16 @@ class DropdownBox extends React.Component {
         UTILS.toggleArrayItem( item, this.itemsSelected );
 
         let numOfSelected = this.itemsSelected.length;
+        let isSelectedClass = '';
+        if ( numOfSelected > 0 ) {
+            
+            isSelectedClass = 'is-selected';
+        }
 
         this.setState( {
             
             selectedLiteralHeader: numOfSelected + ' selected',
-            isSelectedClass: 'is-selected',
+            isSelectedClass: isSelectedClass,
             itemsSelected: this.itemsSelected
 
         } );
@@ -189,6 +229,28 @@ class DropdownBox extends React.Component {
     handleDone() {
         
         this.closeDropdownList();
+    }
+    
+    renderDropdownBoxHeader() {
+        
+        let numOfSelected = this.itemsSelected.length;
+        
+        let selectedLiteralHeader = numOfSelected > 0
+            ? numOfSelected + ' selected'
+            : '';
+        
+        return (
+        
+            <div className="dropdown-header" onClick={ this.handleClick } >
+                <div className="dropdown-icon">
+                    { this.renderDropdownIcon() }
+                </div>
+                <div className="dropdown-name">{ this.props.name }</div>
+                <div className="dropdown-selected">
+                    { selectedLiteralHeader }
+                </div>
+            </div>
+        )
     }
     
     renderDropdownListFooter() {
@@ -223,7 +285,8 @@ class DropdownBox extends React.Component {
     }
     
     render() {
-        //console.log( this.props.onSelect, typeof this.props.onSelect )
+        
+        this.syncSelectedWithListed();
         
         return (
         
@@ -235,15 +298,7 @@ class DropdownBox extends React.Component {
                 }
                 ref={ self => this.dom = self }
             >   
-                <div className="dropdown-header" onClick={ this.handleClick } >
-                    <div className="dropdown-icon">
-                        { this.renderDropdownIcon() }
-                    </div>
-                    <div className="dropdown-name">{ this.props.name }</div>
-                    <div className="dropdown-selected">
-                        { this.state.selectedLiteralHeader }
-                    </div>
-                </div>
+                { this.renderDropdownBoxHeader() }
                 <ul className="dropdown-list">
                     { 
                         this.props.listItems.map( item => {
@@ -276,12 +331,14 @@ class DropdownBoxGroup extends React.Component {
         
         super();
         
-        let full = props.data;
+        this.full = props.data;
+        
+        let full = this.full;
         let firstTierKeys = Object.keys( full );
-        let secondTierObject = UTILS.getMappedObjects( firstTierKeys, full );
-        let secondTierKeys = Object.keys( secondTierObject );
-        let thirdTierObject = UTILS.getMappedObjects( secondTierKeys, secondTierObject );
-        let thirdTierKeys = Object.keys( thirdTierObject );
+        let secondTierObjects = UTILS.getMappedObjects( firstTierKeys, full );
+        let secondTierKeys = Object.keys( secondTierObjects );
+        let thirdTierObjects = UTILS.getMappedObjects( secondTierKeys, secondTierObjects );
+        let thirdTierKeys = Object.keys( thirdTierObjects );
         
         this.state = {
             
@@ -291,9 +348,59 @@ class DropdownBoxGroup extends React.Component {
                 thirdTierKeys
             ]
         };
+        
+        let numOfDropdownBox = this.state.data.length;
+        
+        this.itemsSelected = [];
+        
+        for ( let i = 0; i < numOfDropdownBox; i ++ ) {
+            
+            this.itemsSelected.push( [] );
+        }
+
+        this.handleSelect = this.handleSelect.bind( this );
     }
     
-    renderDropdownBox( attr ) {
+    handleSelect( event, dropdownBoxIndex ) {
+        
+        let selected = event.target.textContent;
+        let itemsPopulated = UTILS.JSONCopy( this.state.data );
+
+        if ( dropdownBoxIndex === 0 ) {
+
+            UTILS.toggleArrayItem( selected, this.itemsSelected[ 0 ] );
+
+            let secondTierKeys = UTILS.getMappedKeys( this.itemsSelected[ 0 ], this.full );
+            
+            itemsPopulated[ 1 ] = secondTierKeys;
+            
+            this.setState( { 
+            
+                data: itemsPopulated
+            } );
+
+        }
+        else if ( dropdownBoxIndex === 1 ) {
+            
+            let secondTierObjects
+                =  UTILS.getMappedObjects( this.itemsSelected[ 0 ], this.full );
+                
+            UTILS.toggleArrayItem( selected, this.itemsSelected[ 1 ] );
+            
+            let thirdTierKeys = UTILS.getMappedKeys( this.itemsSelected[ 1 ], secondTierObjects );
+            
+            itemsPopulated[ 2 ] = thirdTierKeys;
+            
+            this.setState( {
+                
+                data: itemsPopulated
+            
+            });
+        }
+       
+    }
+    
+    renderDropdownBox( attr, index ) {
         
         return (
             <li key={ attr.id } >
@@ -301,7 +408,8 @@ class DropdownBoxGroup extends React.Component {
                     type={ attr.type }
                     id={ attr.id }
                     name={ attr.name }
-                    listItems={ attr.listItems }
+                    listItems={ this.state.data[ index ] }
+                    onSelect={ ( event ) => this.handleSelect( event, index ) }
                 />
             </li>
         );
@@ -313,9 +421,8 @@ class DropdownBoxGroup extends React.Component {
             <ul className="control-list clearfix">
                 { 
                     this.props.children.map( ( child, index ) => {
-                        
-                        child.listItems = this.state.data[ index ];
-                        return this.renderDropdownBox( child );
+
+                        return this.renderDropdownBox( child, index );
                     } )
                 }
             </ul>
