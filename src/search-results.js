@@ -56,11 +56,11 @@ class SearchResultsTable extends React.Component {
         
         super();
         this.tableHeaderContent = [
-            'Created Date',
-            'Type',
-            'Transaction Date',
             'Transaction ID',
-            'NMI'
+            'Transaction Group',
+            'Date Created',
+            'Transaction Ref No.',
+            'Transaction Date'
         ];
     }
     
@@ -142,7 +142,7 @@ class SearchResults extends React.Component {
     
     fetchTransactions() {
         
-        let url = '/mdh/transactions.json';
+        let url = '/transactions.json';
         //let url = '/api/getTransactions';
         
         let fuel = 'MDHGas';
@@ -174,8 +174,7 @@ class SearchResults extends React.Component {
         };
         
         fetch( url, {
-            
-            
+
             method: 'GET',
             
             headers: {
@@ -191,7 +190,7 @@ class SearchResults extends React.Component {
 
                 let searchRecords = json.SearchRecordSet;
                 
-                console.log( searchRecords );
+                console.log( 'records', searchRecords );
                 
                 let dummy = [];
                 
@@ -199,17 +198,18 @@ class SearchResults extends React.Component {
                     
                     let one = [
                         
-                        record[ 'Created Date' ],
-                        record[ 'Type' ],
-                        record[ 'Transaction Date' ],
-                        record[ 'Transaction ID' ],
-                        record[ 'NMI' ]
+                        record[ 'Transaction_Id' ],
+                        record[ 'Transaction_Group' ],
+                        record[ 'Date_Created' ].slice( 0, 10 ),
+                        record[ 'Txn_Ref_Num' ],
+                        record[ 'Transaction_Date' ].slice( 0, 10 )
                     ]
                     
                     dummy.push( one );
 
                 } );
                 
+               
                 this.setState({
                     
                     rowData: dummy

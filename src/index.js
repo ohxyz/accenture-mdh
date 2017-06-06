@@ -62,7 +62,7 @@ class BasicSearch extends React.Component {
                     "B2 Status II": true,
                     "B2 Status III": true
                 } 
-            },
+            }
         }
         
         this.transactionCategory = {
