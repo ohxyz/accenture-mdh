@@ -1,5 +1,6 @@
 import React from 'react';
 import { DropdownBox } from './ui-components';
+import 'whatwg-fetch';
 
 class SearchResultsHeader extends React.Component {
     
@@ -59,7 +60,7 @@ class SearchResultsTable extends React.Component {
             'Type',
             'Transaction Date',
             'Transaction ID',
-            'DB ID'
+            'NMI'
         ];
     }
     
@@ -108,7 +109,7 @@ class SearchResultsFooter extends React.Component {
 }
 
 class SearchResults extends React.Component {
-    
+
     constructor() {
         
         super();
@@ -122,7 +123,7 @@ class SearchResults extends React.Component {
         ];
         
         let dummy = [];
-        let numOfRows = 100;
+        let numOfRows = 60;
         
         for ( let i = 0; i < numOfRows; i ++ ) {
             
@@ -137,6 +138,94 @@ class SearchResults extends React.Component {
             numPerPage: 15,
             rowData: dummy
         }
+    }
+    
+    fetchTransactions() {
+        
+        let url = '/mdh/transactions.json';
+        //let url = '/api/getTransactions';
+        
+        let fuel = 'MDHGas';
+        let postData = { 
+            
+            Fuel_Type: { 
+                
+                value: fuel,
+                Comment: 'Fuel type is either MDHElec or MDHGas' 
+            },
+            
+            Transaction_Id: '',
+            Message_ID: '',
+            NMI: '',
+            MIRN: '',
+            Transaction_Group: '',
+            XML_Transaction_Type: '',
+            Master_Transaction_Status: '',
+            CATS_Sender: '',
+            CATS_Receiver: '',
+            Date_Created_From: '',
+            Date_Created_To: '',
+            Service_Order_Type_Id: '',
+            Service_Order_Sub_Type_Id: '',
+            Service_Order_Number: '',
+            CATS_Change_Reason_Code: '',
+            Transaction_Date_From: '',
+            Transaction_Date_To: '' 
+        };
+        
+        fetch( url, {
+            
+            
+            method: 'GET',
+            
+            headers: {
+                'cache-control': 'no-cache',
+                'content-type': 'application/json',
+                'authorization': 'Basic bWRoUmVzdEFwaUB1c2VyITpza2RpZnc4M3k0Mmtqd2U='
+            },
+            
+            body: postData
+            
+        }  ).then( response => response.json() )
+            .then( json => {
+
+                let searchRecords = json.SearchRecordSet;
+                
+                console.log( searchRecords );
+                
+                let dummy = [];
+                
+                searchRecords.forEach( record => {
+                    
+                    let one = [
+                        
+                        record[ 'Created Date' ],
+                        record[ 'Type' ],
+                        record[ 'Transaction Date' ],
+                        record[ 'Transaction ID' ],
+                        record[ 'NMI' ]
+                    ]
+                    
+                    dummy.push( one );
+
+                } );
+                
+                this.setState({
+                    
+                    rowData: dummy
+                    
+                } );
+          
+            } )
+            .catch( ex => {
+                console.log('parsing failed', ex)
+                
+            } );
+    }
+    
+    componentDidMount() {
+        
+        this.fetchTransactions();
     }
     
     render() {

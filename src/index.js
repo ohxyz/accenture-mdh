@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { SearchResults } from './search-results';
 import { TextBox, DropdownBox, DropdownBoxGroup } from './ui-components';
+import 'whatwg-fetch';
 import './style/index.css';
 
 class BasicSearch extends React.Component {
@@ -63,9 +64,34 @@ class BasicSearch extends React.Component {
                 } 
             },
         }
+        
+        this.transactionCategory = {
+            
+            "SORD": {
+                
+                "ServiceOrderRequest": {},
+                "ServiceOrderResponse": {},
+            },
+            
+            "CATS": {
+                
+                "CATSChangeAlert": {},
+                "CATSObjectionWithdrawal": {},
+                "CATSChangeWithdrawal": {},
+                "CATSObjectionRequest": {},
+                "CATSChangeRequest": {},
+                "CATSChangeResponse": {},
+                "CATSDataRequest": {},
+                "CATSObjectionResponse": {},
+                "TransactionAcknowledgement": {},
+                "CATSNotification": {},
+                "ReportRequest": {},
+                "ReportResponse": {},
+                "ReplicationRequest": {}   
+            }
+        };
     }
 
-    
     render() {
         
         const listItems = [ 'Basic One', 'Basic Two', 'Basic Three' ];
@@ -85,13 +111,14 @@ class BasicSearch extends React.Component {
                 name: 'Transaction Type',
                 listItems: listItems
             },
-            
+            /*
             {        
                 type: 'multiple',
                 id: 'transaction-status',
                 name: 'Transaction Status',
                 listItems: listItems
             },
+            */
         ];
 
         return (
@@ -114,8 +141,8 @@ class BasicSearch extends React.Component {
 							type="single"
 							id="fuel-type"
 							name="Fuel Type"
-                            itemsSelected= { [ 'Basic Two' ] }
-                            listItems={ listItems }
+                            itemsSelected= { [ 'Electricity' ] }
+                            listItems={ [ 'Gas', 'Electricity' ] }
 						/>
                     </li>
                     <li>
@@ -127,7 +154,7 @@ class BasicSearch extends React.Component {
                 </ul>
                 <DropdownBoxGroup
                     children= { dropdownBoxAttrs }
-                    data = { this.cascadedData }
+                    data = { this.transactionCategory }
                 />
             </div>
             
@@ -150,7 +177,8 @@ class AdvancedSearch extends React.Component {
             <div id="advanced-search" style={ style} >
                 <ul className="control-list clearfix">
                     <li>
-						<DropdownBox 
+						<DropdownBox
+                            type="single"
 							id="sending-participants"
 					        name="Sending Participant"
                             listItems={ listItems }
@@ -218,7 +246,11 @@ class SearchControls extends React.Component {
         return (
             <div id="search-controls" className="clearfix">
                 <label id="clear-all-fields">Clear All Fields</label>
-                <button id="search-button">Search</button>
+                <button id="search-button"
+                        onClick={ this.props.onSearch } 
+                >
+                    Search
+                </button>
                 <label id="toggle-search-mode" 
                        onClick={ this.props.toggleSearchModeClick }
                 >
@@ -272,7 +304,8 @@ class SearchTransactionsSection extends React.Component {
                 <h2>Enter all the correcct information in their respective fields.</h2>
                 <BasicSearch />
                 <AdvancedSearch display={ this.state.enableAdvancedSearch }/>
-                <SearchControls 
+                <SearchControls
+                    onSearch={ this.props.onSearch }
                     toggleSearchModeClick={ this.toggleSearchModeClick } 
                     toggleSearchModeText={ this.state.toggleSearchModeText }
                 />
@@ -281,6 +314,69 @@ class SearchTransactionsSection extends React.Component {
     }
 }
 
+class App extends React.Component {
+    
+    constructor() {
+        
+        super();
+        this.handleSearch = this.handleSearch.bind( this );
+        
+        this.state = {
+            
+            showSearchResults: false
+        };
+    }
+    
+    handleSearch( event ) {
+        
+        console.log( 'search button', event.target );
+        
+        this.setState( {
+            
+            showSearchResults: true
+            
+        } );
+    }
+    
+    renderSearchResultsSection() {
+        
+        if ( this.state.showSearchResults === true ) {
+        
+            return (
+            
+                <section id="search-results-section" >
+                    <SearchResults />
+                </section>
+            
+            )
+        }
+        
+        return '';
+    }
+    
+    render() {
+        
+        return (
+            <div id="app">
+                <section id="search-transactions-section">
+                    <SearchTransactionsSection
+                        onSearch={ this.handleSearch }
+                    />
+                </section>
+                { this.renderSearchResultsSection() }
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+
+    <App />,
+    document.getElementById( 'root' )
+
+);
+
+/*
 ReactDOM.render(
     <SearchTransactionsSection />,
     document.getElementById( 'search-transactions-section' )
@@ -291,4 +387,5 @@ ReactDOM.render(
     <SearchResults />,
     document.getElementById( 'search-results-section' )
 );
+*/
 
