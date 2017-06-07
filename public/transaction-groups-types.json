@@ -1,0 +1,63 @@
+{
+  "ServerDateTime": "2017-06-07 11:23:24",
+  "SearchRecordSet": {
+    "CATS": [
+      "CATSChangeAlert",
+      "CATSObjectionWithdrawal",
+      "CATSChangeWithdrawal",
+      "CATSObjectionRequest",
+      "CATSChangeRequest",
+      "CATSChangeResponse",
+      "CATSDataRequest",
+      "CATSObjectionResponse",
+      "TransactionAcknowledgement",
+      "CATSNotification",
+      "ReportRequest",
+      "ReportResponse",
+      "ReplicationRequest",
+      "ReplicationResponse"
+    ],
+    "MDMT": [
+      "MeterDataNotification",
+      "MeterDataResponse",
+      "MeterDataMissingNotification",
+      "MeterReadInputNotification",
+      "MeterDataHistoryRequest",
+      "MeterDataHistoryResponse",
+      "SpecialReadRequest",
+      "SpecialReadResponse",
+      "MeterDataVerifyRequest",
+      "MeterDataVerifyResponse",
+      "AccountCreationNotification"
+    ],
+    "SORD": [
+      "ServiceOrderRequest",
+      "ServiceOrderResponse"
+    ],
+    "FLDW": [
+      "FieldWorkNotification"
+    ],
+    "NMID": [
+      "NMIDiscoveryRequest",
+      "NMIDiscoveryResponse",
+      "NMIStandingDataRequest",
+      "NMIStandingDataResponse"
+    ],
+    "SITE": [
+      "AmendMeterRouteDetails",
+      "AmendMeterRouteDetails"
+    ],
+    "NETB": [
+      "NetworkDUoSBillingNotification"
+    ],
+    "CUST": [
+      "CustomerDetailsNotification",
+      "CustomerDetailsNotification_FTP",
+      "CustomerDetailsNotification_FILE"
+    ],
+    "MTRD": [
+      "MeterDataMissingNotification",
+      "MeterDataVerifyRequest"
+    ]
+  }
+}
