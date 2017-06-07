@@ -17,6 +17,14 @@ class App extends React.Component {
             
             showSearchResults: true
         };
+        /* Test proxy settings */
+        
+        fetch( '/api/test' )
+            .then( response => response.json() )
+            .then( json => {
+                
+                console.log( json );
+            } );
     }
     
     handleSearch( event ) {
