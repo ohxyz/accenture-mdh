@@ -101,7 +101,7 @@ class TableFooter extends React.Component {
                     <label className="pager-prev">&lt;</label>
                     <label className="pager-current">
                         { 
-                            this.props.currentNumberOfPage 
+                            this.props.currentPageNumber 
                                 + ' of ' 
                                 + this.props.totalNumberOfPage 
                         }
@@ -115,7 +115,21 @@ class TableFooter extends React.Component {
 
 class TableBox extends React.Component {
     
+    constructor( props ) {
+        
+        super( props );
+        
+        this.numPerPage = parseInt( this.props.numberPerPage );
+        
+        this.state = {
+            
+            rows: this.props.rowData.slice( 0, this.numPerPage - 1 )
+        };
+    }
+    
     render () {
+        
+        let totalPage = Math.ceil( this.props.rowData.length / this.numPerPage );
             
         return (
         
@@ -123,13 +137,13 @@ class TableBox extends React.Component {
                 <TableHeader />
                 <TableMain
                     columnNames={ this.props.columnNames}
-                    tableRows={ this.props.rowData }
+                    tableRows={ this.state.rows }
                 />
                 <TableFooter
                     className="clearfix"
                     numberPerPage={ this.props.numberPerPage }
-                    currentNumberOfPage={ this.props.currentNumberOfPage }
-                    totalNumberOfPage={ this.props.totalNumberOfPage }
+                    currentPageNumber={ this.props.currentPageNumber }
+                    totalNumberOfPage={ totalPage }
                     numberPerPageOptions={ this.props.numberPerPageOptions }
                 />
             </div>

@@ -17,7 +17,7 @@ class SearchResultsSection extends React.Component {
         ];
         
         let dummy = [];
-        let numOfRows = 60;
+        let numOfRows = 62;
         
         for ( let i = 0; i < numOfRows; i ++ ) {
             
@@ -135,7 +135,7 @@ class SearchResultsSection extends React.Component {
             'Transaction Date'
         ];
         
-        let totalPage = Math.ceil( this.state.rowData.length / this.state.numPerPage );
+        
         
         // Use [ '15', '30', '50' ] instead of [ 15, 30, 50 ], 
         // Could be a bug in React or Babel or elsewhere
@@ -145,8 +145,8 @@ class SearchResultsSection extends React.Component {
                     columnNames={ tableHeaderContent }
                     rowData={ this.state.rowData } 
                     numberPerPage={ this.state.numPerPage }
-                    currentNumberOfPage={ this.state.currentPage }
-                    totalNumberOfPage={ totalPage }
+                    currentPageNumber={ this.state.currentPage }
+                    
                     numberPerPageOptions={ [ '15', '30', '50' ] }
                 />
             </div>
