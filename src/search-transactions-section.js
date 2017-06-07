@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextBox, DropdownBox, DropdownBoxGroup } from './ui-components';
+import { DropdownBox, DropdownBoxGroup } from './ui-dropdownbox';
+import { TextBox } from './ui-textbox';
 
 class BasicSearch extends React.Component {
     
@@ -137,7 +138,7 @@ class BasicSearch extends React.Component {
                     </li>
                     <li>
                         <DropdownBox
-							type="single"
+							type="basic"
 							id="fuel-type"
 							name="Fuel Type"
                             itemsSelected= { [ 'Electricity' ] }

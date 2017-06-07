@@ -167,7 +167,7 @@
             
 /* START: Table */
 
-#search-results-table {
+.table-main {
     background-color: white;
     box-shadow: $defaultBoxShadow;
     padding: 12px 0;
@@ -175,29 +175,34 @@
     margin-bottom: 12px;
     border: $defaultBorder;
 }
-    #search-results-table  li{
-        padding: 16px 36px;
+    .table-main  li{
+        padding: 0 36px;
         color: #9f9f9f;
     }
     
-    #search-results-table .table-header {
+    .table-main .table-header {
         font-family: $fontFamilyBold;
         border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
         color: $fontBoldColor;
         
     }
     
-    #search-results-table label {
+    .table-main label {
         
         display: inline-block;
-        width: 20%;
+        width: 19%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0 0.5%;
+        padding: 16px 0;
         
     }
     
-#search-results-footer {
+.table-box-footer {
     height: 300px;
 }
-    #per-page {
+    .table-box-footer .per-page {
         float: left;
         background-color: white;
         border-radius: $defaultBorderRadius;
@@ -207,7 +212,7 @@
         border: $defaultBorder;
 
     }
-        #num-per-page {
+        .num-per-page {
             
             margin-left: 20px;
             display: inline-block;
@@ -220,24 +225,36 @@
             
         }
         
-        #num-per-page.is-opened {
+        .number-per-page.is-opened {
             border-bottom-right-radius: 0;
         }
         
-        #num-per-page .dropdown-list {
-            box-shadow: $defaultBoxShadow;
-            border:0;
-            left: 0;
-            right: 0;
-        }
+            .num-per-page .dropdown-list {
+                box-shadow: $defaultBoxShadow;
+                border:0;
+                left: 0;
+                right: 0;
+            }
+            
+            .num-per-page .dropdown-name {
+                
+                padding: 16px 0;
+            }
+            
+            .num-per-page .is-selected-basic .dropdown-selected {
+                
+                padding: 16px 0;
+            }
         
-        #num-per-page .dropdown-list > li {
-            border-top: 1px solid rgba( 0, 0, 0, 0.1 );
-        }
+                .num-per-page .dropdown-list > li {
+                    border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+                }
+                
+                
         
     .pager {
         float: right;
-        padding: 18px 0;
+        padding: 16px 0;
         background-color: white;
         border-radius: $defaultBorderRadius;
         box-shadow: $defaultBoxShadow;

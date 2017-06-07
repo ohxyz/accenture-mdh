@@ -91,6 +91,8 @@ function intersectArrays( array, array2 ) {
             
             return true;
         }
+        
+        return false;
     } );
     
     return newArray;

@@ -2,50 +2,6 @@ import React from 'react'
 
 const UTILS = require( './utils.js' );
 
-export class TextBox extends React.Component {
-    
-    constructor() {
-        
-        super();
-        this.handleFocus = this.handleFocus.bind( this );
-        this.handleBlur = this.handleBlur.bind( this );
-    }
-    
-    handleFocus( event ) {
-        
-        let input = event.target;
-        
-        if ( input.value === this.props.value ) {
-             input.value = '';
-        }
-        
-    }
-    
-    handleBlur( event ) {
-        
-        let input = event.target;
-        
-        if ( input.value === '' ) {
-            input.value = this.props.value;
-        }
-    }
-    
-    render() {
-        return (
-        
-            <input className="text-box" 
-                   type="text"
-                   id={ this.props.id } 
-                   name={ this.props.name }
-                   defaultValue={ this.props.value }
-                   onFocus={ this.handleFocus }
-                   onBlur={ this.handleBlur }
-            />
-        );
-    }
-
-}
-
 class DropdownListItem extends React.Component {
 
     renderMarkIcon() {
@@ -91,17 +47,13 @@ class DropdownBox extends React.Component {
         this.type = this.props.type === undefined
             ? 'single'
             : this.props.type;
-            
-        let selectedLiteralHeader = ''
-        let isSelectedClass = ''
 
+        console.log( this.props.id, this.type );
         this.state = {
             
             isOpenedClass: '',
-            isSelectedClass: isSelectedClass,
             itemsSelected: this.itemsSelected
         };
-        
         
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
@@ -124,6 +76,7 @@ class DropdownBox extends React.Component {
     }
 
     handleClick() {
+        
         if ( this.state.isOpenedClass === 'is-opened' ) {
             
             this.handleDone();
@@ -140,16 +93,15 @@ class DropdownBox extends React.Component {
     
     handleItemSelected( event ) {
         
+
         if ( this.props.onSelect !== undefined ) {
             
             this.props.onSelect( event );
         }
 
-        if ( this.type === undefined
-                || this.type === 'basic' ) {
-            
+        if ( this.type === 'basic' ) {
+
             this.handleItemSelectedBasic( event );
-                
         }
         else if ( this.type === 'single' ) {
             
@@ -164,11 +116,12 @@ class DropdownBox extends React.Component {
     
     handleItemSelectedBasic( event ) {
         
+        this.itemsSelected[ 0 ] = event.target.textContent;
+        
+        
         this.setState( {
             
-            selectedLiteralHeader: event.target.textContent,
             isOpenedClass: '',
-            isSelectedClass: 'is-selected-basic'
             
         } );
     }
@@ -176,11 +129,10 @@ class DropdownBox extends React.Component {
     handleItemSelectedSingle( event ) {
         
         this.itemsSelected[ 0 ] = event.target.textContent;
-        
+
         this.setState( {
             
             isOpenedClass: '',
-            isSelectedClass: 'is-selected'
             
         } );
     }
@@ -189,18 +141,8 @@ class DropdownBox extends React.Component {
         
         let item = event.target.textContent;
         UTILS.toggleArrayItem( item, this.itemsSelected );
-
-        let numOfSelected = this.itemsSelected.length;
-        let isSelectedClass = '';
         
-        if ( numOfSelected > 0 ) {
-            
-            isSelectedClass = 'is-selected';
-        }
-
         this.setState( {
-
-            isSelectedClass: isSelectedClass,
             itemsSelected: this.itemsSelected
 
         } );
@@ -223,9 +165,18 @@ class DropdownBox extends React.Component {
         
     makeSelectedClassName() {
         
-        if ( this.itemsSelected.length > 0 ) {
+        if ( this.itemsSelected.length === 0 ) {
             
-            return 'is-selected'
+            return '';
+        }
+        
+        if (  this.type === 'basic' ) {
+            
+            return 'is-selected-basic';
+        }
+        else if ( this.type === 'single' || this.type === 'multiple' ) {
+            
+            return 'is-selected';
         }
         
         return '';
@@ -236,7 +187,7 @@ class DropdownBox extends React.Component {
         let numOfSelected = this.itemsSelected.length;
         let selectedLiteralHeader = '';
         
-        if ( this.type === 'single' ) {
+        if ( this.type === 'single' || this.type === 'basic' ) {
             
             selectedLiteralHeader = this.itemsSelected[ 0 ];
         }
@@ -246,7 +197,8 @@ class DropdownBox extends React.Component {
                 ? numOfSelected + ' selected'
                 : '';
         }
-
+        
+        
         return selectedLiteralHeader;
     }
     
@@ -334,12 +286,17 @@ class DropdownBox extends React.Component {
     render() {
         
         this.syncSelectedWithListed();
+
+        let otherClassNames = this.props.otherClassNames === undefined
+            ? ''
+            : this.props.otherClassNames
         
         return (
         
             <div id={ this.props.id } 
                  className={ 
-                    'dropdown-box ' 
+                    'dropdown-box '
+                    + otherClassNames + ' '
                     + this.state.isOpenedClass + ' '
                     + this.makeSelectedClassName()
                 }
