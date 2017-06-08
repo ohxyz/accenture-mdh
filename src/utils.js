@@ -72,12 +72,6 @@ function getMappedObjects( keysSelected, fromObject ) {
     return objects;
 }
 
-function getObjectsByDepth( depth, fromObject ) {
-    
-    
-    
-}
-
 function JSONCopy( obj ) {
     
     return JSON.parse( JSON.stringify( obj ) );

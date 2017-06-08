@@ -11,41 +11,86 @@ class App extends React.Component {
     constructor() {
         
         super();
-        this.handleSearch = this.handleSearch.bind( this );
+        
+        
         
         this.state = {
             
-            showSearchResults: true
+            showSearchResults: true,
+            searchResults: []
         };
-        /* Test proxy settings */
         
-        fetch( '/api/test' )
-            .then( response => response.json() )
-            .then( json => {
+        this.handleSearch = this.handleSearch.bind( this );
+        
+        this.fetchTransactions();
+    }
+    
+    fetchTransactions() {
+
+        let url = 'transactions-gas.json';
+        
+        fetch( url, {
+
+            method: 'GET',
+
+        }  ).then( response => {
                 
-                console.log( json );
+                return response.json();
+            })
+            .then( json => {
+
+                let searchRecords = json.SearchRecordSet;
+                
+                let records = [];
+                
+                searchRecords.forEach( record => {
+                    
+                    let one = [
+                        
+                        record[ 'Transaction ID' ],
+                        record[ 'Transaction Group' ],
+                        record[ 'Created Date' ].slice( 0, 10 ),
+                        record[ 'Transaction Type' ],
+                        record[ 'Transaction Date' ].slice( 0, 10 )
+                    ]
+                    
+                    records.push( one );
+
+                } );
+                
+                this.setState( {
+                    
+                    searchResults: records
+                } );
+
+            } )
+            .catch( ex => {
+                console.log('parsing failed', ex)
+                
             } );
     }
     
     handleSearch( event ) {
-        
-        console.log( 'search button', event.target );
         
         this.setState( {
             
             showSearchResults: true
             
         } );
+        
+        this.fetchTransactions();
     }
     
     renderSearchResultsSection() {
-        
+        //console.log('render results', this.state.searchResults)
         if ( this.state.showSearchResults === true ) {
         
             return (
             
                 <section id="search-results-section" >
-                    <SearchResultsSection />
+                    <SearchResultsSection 
+                        searchResults={ this.state.searchResults }
+                    />
                 </section>
             
             )
@@ -55,11 +100,11 @@ class App extends React.Component {
     }
     
     render() {
-        
+       
         return (
             <div id="app">
                 <section id="search-transactions-section">
-                    <SearchTransactionsSection
+                    <SearchTransactionsSection    
                         onSearch={ this.handleSearch }
                     />
                 </section>

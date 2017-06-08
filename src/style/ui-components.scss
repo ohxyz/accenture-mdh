@@ -167,110 +167,144 @@
             
 /* START: Table */
 
-.table-main {
-    background-color: white;
-    box-shadow: $defaultBoxShadow;
-    padding: 12px 0;
-    border-radius: $defaultBorderRadius;
-    margin-bottom: 12px;
-    border: $defaultBorder;
-}
-    .table-main  li{
-        padding: 0 36px;
-        color: #9f9f9f;
-    }
-    
-    .table-main .table-header {
-        font-family: $fontFamilyBold;
-        border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
-        color: $fontBoldColor;
-        
-    }
-    
-    .table-main label {
-        
-        display: inline-block;
-        width: 19%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin: 0 0.5%;
-        padding: 16px 0;
-        
-    }
-    
-.table-box-footer {
-    height: 300px;
-}
-    .table-box-footer .per-page {
-        float: left;
-        background-color: white;
-        border-radius: $defaultBorderRadius;
-        padding-left: 12px;
-        color: $defaultFontColor;
-        box-shadow: $defaultBoxShadow;
-        border: $defaultBorder;
 
+
+.table-box { 
+
+}
+
+.table-box button{
+    border: $defaultBorder;
+    box-shadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
+}
+    
+    .table-box-header {
+        margin-bottom: 20px;
     }
-        .num-per-page {
-            
-            margin-left: 20px;
+
+        .table-box-heading {
             display: inline-block;
-            width: 60px;
-            border: none;
-            border-left: 1px solid rgba( 0, 0, 0, 0.1 );
-            border-radius: 0;
-            border-top-right-radius: $defaultBorderRadius;
-            border-bottom-right-radius: $defaultBorderRadius;
+            margin-right: 30px;
+        }
+
+        .number-displayed-heading {
+            display: inline-block;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        .export-all {
+            float: right;
+            margin-right: 20px;
+            width: 220px;
+        }
+
+        .customise {
+            float: right;
+        }
+
+    .table-box-main {
+        background-color: white;
+        box-shadow: $defaultBoxShadow;
+        padding: 12px 0;
+        border-radius: $defaultBorderRadius;
+        margin-bottom: 12px;
+        border: $defaultBorder;
+    }
+        .table-box-main  li{
+            padding: 0 36px;
+            color: #9f9f9f;
+        }
+        
+        .table-box-main .table-box-main-header {
+            font-family: $fontFamilyBold;
+            border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+            color: $fontBoldColor;
             
         }
         
-        .number-per-page.is-opened {
-            border-bottom-right-radius: 0;
+        .table-box-main label {
+            
+            display: inline-block;
+            width: 19%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0 0.5%;
+            padding: 16px 0;
+            
         }
         
-            .num-per-page .dropdown-list {
-                box-shadow: $defaultBoxShadow;
-                border:0;
-                left: 0;
-                right: 0;
+    .table-box-footer {
+        height: 300px;
+    }
+        .table-box-footer .per-page {
+            float: left;
+            background-color: white;
+            border-radius: $defaultBorderRadius;
+            padding-left: 12px;
+            color: $defaultFontColor;
+            box-shadow: $defaultBoxShadow;
+            border: $defaultBorder;
+
+        }
+            .num-per-page {
+                
+                margin-left: 20px;
+                display: inline-block;
+                width: 60px;
+                border: none;
+                border-left: 1px solid rgba( 0, 0, 0, 0.1 );
+                border-radius: 0;
+                border-top-right-radius: $defaultBorderRadius;
+                border-bottom-right-radius: $defaultBorderRadius;
+                
             }
             
-            .num-per-page .dropdown-name {
-                
-                padding: 16px 0;
+            .number-per-page.is-opened {
+                border-bottom-right-radius: 0;
             }
             
-            .num-per-page.is-selected-basic .dropdown-selected {
-                
-                padding: 16px 0;
-            }
-        
-                .num-per-page .dropdown-list > li {
-                    border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+                .num-per-page .dropdown-list {
+                    box-shadow: $defaultBoxShadow;
+                    border:0;
+                    left: 0;
+                    right: 0;
                 }
                 
+                .num-per-page .dropdown-name {
+                    
+                    padding: 16px 0;
+                }
                 
-        
-    .pager {
-        float: right;
-        padding: 16px 0;
-        background-color: white;
-        border-radius: $defaultBorderRadius;
-        box-shadow: $defaultBoxShadow;
-        border: $defaultBorder;
-    }
-        
-        .pager-prev, .pager-next, .pager-current {
+                .num-per-page.is-selected-basic .dropdown-selected {
+                    
+                    padding: 16px 0;
+                }
             
-            padding: 0 18px;
+                    .num-per-page .dropdown-list > li {
+                        border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+                    }
+                    
+        .pager {
+            float: right;
+            padding: 16px 0;
+            background-color: white;
+            border-radius: $defaultBorderRadius;
+            box-shadow: $defaultBoxShadow;
+            border: $defaultBorder;
         }
-        
-        .pager-prev {
-            border-right: $defaultBorder2;
-        }
-        
-        .pager-next {
-            border-left: $defaultBorder2;
-        }
+            
+            .pager-prev, .pager-next, .pager-current {
+                
+                padding: 0 18px;
+            }
+            
+            .pager-prev {
+                border-right: $defaultBorder2;
+            }
+            
+            .pager-next {
+                border-left: $defaultBorder2;
+            }
     

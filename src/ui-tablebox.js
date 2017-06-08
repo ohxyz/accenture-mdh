@@ -6,11 +6,14 @@ class TableHeader extends React.Component {
     render() {
         return (
         
-            <div id="search-results-header" className="clearfix">
-                <h1 id="search-results-heading">Search Results</h1>
-                <h2 id="displaying-heading">Displaying 15 Items</h2>
-                <button id="customise">Customise</button>
-                <button id="export-all">Export all to CSV</button>
+            <div className="table-box-header clearfix">
+                <h1 className="table-box-heading">Search Results</h1>
+                <h2 className="number-displayed-heading">
+                    Displaying { this.props.numberOfRowsDisplayed } Items
+                    ( { this.props.numberOfRowsInTotal } in Total ) 
+                </h2>
+                <button className="customise">Customise</button>
+                <button className="export-all">Export all to CSV</button>
             </div>
         )
     }
@@ -33,7 +36,7 @@ class TableRow extends React.Component {
         let cssClass = '';
         
         if ( this.props.type === 'header' ) {
-            cssClass = 'table-header';
+            cssClass = 'table-box-main-header';
         }
         
         return (
@@ -69,14 +72,13 @@ class TableMain extends React.Component {
     render() {
 
         return (
-            <ul className="table-main">
+            <ul className="table-box-main">
                 { this.renderHeader() }
                 { this.renderContent() }
             </ul>
         )
     }
 }
-
 
 class TableFooter extends React.Component {
     
@@ -118,30 +120,37 @@ class TableBox extends React.Component {
     constructor( props ) {
         
         super( props );
-        
-        this.numPerPage = parseInt( this.props.numberPerPage );
-        
-        this.state = {
-            
-            rows: this.props.rowData.slice( 0, this.numPerPage - 1 )
-        };
+        //console.log( 'table-box constructor', this.props.rowData );
+
     }
     
     render () {
+        //console.log( 'in ui-tablebox', this.props.rowData );
         
-        let totalPage = Math.ceil( this.props.rowData.length / this.numPerPage );
+        let numberPerPage = parseInt( this.props.numberPerPage, 10 );
+        let rowsInTotal = this.props.rowData;
+        let numberOfRowsInTotal = rowsInTotal.length;
+        
+        let rowsDisplayed = numberOfRowsInTotal <= numberPerPage
+            ? rowsInTotal
+            : rowsInTotal.slice( 0, numberPerPage )
+        
+        let totalPage = Math.ceil( numberOfRowsInTotal / numberPerPage );
             
         return (
         
             <div className="table-box">
-                <TableHeader />
+                <TableHeader 
+                    numberOfRowsDisplayed={ rowsDisplayed.length }
+                    numberOfRowsInTotal= { numberOfRowsInTotal }
+                />
                 <TableMain
                     columnNames={ this.props.columnNames}
-                    tableRows={ this.state.rows }
+                    tableRows={ rowsDisplayed }
                 />
                 <TableFooter
                     className="clearfix"
-                    numberPerPage={ this.props.numberPerPage }
+                    numberPerPage={ numberPerPage }
                     currentPageNumber={ this.props.currentPageNumber }
                     totalNumberOfPage={ totalPage }
                     numberPerPageOptions={ this.props.numberPerPageOptions }

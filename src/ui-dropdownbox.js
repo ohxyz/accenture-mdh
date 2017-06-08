@@ -48,7 +48,7 @@ class DropdownBox extends React.Component {
             ? 'single'
             : this.props.type;
 
-        console.log( this.props.id, this.type );
+        // console.log( this.props.id, this.type );
         this.state = {
             
             isOpenedClass: '',
@@ -320,11 +320,12 @@ class DropdownBoxGroup extends React.Component {
         let full = this.full;
         let firstTierKeys = Object.keys( full );
         
+        /*
         let secondTierObjects = UTILS.getMappedObjects( firstTierKeys, full );
         let secondTierKeys = Object.keys( secondTierObjects );
         let thirdTierObjects = UTILS.getMappedObjects( secondTierKeys, secondTierObjects );
         let thirdTierKeys = Object.keys( thirdTierObjects );
-        
+        */
         this.state = {
             
             data: [
