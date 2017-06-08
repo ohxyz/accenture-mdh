@@ -293,6 +293,7 @@
             border-radius: $defaultBorderRadius;
             box-shadow: $defaultBoxShadow;
             border: $defaultBorder;
+            color: $defaultFontColor;
         }
             
             .pager-prev, .pager-next, .pager-current {
@@ -300,11 +301,19 @@
                 padding: 0 18px;
             }
             
+            .pager-prev, .pager-next {
+                
+                user-select: none;
+                cursor: pointer;
+            }
+            
             .pager-prev {
                 border-right: $defaultBorder2;
+                
             }
             
             .pager-next {
                 border-left: $defaultBorder2;
+                
             }
     

@@ -8,11 +8,8 @@ class SearchResultsSection extends React.Component {
         
         super( props );
 
-        this.state = {
-            
-            currentPage: 1,
-            numPerPage: 15,
-        };
+        this.defaultCurrentPageNumber = 1;
+        this.defaultNumberPerPage = 10;
     }
     
     render() {
@@ -25,9 +22,6 @@ class SearchResultsSection extends React.Component {
             'Transaction Date'
         ];
         
-        //console.log( 'in render state self', this.state )
-        //console.log( 'in render props ', this.props.searchResults );
-        
         // Use [ '15', '30', '50' ] instead of [ 15, 30, 50 ], 
         // Could be a bug in React or Babel or elsewhere
         return (
@@ -35,9 +29,9 @@ class SearchResultsSection extends React.Component {
                 <TableBox
                     columnNames={ tableHeaderContent }
                     rowData={ this.props.searchResults } 
-                    numberPerPage={ this.state.numPerPage }
-                    currentPageNumber={ this.state.currentPage }
-                    numberPerPageOptions={ [ '15', '30', '50' ] }
+                    numberPerPage={ this.defaultNumberPerPage }
+                    currentPageNumber={ this.defaultCurrentPageNumber }
+                    numberPerPageOptions={ [ '10', '30', '50', '100', '200' ] }
                 />
             </div>
         );

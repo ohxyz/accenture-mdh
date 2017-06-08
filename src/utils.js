@@ -42,7 +42,7 @@ function getMappedKeys( keysSelected, fromObject ) {
             
         }
         
-        return null;
+        return true;
     } );
     
     return keys;
@@ -64,7 +64,7 @@ function getMappedObjects( keysSelected, fromObject ) {
             }
         }
         
-        return null;
+        return true;
         
     } );
     

@@ -92,7 +92,6 @@ class DropdownBox extends React.Component {
     }
     
     handleItemSelected( event ) {
-        
 
         if ( this.props.onSelect !== undefined ) {
             
