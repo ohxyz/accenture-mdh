@@ -124,6 +124,7 @@ class BasicSearch extends React.Component {
         return (
             <div id="basic-search">
                 <ul className="control-list clearfix">
+
                     <li>
                         <TextBox id={ this.textBoxes[0].id }
                                  name={ this.textBoxes[0].name }
@@ -131,20 +132,21 @@ class BasicSearch extends React.Component {
                         />
                     </li>
                     <li>
+                        <DropdownBox
+							type="single"
+							id="fuel-type"
+							name="Fuel Type"
+                            itemsSelected= { [ 'Gas' ] }
+                            listItems={ [ 'Gas', 'Electricity' ] }
+						/>
+                    </li>
+                    <li>
                         <TextBox id={ this.textBoxes[1].id }
                                  name={ this.textBoxes[1].name }
                                  value={ this.textBoxes[1].value }
                         />
                     </li>
-                    <li>
-                        <DropdownBox
-							type="basic"
-							id="fuel-type"
-							name="Fuel Type"
-                            itemsSelected= { [ 'Electricity' ] }
-                            listItems={ [ 'Gas', 'Electricity' ] }
-						/>
-                    </li>
+
                     <li>
                         <TextBox id={ this.textBoxes[2].id }
                                  name={ this.textBoxes[2].name }

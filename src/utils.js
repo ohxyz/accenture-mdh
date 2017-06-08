@@ -1,6 +1,5 @@
 /* Utils */
 
-
 function isDescendant( childElem, parentElem ) {
     
     let node = childElem.parentNode;
