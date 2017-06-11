@@ -34,24 +34,58 @@ class TableData extends React.Component {
 
 class TableRow extends React.Component {
     
+    constructor( props ) {
+        
+        super( props );
+        this.type = this.props.type;
+    }
+    
+    renderHeaderRow( item, columnIndex ) {
+        
+        return (
+        
+            <TableData key={ columnIndex } 
+                       data={ item }
+                       onClick={ ( event ) => this.props.onClick( event, columnIndex ) } 
+            />
+        );
+    }
+    
+    renderContentRow( item, columnIndex ) {
+        
+        return (
+        
+            <TableData key={ columnIndex } 
+                       data={ item }
+            />
+        );
+        
+    }
+    
     render() {
         
         let cssClass = '';
         
-        if ( this.props.type === 'header' ) {
+        if ( this.type === 'header' ) {
             cssClass = 'table-box-main-header';
         }
         
         return (
-            <li className = { cssClass }>
+            <li className={ cssClass } >
             { 
-                this.props.data.map( ( item, index ) => 
+                this.props.data.map( ( item, index ) => {
                     
-                    <TableData key={ index } 
-                               data={ item }
-                               onClick={ ( event ) => this.props.onClick( event, index ) } 
-                    /> 
-                ) 
+                    if ( this.type === 'header' ) {
+                        
+                        return this.renderHeaderRow( item, index );
+                    }
+                    else {
+                        
+                        return this.renderContentRow( item, index );
+                    }
+                    
+                    
+                } )
             }
             </li>
         );
@@ -220,7 +254,7 @@ class TableBox extends React.Component {
     render () {
         // Assign this.rowsAll here because data is received asynchronously by AJAX
         this.rowsAll = this.props.rowData;
-        
+        console.log( 'rowsAll', this.rowsAll );
         let numberOfRowsInTotal = this.rowsAll.length;
         let sliceStart = ( this.currentPageNumber - 1 ) * this.numberPerPage;
         let sliceEnd = this.currentPageNumber * this.numberPerPage;
