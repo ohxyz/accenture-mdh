@@ -3,8 +3,7 @@
 .text-box {
 	border-radius: $defaultBorderRadius;
 	border: 1px solid $defaultColor;
-	padding: $textBoxPaddingTop 12px;
-	height: $textBoxHeight;
+	padding: 16px 12px;
 	box-sizing: border-box;
 	width: 100%;
 	color: $defaultFontColor;

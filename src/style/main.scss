@@ -128,11 +128,13 @@ header {
             }
 
                 .control-list > li{
-                    float: left;
+                    /*float: left;*/
+                    display: inline-block;
                     width: 24%;
                     margin-right: 1%;
                     margin-top: 6px;
                     margin-bottom: 6px;
+                    vertical-align: top;
                 }
                 
                 
