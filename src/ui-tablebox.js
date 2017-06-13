@@ -3,18 +3,27 @@ import { DropdownBox } from './ui-dropdownbox';
 
 class TableHeader extends React.Component {
     
+    renderCustomiseButton() {
+        
+        return <button className="customise">Customise</button>
+    }
+    
+    renderExportButton() {
+        
+        return <button className="export-all">Export all to CSV</button>
+    }
+    
     render() {
         
         return (
-        
             <div className="table-box-header clearfix">
                 <h1 className="table-box-heading">Search Results</h1>
                 <h2 className="number-displayed-heading">
                     Displaying { this.props.numberOfRowsDisplayed } Items
-                    ( { this.props.numberOfRowsInTotal } total ) 
+                    ( { this.props.numberOfRowsInTotal } total )
                 </h2>
-                <button className="customise">Customise</button>
-                <button className="export-all">Export all to CSV</button>
+                { /* this.renderCustomiseButton() */ }
+                { /* this.renderExportButton() */ }
             </div>
         );
     }
@@ -38,86 +47,92 @@ class TableRow extends React.Component {
         
         super( props );
         this.type = this.props.type;
+        this.row = this.props.rowData;
+
     }
     
-    renderHeaderRow( item, columnIndex ) {
+    renderHeaderRow() {
         
-        return (
-        
-            <TableData key={ columnIndex } 
-                       data={ item }
-                       onClick={ ( event ) => this.props.onClick( event, columnIndex ) } 
-            />
-        );
+        return Object.keys( this.row ).map( columnName => 
+                    
+            <TableData key={ columnName } data={ columnName } />
+        )
     }
     
-    renderContentRow( item, columnIndex ) {
+    renderContentRow() {
+
+        let row = this.props.rowData;
         
-        return (
-        
-            <TableData key={ columnIndex } 
-                       data={ item }
-            />
-        );
-        
+        return Object.keys( row ).map( ( columnName, index ) => 
+            
+            <TableData key={ index } data={ row[ columnName ] } />
+        )
     }
     
     render() {
         
-        let cssClass = '';
-        
         if ( this.type === 'header' ) {
-            cssClass = 'table-box-main-header';
+            
+            return (
+                
+                <li className="table-box-main-header">
+                    { this.renderHeaderRow() }
+                </li>
+            
+            );
         }
-        
-        return (
-            <li className={ cssClass } >
-            { 
-                this.props.data.map( ( item, index ) => {
-                    
-                    if ( this.type === 'header' ) {
-                        
-                        return this.renderHeaderRow( item, index );
-                    }
-                    else {
-                        
-                        return this.renderContentRow( item, index );
-                    }
-                    
-                    
-                } )
-            }
-            </li>
-        );
+        else if( this.type === 'row' ) {
+            
+            return (
+                <li>
+                    { this.renderContentRow() }
+                </li>
+            )
+        }
     }
 }
 
 class TableMain extends React.Component {
     
+    constructor( props ) {
+        
+        super( props );
+        this.rows = [];
+    }
+
     renderHeader() {
         
         return (
             
-            <TableRow type="header" 
-                      data={ this.props.columnNames }
+            <TableRow type="header"
+                      rowData={ this.rows[0] }
                       onClick={ this.props.onSort }
             />
-        
         )
     }
     
     renderContent() {
         
+        // console.log( 'tablerows', this.rows );
+        
         return (
-            this.props.tableRows.map( ( item, index ) => 
-                    
-                <TableRow type="row" key={ index } data={ item } /> 
-            )
+            this.rows.map( ( row, index ) => {
+                // console.log( row, index );
+                 
+                return <TableRow type="row" key={ index } rowData={ row } /> 
+            } )
         );
     }
     
     render() {
+        
+        this.rows = this.props.tableRows;
 
+        if ( this.rows.length === 0 ) {
+            
+            return null;
+        }
+ 
         return (
             <ul className="table-box-main">
                 { this.renderHeader() }
@@ -254,7 +269,7 @@ class TableBox extends React.Component {
     render () {
         // Assign this.rowsAll here because data is received asynchronously by AJAX
         this.rowsAll = this.props.rowData;
-        console.log( 'rowsAll', this.rowsAll );
+        // console.log( 'rowsAll', this.rowsAll );
         let numberOfRowsInTotal = this.rowsAll.length;
         let sliceStart = ( this.currentPageNumber - 1 ) * this.numberPerPage;
         let sliceEnd = this.currentPageNumber * this.numberPerPage;
@@ -263,6 +278,7 @@ class TableBox extends React.Component {
             ? this.rowsAll
             : this.rowsAll.slice( sliceStart, sliceEnd );
         
+        // console.log( 'rows displayed', rowsDisplayed );
         this.totalPage = Math.ceil( numberOfRowsInTotal / this.numberPerPage );
             
         return (
@@ -275,7 +291,7 @@ class TableBox extends React.Component {
                 <TableMain
                     columnNames={ this.props.columnNames }
                     tableRows={ rowsDisplayed }
-                    onSort={ this.handleSort }
+                    onClick={ this.handleSort }
                 />
                 <TableFooter
                     className="clearfix"
