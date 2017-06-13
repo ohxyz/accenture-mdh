@@ -124,13 +124,6 @@ class BasicSearch extends React.Component {
         return (
             <div id="basic-search">
                 <ul className="control-list clearfix">
-
-                    <li>
-                        <TextBox id={ this.textBoxes[0].id }
-                                 name={ this.textBoxes[0].name }
-                                 value={ this.textBoxes[0].value }
-                        />
-                    </li>
                     <li>
                         <DropdownBox
 							type="single"
@@ -139,6 +132,12 @@ class BasicSearch extends React.Component {
                             itemsSelected= { [ 'Gas' ] }
                             listItems={ [ 'Gas', 'Electricity' ] }
 						/>
+                    </li>
+                    <li>
+                        <TextBox id={ this.textBoxes[0].id }
+                                 name={ this.textBoxes[0].name }
+                                 value={ this.textBoxes[0].value }
+                        />
                     </li>
                     <li>
                         <TextBox id={ this.textBoxes[1].id }
@@ -297,11 +296,16 @@ class SearchTransactionsSection extends React.Component {
         }
     }
     
+    renderQuickSearchButton() {
+        
+        return <button id="quick-search">Quick Search</button>
+    }
+    
     render() {
         
         return (
             <div id="search-transactions-content" className="section-box">
-                <button id="quick-search">Quick Search</button>
+                { /* this.renderQuickSearchButton() */ }
                 <h1>Search Transactions</h1>
                 <h2>Enter all the correcct information in their respective fields.</h2>
                 <BasicSearch />

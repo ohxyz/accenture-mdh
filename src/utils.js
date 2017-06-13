@@ -91,6 +91,15 @@ function intersectArrays( array, array2 ) {
     return newArray;
 }
 
+function sortArrayByObjectKey( array, objectKey ) {
+
+    let sorted = array.sort( ( a, b ) => {
+        
+        return a[ objectKey ] > b[ objectKey ]
+    } );
+    
+    return sorted;
+}
 
 module.exports = {
     isDescendant: isDescendant,
@@ -98,5 +107,6 @@ module.exports = {
     getMappedKeys: getMappedKeys,
     getMappedObjects: getMappedObjects,
     JSONCopy: JSONCopy,
-    intersectArrays: intersectArrays
+    intersectArrays: intersectArrays,
+    sortArrayByObjectKey: sortArrayByObjectKey
 };

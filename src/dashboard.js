@@ -26,19 +26,18 @@ class DashBoard extends React.Component {
     handleFetch( json ) {
         
         let searchRecords = json.SearchRecordSet;
-            
         let records = [];
+        // console.log( 'rs', searchRecords );
         
         searchRecords.forEach( record => {
-            
-            let one = [
-                
-                record[ 'Transaction ID' ],
-                record[ 'Transaction Group' ],
-                record[ 'Created Date' ].slice( 0, 10 ),
-                record[ 'Transaction Type' ],
-                record[ 'Transaction Date' ].slice( 0, 10 )
-            ]
+
+            let one = {
+                'Transaction ID': record[ 'Transaction ID'],
+                'Transaction Group': record[ 'Transaction Group' ],
+                'Date Created': record[ 'Created Date' ].slice( 0, 10 ),
+                'Transaction Status': record[ 'Transaction Status' ],
+                'Transaction Date': record[ 'Transaction Date' ].slice( 0, 10 )
+            };
             
             records.push( one );
 
@@ -84,7 +83,6 @@ class DashBoard extends React.Component {
                         searchResults={ this.state.searchResults }
                     />
                 </section>
-            
             )
         }
         

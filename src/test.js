@@ -42,6 +42,7 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
         }
         
     };
+    
     describe( 'Test getMappedKeys', () => {
         
         it( 'returns normal resutls', () => {
@@ -112,5 +113,44 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
         } );
         
     } );
+    
+    describe( 'Utils: sortArrayByObjectKey', () => {
+        
+        const arr = [
+        
+            {   
+                'key 1': 2,
+                'key 2': 'a'
+            },
+            
+            {
+                'key 1': 1,
+                'key 2': 'c'
+            },
+            
+            {
+                'key 1': 3,
+                'key 2': 'b'
+            },
+        ]
+    
+    
+        it( 'should sorted by key 1', () => { 
+        
+            let result = UTILS.sortArrayByObjectKey( arr, 'key 1' );
+            
+            console.log( arr );
+        } );
+        
+        
+         it( 'should sorted by key 2', () => { 
+        
+            let result = UTILS.sortArrayByObjectKey( arr, 'key 2' );
+            
+            console.log( arr );
+        } );
+        
+    } );
+    
     
 } );

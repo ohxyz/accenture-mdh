@@ -14,20 +14,11 @@ class SearchResultsSection extends React.Component {
     
     render() {
         
-        let tableHeaderContent = [
-            'Transaction ID',
-            'Transaction Group',
-            'Date Created',
-            'Transaction Ref No.',
-            'Transaction Date'
-        ];
-        
         // Use [ '15', '30', '50' ] instead of [ 15, 30, 50 ], 
         // Could be a bug in React or Babel or elsewhere
         return (
             <div id="latest-transactions-content" className="section-box">
                 <TableBox
-                    columnNames={ tableHeaderContent }
                     rowData={ this.props.searchResults } 
                     numberPerPage={ this.defaultNumberPerPage }
                     currentPageNumber={ this.defaultCurrentPageNumber }
