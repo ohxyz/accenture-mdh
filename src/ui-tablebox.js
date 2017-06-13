@@ -1,6 +1,8 @@
 import React from 'react';
 import { DropdownBox } from './ui-dropdownbox';
 
+const UTILS = require( './utils.js' );
+
 class TableHeader extends React.Component {
     
     renderCustomiseButton() {
@@ -55,7 +57,11 @@ class TableRow extends React.Component {
         
         return Object.keys( this.row ).map( columnName => 
                     
-            <TableData key={ columnName } data={ columnName } />
+            <TableData key={ columnName } 
+                       data={ columnName }
+                       onClick={ this.props.onClick }
+                        
+            />
         )
     }
     
@@ -201,12 +207,14 @@ class TableBox extends React.Component {
         this.numberPerPage = parseInt( this.props.numberPerPage, 10 );
         this.totalPage = 0;
         this.rowsAll = this.props.rowData;
+        this.rowsDisplayed = [];
         
         
         this.state = {
             
             numberPerPage: this.numberPerPage,
-            currentPageNumber: this.currentPageNumber
+            currentPageNumber: this.currentPageNumber,
+            rowsDisplayed: this.rowsDisplayed
         };
     }
     
@@ -260,9 +268,18 @@ class TableBox extends React.Component {
         } );
     }
     
-    handleSort( event, index ) {
+    handleSort( event ) {
+        this.rows = this.props.rowData;
+        let key = event.target.textContent;
+        console.log( key );
+        UTILS.sortArrayByObjectKey( this.rows, key );
         
-        console.log( event.target.textContent, index );
+        console.log( this.rows );
+        this.setState( {
+            
+            rowsDisplayed: this.rowsDisplay
+            
+        } );
         
     }
     
@@ -274,7 +291,7 @@ class TableBox extends React.Component {
         let sliceStart = ( this.currentPageNumber - 1 ) * this.numberPerPage;
         let sliceEnd = this.currentPageNumber * this.numberPerPage;
 
-        let rowsDisplayed = numberOfRowsInTotal <= this.numberPerPage
+        this.rowsDisplayed = numberOfRowsInTotal <= this.numberPerPage
             ? this.rowsAll
             : this.rowsAll.slice( sliceStart, sliceEnd );
         
@@ -285,13 +302,13 @@ class TableBox extends React.Component {
         
             <div className="table-box">
                 <TableHeader 
-                    numberOfRowsDisplayed={ rowsDisplayed.length }
+                    numberOfRowsDisplayed={ this.rowsDisplayed.length }
                     numberOfRowsInTotal={ numberOfRowsInTotal }
                 />
                 <TableMain
                     columnNames={ this.props.columnNames }
-                    tableRows={ rowsDisplayed }
-                    onClick={ this.handleSort }
+                    tableRows={ this.rowsDisplayed }
+                    onSort={ this.handleSort }
                 />
                 <TableFooter
                     className="clearfix"

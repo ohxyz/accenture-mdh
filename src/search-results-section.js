@@ -22,7 +22,7 @@ class SearchResultsSection extends React.Component {
                     rowData={ this.props.searchResults } 
                     numberPerPage={ this.defaultNumberPerPage }
                     currentPageNumber={ this.defaultCurrentPageNumber }
-                    numberPerPageOptions={ [ '5', '10', '30', '50', '100', '200' ] }
+                    numberPerPageOptions={ [ '10', '30', '50', '100', '200' ] }
                 />
             </div>
         );
