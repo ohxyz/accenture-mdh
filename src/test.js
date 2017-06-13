@@ -1,5 +1,9 @@
-const expect = require('chai').expect;
-const UTILS = require('./utils');
+const chai = require( 'chai' );
+const chaiHttp = require( 'chai-http' );
+const UTILS = require( './utils' );
+const expect = chai.expect;
+
+chai.use( chaiHttp );
 
 describe( 'Utils: getMappedKeys & getMappedObjects', () => {
     
@@ -132,9 +136,27 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
                 'key 1': 3,
                 'key 2': 'b'
             },
-        ]
-    
-    
+        ];
+        
+        const serverAddress = 'http://localhost:3000';
+        
+        chai.request( serverAddress )
+            .get( '/transactions-gas.json' )
+            .then( response => {
+
+                return response.body;
+            } )
+            .then( body  => {
+               
+                console.log( body );
+            } )
+            .catch( error => {
+                
+                throw error;
+                
+            } );
+        
+
         it( 'should sorted by key 1', () => { 
         
             let result = UTILS.sortArrayByObjectKey( arr, 'key 1' );

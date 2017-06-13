@@ -91,12 +91,45 @@ function intersectArrays( array, array2 ) {
     return newArray;
 }
 
-function sortArrayByObjectKey( array, objectKey ) {
-
-    let sorted = array.sort( ( a, b ) => {
+function isNumber( obj ) {
+    
+    if ( isNaN( obj ) === true ) {
         
-        return a[ objectKey ] > b[ objectKey ]
-    } );
+        return false;
+    }
+    
+    return true;
+}
+
+function sortArrayByObjectKey( array, objectKey, secondObjectKey ) {
+    
+    function sortFn( item1, item2 ) {
+        
+        let a = item1[ objectKey ];
+        let b = item2[ objectKey ];
+        
+        if ( a === null ) {
+            
+            a = '';
+        }
+        
+        if ( b === null ) {
+            
+            b = '';
+        }
+        
+        if ( isNumber( a ) === true 
+                && isNumber( b ) === true )
+        {
+            return a - b;
+        }
+        
+        return a.localeCompare( b );
+    } 
+    
+    
+
+    let sorted = array.sort( sortFn);
     
     return sorted;
 }

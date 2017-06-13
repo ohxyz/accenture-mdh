@@ -209,7 +209,6 @@ class TableBox extends React.Component {
         this.rowsAll = this.props.rowData;
         this.rowsDisplayed = [];
         
-        
         this.state = {
             
             numberPerPage: this.numberPerPage,
@@ -249,7 +248,6 @@ class TableBox extends React.Component {
         
             currentPageNumber: this.currentPageNumber
         } );
-        
     }
     
     handleNextClick( event ) {
@@ -272,12 +270,12 @@ class TableBox extends React.Component {
         this.rows = this.props.rowData;
         let key = event.target.textContent;
         console.log( key );
-        UTILS.sortArrayByObjectKey( this.rows, key );
-        
-        console.log( this.rows );
+        let key2 = 'Transaction ID';
+        UTILS.sortArrayByObjectKey( this.rows, key, key2 );
+
         this.setState( {
             
-            rowsDisplayed: this.rowsDisplay
+            // rowsDisplayed: this.rowsDisplay
             
         } );
         
