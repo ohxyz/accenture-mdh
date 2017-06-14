@@ -100,7 +100,7 @@ function getRealTransactions () {
 
 function fetchTransactions( onfetch, onerror ) {
     
-    let url = 'transactions-gas.json';
+    let url = 'transactions-electricity.json';
         
     fetch( url, {
 
@@ -121,7 +121,6 @@ function fetchTransactions( onfetch, onerror ) {
         // console.log('parsing failed', exception )
         
     } );
-    
 }
 
 module.exports = {

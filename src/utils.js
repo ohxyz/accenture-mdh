@@ -1,5 +1,8 @@
 /* Utils */
 
+
+/* App related */
+
 function isDescendant( childElem, parentElem ) {
     
     let node = childElem.parentNode;
@@ -101,9 +104,21 @@ function isNumber( obj ) {
     return true;
 }
 
-function sortArrayByObjectKey( array, objectKey, secondObjectKey ) {
+function sortArrayByObjectKey( options, array ) {
     
-    function sortFn( item1, item2 ) {
+    let defaultSettings = {
+        
+        type: 'quick',
+        order: 'ascend',
+        objectKey: '',
+        secondObjectKey: ''
+    };
+    
+    let settings = Object.assign( defaultSettings, options );
+    let objectKey = settings.objectKey;
+    let secondObjectKey = settings.secondObjectKey;
+    
+    function sortAscend( item1, item2 ) {
         
         let a = item1[ objectKey ];
         let b = item2[ objectKey ];
@@ -118,20 +133,36 @@ function sortArrayByObjectKey( array, objectKey, secondObjectKey ) {
             b = '';
         }
         
-        if ( isNumber( a ) === true 
-                && isNumber( b ) === true )
+        if ( a === b && settings.type === 'normal' ) { 
+            
+            a = item1[ secondObjectKey ];
+            b = item2[ secondObjectKey ];
+        }
+
+        
+        if ( isNumber( a ) === true && isNumber( b ) === true )
         {
             return a - b;
         }
         
         return a.localeCompare( b );
-    } 
+    }
     
+    function sortDescend( item1, item2 ) {
+        
+        return sortAscend( item2, item1 );
+    }
     
+    let sortFn = sortAscend;
+    
+    if ( settings.order === 'descend'  ) {
+        
+        sortFn = sortDescend;
+    }
 
-    let sorted = array.sort( sortFn);
+    array.sort( sortFn );
     
-    return sorted;
+    return array;
 }
 
 module.exports = {

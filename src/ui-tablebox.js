@@ -271,8 +271,18 @@ class TableBox extends React.Component {
         let key = event.target.textContent;
         console.log( key );
         let key2 = 'Transaction ID';
-        UTILS.sortArrayByObjectKey( this.rows, key, key2 );
-
+        
+        let sortOptions = {
+            
+            type: 'quick',
+            order: 'ascend',
+            objectKey: key,
+            secondObjectKey: key2
+        };
+        
+        UTILS.sortArrayByObjectKey( sortOptions, this.rows, key, key2 );
+        
+        // Call this function to update UI, even it's an empty object
         this.setState( {
             
             // rowsDisplayed: this.rowsDisplay
