@@ -27,9 +27,9 @@ class DashBoard extends React.Component {
             'nmi-mirn': '',
             'transaction-id': '',
             'message-id': '',
-            'transaction-group': '',
-            'transaction-type': '',
-            'transaction-status': '',
+            'transaction-group': [ 'SORD', 'CATS' ],
+            'transaction-type': [],
+            'transaction-status': [],
             
             'sending-participant': '',
             'receiving-participant': '',

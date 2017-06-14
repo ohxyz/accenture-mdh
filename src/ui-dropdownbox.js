@@ -227,7 +227,7 @@ class DropdownBox extends React.Component {
                 { 
                     this.props.listItems.map( item => {
                         
-                        let className = 'dropdown-list-item';
+                        let className = 'dropdown-list-item ';
                         
                         if ( this.type === 'multiple' ) {
                         
@@ -406,6 +406,7 @@ class DropdownBoxGroup extends React.Component {
                     title={ attr.title }
                     listItems={ this.state.data[ index ] }
                     onGroupSelect={ ( event ) => this.handleGroupSelect( event, index ) }
+                    onSelect={ this.props.onChange }
                 />
             </li>
         );

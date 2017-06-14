@@ -151,6 +151,7 @@ class BasicSearch extends React.Component {
                 <DropdownBoxGroup
                     children={ dropdownBoxAttrs }
                     data={ this.transactionCategory }
+                    onChange={ this.props.onChange }
                 />                    
             </div>
             
