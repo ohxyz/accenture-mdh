@@ -39,7 +39,12 @@ class DropdownBox extends React.Component {
     constructor( props ) {
         
         super( props );
-
+        
+        this.handleClick = this.handleClick.bind( this );
+        this.handleItemSelected = this.handleItemSelected.bind( this );
+        this.closeDropdownList = this.closeDropdownList.bind( this );
+        this.handleDone = this.handleDone.bind( this );
+        
         this.itemsSelected = this.props.itemsSelected === undefined
             ? []
             : this.props.itemsSelected
@@ -48,20 +53,16 @@ class DropdownBox extends React.Component {
             ? 'single'
             : this.props.type;
 
-        // console.log( this.props.id, this.type );
         this.state = {
             
             isOpenedClass: '',
             itemsSelected: this.itemsSelected
         };
+
         
-        this.handleClick = this.handleClick.bind( this );
-        this.handleItemSelected = this.handleItemSelected.bind( this );
-        this.closeDropdownList = this.closeDropdownList.bind( this );
-        this.handleDone = this.handleDone.bind( this );
-        
-                
         this.dom = null;
+        this.value = this.itemsSelected;
+        
         DropdownBox.dropdownBoxes.push( this );
     }
     
@@ -92,10 +93,10 @@ class DropdownBox extends React.Component {
     }
     
     handleItemSelected( event ) {
-
-        if ( this.props.onSelect !== undefined ) {
+        
+        if ( this.props.onGroupSelect !== undefined ) {
             
-            this.props.onSelect( event );
+            this.props.onGroupSelect( event );
         }
 
         if ( this.type === 'basic' ) {
@@ -110,13 +111,12 @@ class DropdownBox extends React.Component {
             
             this.handleItemSelectedMultiple( event );
         }
-        
+
     }
     
     handleItemSelectedBasic( event ) {
         
         this.itemsSelected[ 0 ] = event.target.textContent;
-        
         
         this.setState( {
             
@@ -205,11 +205,13 @@ class DropdownBox extends React.Component {
 
         return (
         
-            <div className="dropdown-header" onClick={ this.handleClick } >
+            <div className="dropdown-header"
+                 onClick={ this.handleClick } 
+            >
                 <div className="dropdown-icon">
                     { this.renderDropdownIcon() }
                 </div>
-                <div className="dropdown-name">{ this.props.name }</div>
+                <div className="dropdown-name">{ this.props.title }</div>
                 <div className="dropdown-selected">
                     { this.makeSelectedLiteralHeader() }
                 </div>
@@ -225,11 +227,11 @@ class DropdownBox extends React.Component {
                 { 
                     this.props.listItems.map( item => {
                         
-                        let className = '';
+                        let className = 'dropdown-list-item';
                         
                         if ( this.type === 'multiple' ) {
                         
-                            className = this.itemsSelected.indexOf( item ) >= 0
+                            className += this.itemsSelected.indexOf( item ) >= 0
                                 ? 'item-selected'
                                 : '';
                         }
@@ -240,7 +242,11 @@ class DropdownBox extends React.Component {
                                 key={ item } 
                                 item={ item }
                                 type={ this.type }
-                                onClick={ this.handleItemSelected }
+                                onClick={ ( event ) => {
+                                    
+                                    this.handleItemSelected( event );
+                                    this.props.onSelect( event, this.itemsSelected );
+                                } }
                             />
                         );
                         
@@ -269,7 +275,7 @@ class DropdownBox extends React.Component {
                 <span className="num-of-selected">{ selectedLiteral }</span>
                 <span className="done" onClick={ this.handleDone }>Done</span>
             </li>
-        )
+        );
     }
 
     renderDropdownIcon() {
@@ -279,7 +285,7 @@ class DropdownBox extends React.Component {
                 <path d="M17,10.6l-5.8,5.8h11.7L17,10.6z M17,25.9l5.9-5.8H11.2L17,25.9z"/>
             </svg>
         
-        )
+        );
     }
 
     render() {
@@ -299,6 +305,7 @@ class DropdownBox extends React.Component {
                     + this.state.isOpenedClass + ' '
                     + this.makeSelectedClassName()
                 }
+                data-name={ this.props.name }
                 ref={ self => this.dom = self }
             >   
                 { this.renderDropdownBoxHeader() }
@@ -312,8 +319,9 @@ class DropdownBoxGroup extends React.Component {
     
     constructor( props ) {
         
-        super();
-        
+        super( props );
+        this.handleGroupSelect = this.handleGroupSelect.bind( this );
+
         this.full = props.data;
         
         let full = this.full;
@@ -346,11 +354,9 @@ class DropdownBoxGroup extends React.Component {
             
             this.itemsSelected.push( [] );
         }
-
-        this.handleSelect = this.handleSelect.bind( this );
     }
     
-    handleSelect( event, dropdownBoxIndex ) {
+    handleGroupSelect( event, dropdownBoxIndex ) {
         
         let selected = event.target.textContent;
         let itemsPopulated = UTILS.JSONCopy( this.state.data );
@@ -385,9 +391,8 @@ class DropdownBoxGroup extends React.Component {
                 
                 data: itemsPopulated
             
-            });
+            } );
         }
-        
     }
     
     renderDropdownBox( attr, index ) {
@@ -398,26 +403,16 @@ class DropdownBoxGroup extends React.Component {
                     type={ attr.type }
                     id={ attr.id }
                     name={ attr.name }
+                    title={ attr.title }
                     listItems={ this.state.data[ index ] }
-                    onSelect={ ( event ) => this.handleSelect( event, index ) }
+                    onGroupSelect={ ( event ) => this.handleGroupSelect( event, index ) }
                 />
             </li>
         );
     }
 
     render() {
-                
-        const transactionStatus = [
-            'Completed',
-            'Requested',
-            'Cancelled',
-            'Objected',
-            'Pending Acknowledgement',
-            'PACN',
-            'Rejected'
-        ];
-         
-         /* Rendered for demo purpose only */
+
         return (
             <ul className="control-list clearfix">
                 { 
@@ -426,14 +421,7 @@ class DropdownBoxGroup extends React.Component {
                         return this.renderDropdownBox( child, index );
                     } )
                 }
-                <li>
-                    <DropdownBox
-                        type="multiple"
-                        id="transaction-status"
-                        name="Transaction Status"
-                        listItems={ transactionStatus }
-                    />
-                </li>
+
             </ul>
         )
     }
@@ -445,7 +433,7 @@ DropdownBox.dropdownBoxes = [];
 document.addEventListener( 'mouseup', ( event ) => {
     
     DropdownBox.dropdownBoxes.forEach( ( box ) => {
-        // console.log( 'box', DropdownBox.dropdownBoxes );
+
         if ( UTILS.isDescendant( event.target, box.dom ) === false ){
             
             box.closeDropdownList();

@@ -19,6 +19,30 @@ class DashBoard extends React.Component {
         
         this.handleSearch = this.handleSearch.bind( this );
         this.handleFetch = this.handleFetch.bind( this );
+        this.handleChange = this.handleChange.bind( this );
+        
+        this.searchInputs = {
+            
+            'fuel-type': [ 'Gas' ],
+            'nmi-mirn': '',
+            'transaction-id': '',
+            'message-id': '',
+            'transaction-group': '',
+            'transaction-type': '',
+            'transaction-status': '',
+            
+            'sending-participant': '',
+            'receiving-participant': '',
+            'unsolicited-responses': false,
+            'date-created-from': '',
+            'date-created-to': '',
+            'time-created-from': '',
+            'time-created-to': '',
+            'service-order-type': '',
+            'service-order-subtype': '',
+            'service-order-number': '',
+            'cr-code': '',
+        };
         
         this.fetchTransactions();
     }
@@ -27,8 +51,7 @@ class DashBoard extends React.Component {
         
         let searchRecords = json.SearchRecordSet;
         let records = [];
-        // console.log( 'rs', searchRecords );
-        
+
         searchRecords.forEach( record => {
 
             let one = {
@@ -69,11 +92,32 @@ class DashBoard extends React.Component {
             
         } );
         
+        console.log( 'on search', this.searchInputs );
         this.fetchTransactions();
     }
     
+    handleChange( event, dropdownBoxSelectedItems ) {
+        
+        let target = event.target;
+        let targetClassName = target.className;
+        
+        if ( targetClassName.indexOf( 'text-box' ) > -1 ) {
+            
+            let name = target.name;
+            let value = target.value;
+
+            this.searchInputs[ name ] = value;
+        }
+        else if ( targetClassName.indexOf( 'dropdown-list-item' ) > -1 ) {
+            
+            console.log( target.textContent, dropdownBoxSelectedItems )
+        }
+        
+        console.log( 'search inputs', this.searchInputs );
+    }
+    
     renderSearchResultsSection() {
-        //console.log('render results', this.state.searchResults)
+
         if ( this.state.showSearchResults === true ) {
         
             return (
@@ -94,8 +138,10 @@ class DashBoard extends React.Component {
         return (
             <div id="dashboard">
                 <section id="search-transactions-section">
-                    <SearchTransactionsSection    
+                    <SearchTransactionsSection
+                        defaultInputValues={ this.searchInputs }
                         onSearch={ this.handleSearch }
+                        onChange={ this.handleChange }
                     />
                 </section>
                 { this.renderSearchResultsSection() }

@@ -29,6 +29,7 @@ class TextBox extends React.Component {
     }
     
     render() {
+        
         return (
         
             <input className="text-box" 
@@ -38,6 +39,7 @@ class TextBox extends React.Component {
                    defaultValue={ this.props.value }
                    onFocus={ this.handleFocus }
                    onBlur={ this.handleBlur }
+                   onChange={ this.props.onChange }
             />
         );
     }

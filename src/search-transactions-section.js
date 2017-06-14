@@ -5,30 +5,8 @@ import { TextBox } from './ui-textbox';
 class BasicSearch extends React.Component {
     
     constructor() {
-        super();
         
-        this.textBoxes = [
-         
-            {
-                id: 'nmi-mirn',
-                name: 'nmi-mirn',
-                value: 'NMI / MIRN'
-            },
-            
-            {
-                id: 'transaction-id',
-                name: 'transaction-id',
-                value: 'Transaction ID'
-            },
-            
-            {
-                id: 'message-id',
-                name: 'message-name',
-                value: 'Message ID'
-            },
-
-            
-        ];
+        super();
                 
         this.cascadedData = {
             
@@ -100,7 +78,8 @@ class BasicSearch extends React.Component {
             {
                 type: 'multiple',
                 id: 'transaction-group',
-                name: 'Transaction Group',
+                name: 'transaction-group',
+                title: 'Transaction Group',
                 listItems: listItems
             },
             
@@ -108,19 +87,22 @@ class BasicSearch extends React.Component {
             {        
                 type: 'multiple',
                 id: 'transaction-type',
-                name: 'Transaction Type',
+                name: 'transaction-type',
+                title: 'Transaction Type',
                 listItems: listItems
             },
-            /*
-            {        
-                type: 'multiple',
-                id: 'transaction-status',
-                name: 'Transaction Status',
-                listItems: listItems
-            },
-            */
         ];
-
+                        
+        const transactionStatus = [
+            'Completed',
+            'Requested',
+            'Cancelled',
+            'Objected',
+            'Pending Acknowledgement',
+            'PACN',
+            'Rejected'
+        ];
+         
         return (
             <div id="basic-search">
                 <ul className="control-list clearfix">
@@ -128,35 +110,48 @@ class BasicSearch extends React.Component {
                         <DropdownBox
 							type="single"
 							id="fuel-type"
-							name="Fuel Type"
-                            itemsSelected= { [ 'Gas' ] }
+                            name="fuel-type"
+							title="Fuel Type"
+                            itemsSelected={ this.props.defaultInputValues[ 'fuel-type' ] }
                             listItems={ [ 'Gas', 'Electricity' ] }
+                            onSelect={ this.props.onChange }
 						/>
                     </li>
                     <li>
-                        <TextBox id={ this.textBoxes[0].id }
-                                 name={ this.textBoxes[0].name }
-                                 value={ this.textBoxes[0].value }
+                        <TextBox id="nmi-mirn"
+                                 name="nmi-mirn"
+                                 value="NMI / MIRN"
+                                 onChange={ this.props.onChange }
                         />
                     </li>
                     <li>
-                        <TextBox id={ this.textBoxes[1].id }
-                                 name={ this.textBoxes[1].name }
-                                 value={ this.textBoxes[1].value }
+                        <TextBox id="transaction-id"
+                                 name="transaction-id"
+                                 value="Transaction ID"
+                                 onChange={ this.props.onChange }
                         />
                     </li>
-
                     <li>
-                        <TextBox id={ this.textBoxes[2].id }
-                                 name={ this.textBoxes[2].name }
-                                 value={ this.textBoxes[2].value }
+                        <TextBox id="message-id"
+                                 name="message-id"
+                                 value="Message ID"
+                                 onChange={ this.props.onChange }
+                        />
+                    </li>
+                    <li>
+                        <DropdownBox
+                            type="multiple"
+                            id="transaction-status"
+                            name="transaction-status"
+                            title="Transaction Status"
+                            listItems={ transactionStatus } 
                         />
                     </li>
                 </ul>
                 <DropdownBoxGroup
-                    children= { dropdownBoxAttrs }
-                    data = { this.transactionCategory }
-                />
+                    children={ dropdownBoxAttrs }
+                    data={ this.transactionCategory }
+                />                    
             </div>
             
         );
@@ -181,14 +176,16 @@ class AdvancedSearch extends React.Component {
 						<DropdownBox
                             type="single"
 							id="sending-participants"
-					        name="Sending Participant"
+                            name="sending-participants"
+					        title="Sending Participant"
                             listItems={ listItems }
                         />
 				    </li>
                     <li>
 						<DropdownBox
 							id="receiving-participants"
-							name="Receiving Participant"
+                            name="receiving-participants"
+							title="Receiving Participant"
                             listItems={ listItems }
                         />
 				    </li>
@@ -196,41 +193,58 @@ class AdvancedSearch extends React.Component {
 						<TextBox
 							id="unsolicited-responses"
 							value="Unsolicited Responses"
-                            listItems={ listItems }
                         />
 				    </li>
                     <li style={ {visibility: 'hidden' } }>
 						<TextBox value="Place Holder" />
 				    </li>
-                    <li><TextBox id="date-created-from" value="Date Created from" /></li>
-                    <li><TextBox id="date-created-to" value="Date Created to" /></li>
+                    <li>
+                        <TextBox 
+                            id="date-created-from" 
+                            name="date-created-from"
+                            value="Date Created from"
+                            onChange={ this.props.onChange }
+                        />
+                    </li>
+                    <li>
+                        <TextBox 
+                            id="date-created-to"
+                            name="date-created-to"
+                            value="Date Created to" 
+                            onChange={ this.props.onChange }
+                        />
+                    </li>
                     <li><TextBox value="Time Created from" /></li>
                     <li><TextBox value="Time Created to" /></li>
                     <li>
 						<DropdownBox
                             type="multiple"
 							id="service-order-type"
-							name="Service Order Type"
-                            itemsSelected={ ['Advanced Two', 'Advanced Three']}
+                            name="service-order-type"
+							title="Service Order Type"
+                            itemsSelected={ ['Advanced Two', 'Advanced Three'] }
                             listItems={ listItems }
                         />
 					</li>
                     <li><DropdownBox 
 							id="service-order-subtype"
-							name="Service Order SubType"
+                            name="service-order-subtype"
+							title="Service Order Subtype"
                             listItems={ listItems }
                         />
 					</li>
                     <li><DropdownBox 
 							id="service-order-number"
-							name="Service Order Number"
+                            name="service-order-number"
+							title="Service Order Number"
                             listItems={ listItems }
                         />
 					</li>
                     <li>
 						<DropdownBox 
-							id="cr-code" 
-							name="CR Code"
+							id="cr-code"
+                            name="cr-code"
+							title="CR Code"
                             listItems={ listItems }
                         />
 				    </li>
@@ -305,11 +319,18 @@ class SearchTransactionsSection extends React.Component {
         
         return (
             <div id="search-transactions-content" className="section-box">
-                { /* this.renderQuickSearchButton() */ }
+                { this.renderQuickSearchButton() }
                 <h1>Search Transactions</h1>
                 <h2>Enter all the correcct information in their respective fields.</h2>
-                <BasicSearch />
-                <AdvancedSearch display={ this.state.enableAdvancedSearch }/>
+                <BasicSearch
+                    defaultInputValues={ this.props.defaultInputValues }
+                    onChange={ this.props.onChange }
+                />
+                <AdvancedSearch
+                    
+                    display={ this.state.enableAdvancedSearch }
+                    onChange={ this.props.onChange }
+                />
                 <SearchControls
                     onSearch={ this.props.onSearch }
                     toggleSearchModeClick={ this.toggleSearchModeClick } 

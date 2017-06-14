@@ -21,11 +21,11 @@ class TableHeader extends React.Component {
             <div className="table-box-header clearfix">
                 <h1 className="table-box-heading">Search Results</h1>
                 <h2 className="number-displayed-heading">
-                    Displaying { this.props.numberOfRowsDisplayed } Items
-                    ( { this.props.numberOfRowsInTotal } total )
+                    Displaying { this.props.numberOfRowsDisplayed.toLocaleString() } Items
+                    ( { this.props.numberOfRowsInTotal.toLocaleString() } total )
                 </h2>
-                { /* this.renderCustomiseButton() */ }
-                { /* this.renderExportButton() */ }
+                { this.renderCustomiseButton() }
+                { this.renderExportButton() }
             </div>
         );
     }
@@ -163,7 +163,7 @@ class TableFooter extends React.Component {
                     <DropdownBox
                         type="basic"
                         otherClassNames="num-per-page"
-                        name={ this.props.numberPerPage }
+                        title={ this.props.numberPerPage }
                         listItems={ numberPerPageOptions }
                         onSelect={ this.props.onNumberPerPageChange }
                     />
@@ -295,7 +295,7 @@ class TableBox extends React.Component {
     render () {
         // Assign this.rowsAll here because data is received asynchronously by AJAX
         this.rowsAll = this.props.rowData;
-        // console.log( 'rowsAll', this.rowsAll );
+
         let numberOfRowsInTotal = this.rowsAll.length;
         let sliceStart = ( this.currentPageNumber - 1 ) * this.numberPerPage;
         let sliceEnd = this.currentPageNumber * this.numberPerPage;
@@ -304,7 +304,6 @@ class TableBox extends React.Component {
             ? this.rowsAll
             : this.rowsAll.slice( sliceStart, sliceEnd );
         
-        // console.log( 'rows displayed', rowsDisplayed );
         this.totalPage = Math.ceil( numberOfRowsInTotal / this.numberPerPage );
             
         return (
