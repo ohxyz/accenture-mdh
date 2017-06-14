@@ -268,8 +268,8 @@ class TableBox extends React.Component {
     
     handleSort( event ) {
         this.rows = this.props.rowData;
+        
         let key = event.target.textContent;
-        console.log( key );
         let key2 = 'Transaction ID';
         
         let sortOptions = {
@@ -283,6 +283,7 @@ class TableBox extends React.Component {
         UTILS.sortArrayByObjectKey( sortOptions, this.rows, key, key2 );
         
         // Call this function to update UI, even it's an empty object
+        // But this.rows' value has actually changed.
         this.setState( {
             
             // rowsDisplayed: this.rowsDisplay

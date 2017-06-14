@@ -166,6 +166,7 @@ function sortArrayByObjectKey( options, array ) {
 }
 
 module.exports = {
+    
     isDescendant: isDescendant,
     toggleArrayItem: toggleArrayItem,
     getMappedKeys: getMappedKeys,
@@ -173,4 +174,5 @@ module.exports = {
     JSONCopy: JSONCopy,
     intersectArrays: intersectArrays,
     sortArrayByObjectKey: sortArrayByObjectKey
+    
 };
