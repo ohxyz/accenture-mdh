@@ -3,6 +3,10 @@ import { DropdownBox } from './ui-dropdownbox';
 
 const UTILS = require( './utils.js' );
 
+const ASCEND = 'ascend';
+const DESCEND = 'descend';
+const INACTIVE = '';
+
 class TableHeader extends React.Component {
     
     renderCustomiseButton() {
@@ -24,8 +28,8 @@ class TableHeader extends React.Component {
                     Displaying { this.props.numberOfRowsDisplayed.toLocaleString() } Items
                     ( { this.props.numberOfRowsInTotal.toLocaleString() } total )
                 </h2>
-                { this.renderCustomiseButton() }
-                { this.renderExportButton() }
+                { /* this.renderCustomiseButton() */ }
+                { /* this.renderExportButton() */ }
             </div>
         );
     }
@@ -33,11 +37,70 @@ class TableHeader extends React.Component {
 
 class TableData extends React.Component {
     
-    render() {
+    constructor( props ) {
+        
+        super( props );
+    }
+    
+    renderSortIconUp() {
+        
         return (
         
-            <label onClick={ this.props.onClick }>
+            <svg className="sort-icon sort-icon-up" viewBox="0 0 34 36.5">
+                <polygon points="17,25.9 11.2,20.1 22.8,20.1"/>
+                <path d="M11.2,16.4l5.8-5.8l5.9,5.8H11.2z"/>
+            </svg>
+        )
+    }
+    
+    renderSortIconInactive() {
+        
+        return (
+        
+            <svg className="sort-icon sort-icon-inactive" viewBox="0 0 34 36.5">
+                <path d="M17,10.6l-5.8,5.8h11.7L17,10.6z M17,25.9l5.9-5.8H11.2L17,25.9z"/>
+            </svg>
+        )
+    }
+    
+    renderSortIconDown() {
+        
+        return(
+        
+            <svg className="sort-icon sort-icon-down" viewBox="0 0 34 36.5">
+                <polygon points="17,10.6 11.2,16.4 22.8,16.4"/>
+                <path d="M22.8,20.1L17,25.9l-5.8-5.8H22.8z"/>
+            </svg>
+        )
+    }
+    
+    render() {
+        
+        let sortIcon;
+        let rowType = this.props.type;
+        let sortOrder = this.props.sortOrder;
+        
+        if ( rowType === 'header' ) {
+            
+            if ( sortOrder === ASCEND ) {
+                
+                sortIcon = this.renderSortIconUp();
+            }
+            else if ( sortOrder === DESCEND ) {
+                
+                sortIcon = this.renderSortIconDown();
+            }
+            else {
+                
+                sortIcon = this.renderSortIconInactive();
+            }
+        }
+        
+        return (
+            
+            <label onClick={ this.props.onClick } >
                 { this.props.data }
+                { sortIcon }
             </label>
         );
     }
@@ -50,16 +113,17 @@ class TableRow extends React.Component {
         super( props );
         this.type = this.props.type;
         this.row = this.props.rowData;
-
     }
     
     renderHeaderRow() {
         
         return Object.keys( this.row ).map( columnName => 
-                    
-            <TableData key={ columnName } 
+            
+            <TableData type={ this.type }
+                       key={ columnName } 
                        data={ columnName }
                        onClick={ this.props.onClick }
+                       sortOrder= { this.props.sortOrder }
                         
             />
         )
@@ -111,6 +175,7 @@ class TableMain extends React.Component {
         return (
             
             <TableRow type="header"
+                      sortOrder={ this.props.sortOrder }
                       rowData={ this.rows[0] }
                       onClick={ this.props.onSort }
             />
@@ -208,6 +273,7 @@ class TableBox extends React.Component {
         this.totalPage = 0;
         this.rowsAll = this.props.rowData;
         this.rowsDisplayed = [];
+        this.sortOrder = INACTIVE;
         
         this.state = {
             
@@ -267,15 +333,36 @@ class TableBox extends React.Component {
     }
     
     handleSort( event ) {
+        
+        let target = event.target;
+        
+        if ( event.target !== event.currentTarget ) {
+            
+            target = event.currentTarget;
+        }
+
         this.rows = this.props.rowData;
         
-        let key = event.target.textContent;
+        let key = target.textContent;
         let key2 = 'Transaction ID';
+        
+        if ( this.sortOrder === '' ) {
+            
+            this.sortOrder = ASCEND
+        }
+        else if ( this.sortOrder === ASCEND ) {
+            
+            this.sortOrder = DESCEND;
+        }
+        else if( this.sortOrder === DESCEND ) {
+            
+            this.sortOrder = ASCEND;
+        }
         
         let sortOptions = {
             
             type: 'quick',
-            order: 'ascend',
+            order: this.sortOrder,
             objectKey: key,
             secondObjectKey: key2
         };
@@ -289,8 +376,9 @@ class TableBox extends React.Component {
             // rowsDisplayed: this.rowsDisplay
             
         } );
-        
+
     }
+    
     
     render () {
         // Assign this.rowsAll here because data is received asynchronously by AJAX
@@ -315,6 +403,7 @@ class TableBox extends React.Component {
                 />
                 <TableMain
                     columnNames={ this.props.columnNames }
+                    sortOrder={ this.sortOrder }
                     tableRows={ this.rowsDisplayed }
                     onSort={ this.handleSort }
                 />

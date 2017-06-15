@@ -211,7 +211,7 @@
         margin-bottom: 12px;
         border: $defaultBorder;
     }
-        .table-box-main  li{
+        .table-box-main li{
             padding: 0 36px;
             color: #9f9f9f;
         }
@@ -221,7 +221,41 @@
             border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
             color: $fontBoldColor;            
         }
-        
+            
+            .sort-icon {
+                
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                top: 30%;
+            }
+            
+                .sort-icon-up polygon { 
+                
+                    fill:#D8D8D8; 
+                }
+                
+                .sort-icon-up path {
+                    
+                    fill:#2794EA; 
+                }
+                
+                .sort-icon-inactive path {
+                    
+                    fill:#D8D8D8; 
+                    
+                }
+                
+                .sort-icon-down polygon { 
+                
+                    fill:#D8D8D8; 
+                }
+                
+                .sort-icon-down path {
+                    
+                    fill:#2794EA; 
+                }
+    
         .table-box-main label {
             
             display: inline-block;
@@ -235,7 +269,7 @@
         }
             
         .table-box-main-header label {
-            
+            position: relative;
             user-select: none;
             cursor: pointer;
         }

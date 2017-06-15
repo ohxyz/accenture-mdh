@@ -331,7 +331,7 @@ class SearchTransactionsSection extends React.Component {
         
         return (
             <div id="search-transactions-content" className="section-box">
-                { this.renderQuickSearchButton() }
+                { /* this.renderQuickSearchButton() */ }
                 <h1>Search Transactions</h1>
                 <h2>Enter all the correcct information in their respective fields.</h2>
                 <BasicSearch
