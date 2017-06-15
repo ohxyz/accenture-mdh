@@ -28,8 +28,8 @@ class DashBoard extends React.Component {
             'transaction-id': '',
             'message-id': '',
             'transaction-group': [ 'SORD', 'CATS' ],
-            'transaction-type': [],
-            'transaction-status': [],
+            'transaction-type': [ 'ServiceOrderRequest', 'CATSObjectionWithdrawal' ],
+            'transaction-status': [ 'Completed', 'PACN' ],
             
             'sending-participant': '',
             'receiving-participant': '',
@@ -38,9 +38,9 @@ class DashBoard extends React.Component {
             'date-created-to': '',
             'time-created-from': '',
             'time-created-to': '',
-            'service-order-type': '',
-            'service-order-subtype': '',
-            'service-order-number': '',
+            'service-order-type': [],
+            'service-order-subtype': [],
+            'service-order-number': [],
             'cr-code': '',
         };
         
@@ -103,17 +103,28 @@ class DashBoard extends React.Component {
         
         if ( targetClassName.indexOf( 'text-box' ) > -1 ) {
             
-            let name = target.name;
+            let searchObjectPropertyName = target.name;
             let value = target.value;
 
-            this.searchInputs[ name ] = value;
+            this.searchInputs[ searchObjectPropertyName ] = value;
         }
         else if ( targetClassName.indexOf( 'dropdown-list-item' ) > -1 ) {
             
-            console.log( target.textContent, dropdownBoxSelectedItems )
+            this.handleDropdownBoxChange( event, dropdownBoxSelectedItems );
         }
         
         console.log( 'search inputs', this.searchInputs );
+    }
+    
+    handleDropdownBoxChange( event, selectedItems ) {
+        // console.log( selectedItems );
+        
+        let target = event.target;
+        let dropdownBoxElement = target.parentElement.parentElement;    
+        let searchObjectPropertyName = dropdownBoxElement.id;
+
+        this.searchInputs[ searchObjectPropertyName ] = selectedItems;
+        
     }
     
     renderSearchResultsSection() {

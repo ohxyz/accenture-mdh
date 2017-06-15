@@ -73,7 +73,7 @@ class BasicSearch extends React.Component {
     render() {
         
         const listItems = [ 'Basic One', 'Basic Two', 'Basic Three' ];
-        const dropdownBoxAttrs = 
+        const attrsOfDropdownBoxes = 
         [
             {
                 type: 'multiple',
@@ -101,6 +101,19 @@ class BasicSearch extends React.Component {
             'Pending Acknowledgement',
             'PACN',
             'Rejected'
+        ];
+        
+        const otherDropdownBoxes = [
+        
+            {
+                type: "multiple",
+                id: "transaction-status",
+                name: "transaction-status",
+                title: "Transaction Status",
+                listItems: transactionStatus,
+                onChange: this.props.onChange
+            }
+        
         ];
          
         return (
@@ -138,20 +151,12 @@ class BasicSearch extends React.Component {
                                  onChange={ this.props.onChange }
                         />
                     </li>
-                    <li>
-                        <DropdownBox
-                            type="multiple"
-                            id="transaction-status"
-                            name="transaction-status"
-                            title="Transaction Status"
-                            listItems={ transactionStatus } 
-                        />
-                    </li>
                 </ul>
                 <DropdownBoxGroup
-                    children={ dropdownBoxAttrs }
+                    children={ attrsOfDropdownBoxes }
                     data={ this.transactionCategory }
                     onChange={ this.props.onChange }
+                    otherDropdownBoxes={ otherDropdownBoxes }
                 />                    
             </div>
             
@@ -180,6 +185,7 @@ class AdvancedSearch extends React.Component {
                             name="sending-participants"
 					        title="Sending Participant"
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 				    </li>
                     <li>
@@ -188,6 +194,7 @@ class AdvancedSearch extends React.Component {
                             name="receiving-participants"
 							title="Receiving Participant"
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 				    </li>
                     <li>
@@ -225,6 +232,7 @@ class AdvancedSearch extends React.Component {
 							title="Service Order Type"
                             itemsSelected={ ['Advanced Two', 'Advanced Three'] }
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 					</li>
                     <li><DropdownBox 
@@ -232,6 +240,7 @@ class AdvancedSearch extends React.Component {
                             name="service-order-subtype"
 							title="Service Order Subtype"
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 					</li>
                     <li><DropdownBox 
@@ -239,6 +248,7 @@ class AdvancedSearch extends React.Component {
                             name="service-order-number"
 							title="Service Order Number"
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 					</li>
                     <li>
@@ -247,6 +257,7 @@ class AdvancedSearch extends React.Component {
                             name="cr-code"
 							title="CR Code"
                             listItems={ listItems }
+                            onSelect={ this.props.onChange }
                         />
 				    </li>
                 </ul>
@@ -328,7 +339,6 @@ class SearchTransactionsSection extends React.Component {
                     onChange={ this.props.onChange }
                 />
                 <AdvancedSearch
-                    
                     display={ this.state.enableAdvancedSearch }
                     onChange={ this.props.onChange }
                 />

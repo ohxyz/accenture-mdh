@@ -411,10 +411,35 @@ class DropdownBoxGroup extends React.Component {
             </li>
         );
     }
-
+    
+    renderOtherDropdownBoxes() {
+        
+        let others = this.props.otherDropdownBoxes;
+        
+        if ( others === undefined ) {
+            
+            return '';
+        }
+        
+        return others.map( attr => 
+        
+            <li key={ attr.id } >
+                <DropdownBox
+                    type={ attr.type }
+                    id={ attr.id }
+                    name={ attr.name }
+                    title={ attr.title }
+                    listItems={ attr.listItems }
+                    onSelect={ this.props.onChange }
+                />
+            </li>
+        );
+    }
+    
     render() {
 
         return (
+        
             <ul className="control-list clearfix">
                 { 
                     this.props.children.map( ( child, index ) => {
@@ -422,10 +447,11 @@ class DropdownBoxGroup extends React.Component {
                         return this.renderDropdownBox( child, index );
                     } )
                 }
-
+                { this.renderOtherDropdownBoxes() }
             </ul>
         )
     }
+
 }
 
 /* Global events */
