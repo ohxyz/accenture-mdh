@@ -85,9 +85,8 @@ class TableData extends React.Component {
             
             target = event.currentTarget;
         }
-        
+
         this.columnNameClicked = target.textContent;
-        
         this.props.onClick( event );
         
     }
