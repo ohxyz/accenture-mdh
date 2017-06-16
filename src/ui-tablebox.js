@@ -96,6 +96,7 @@ class TableData extends React.Component {
         let sortIcon;
         let rowType = this.props.type;
         let sortOrder = this.props.sortOrder;
+        let labelClassName = '';
         
         if ( rowType === 'header' ) {
 
@@ -103,6 +104,7 @@ class TableData extends React.Component {
             
             if ( this.props.data === this.columnNameClicked ) {
                 
+                labelClassName = 'table-column-sorted';
                 
                 if ( sortOrder === ASCEND ) {
                 
@@ -114,12 +116,13 @@ class TableData extends React.Component {
                 }
                 
                 this.columnNameClicked = '';
+                
             }
         }
         
         return (
             
-            <label onClick={ this.handleClick } >
+            <label className={ labelClassName } onClick={ this.handleClick } >
                 { this.props.data }
                 { sortIcon }
             </label>
@@ -145,8 +148,7 @@ class TableRow extends React.Component {
                        data={ columnName }
                        onClick={ this.props.onClick }
                        sortOrder={ this.props.sortOrder }
-                       sortColumnName={ this.props.sortColumnName }
-                        
+         
             />
         )
     }
@@ -199,7 +201,6 @@ class TableBoxMain extends React.Component {
             <TableRow type="header"
                       sortOrder={ this.props.sortOrder }
                       rowData={ this.rows[0] }
-                      sortColumnName={ this.props.sortColumnName }
                       onClick={ this.props.onSort }
             />
         )
@@ -297,7 +298,8 @@ class TableBox extends React.Component {
         this.rowsAll = this.props.rowData;
         this.rowsDisplayed = [];
         this.sortOrder = INACTIVE;
-        this.sortColumnName = '';
+        this.previousSortedColumnName = '';
+        this.currentSortedColumnName = '';
         
         this.state = {
             
@@ -370,7 +372,7 @@ class TableBox extends React.Component {
         let key = target.textContent;    
         let key2 = 'Transaction ID';
         
-        this.sortColumnName = key;
+        this.currentSortedColumnName = key;
         
         if ( this.sortOrder === '' ) {
             
@@ -385,6 +387,11 @@ class TableBox extends React.Component {
             this.sortOrder = ASCEND;
         }
         
+        if ( this.currentSortedColumnName !== this.previousSortedColumnName ) {
+            
+            this.sortOrder = ASCEND;
+        }
+        
         let sortOptions = {
             
             type: 'quick',
@@ -394,6 +401,8 @@ class TableBox extends React.Component {
         };
         
         UTILS.sortArrayByObjectKey( sortOptions, this.rows, key, key2 );
+        
+        this.previousSortedColumnName = this.currentSortedColumnName;
         
         // Call this function to update UI, even it's an empty object
         // But this.rows' value has actually changed.
@@ -431,7 +440,6 @@ class TableBox extends React.Component {
                     columnNames={ this.props.columnNames }
                     sortOrder={ this.sortOrder }
                     tableRows={ this.rowsDisplayed }
-                    sortColumnName={ this.sortColumnName }
                     onSort={ this.handleSort }
                 />
                 <TableBoxFooter
