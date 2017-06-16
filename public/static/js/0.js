@@ -1,6 +1,6 @@
 /* All client side code */
 
-( function () {
+$( '#search-transactions-section' ).ready ( function () {
     
     var initPikaday = function () {
 
@@ -33,6 +33,17 @@
         
     }
     
-    document.addEventListener( 'DOMContentLoaded', initPikaday );
+    var initScrollBar = function () {
+        
+        var $dropdownLists = $( '.dropdown-list' );
+        
+        $dropdownLists.addClass( 'scrollbar-inner' ).scrollbar();
 
-} )();
+    }
+    
+    initPikaday();
+    initScrollBar();
+
+} );
+
+

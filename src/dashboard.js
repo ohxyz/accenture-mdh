@@ -138,7 +138,7 @@ class DashBoard extends React.Component {
                         searchResults={ this.state.searchResults }
                     />
                 </section>
-            )
+            );
         }
         
         return '';

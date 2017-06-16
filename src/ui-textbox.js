@@ -32,7 +32,7 @@ class TextBox extends React.Component {
         
         return (
         
-            <input className="text-box" 
+            <input className="text-box"
                    type="text"
                    id={ this.props.id } 
                    name={ this.props.name }

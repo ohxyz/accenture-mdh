@@ -1,6 +1,8 @@
 import React from 'react';
 import { DropdownBox, DropdownBoxGroup } from './ui-dropdownbox';
 import { TextBox } from './ui-textbox';
+import { CheckBox } from './ui-checkbox';
+
 
 class BasicSearch extends React.Component {
     
@@ -172,7 +174,7 @@ class AdvancedSearch extends React.Component {
             ? { display: 'block' } 
             : { display: 'none' };
         
-        const listItems = [ 'Advanced One', 'Advanced Two', 'Advanced Three'];
+        const listItems = [ 'Advanced One', 'Advanced Two', 'Advanced Three', 'Adv 4', 'Adv V' ];
         
         return (
 
@@ -198,9 +200,9 @@ class AdvancedSearch extends React.Component {
                         />
 				    </li>
                     <li>
-						<TextBox
+						<CheckBox
 							id="unsolicited-responses"
-							value="Unsolicited Responses"
+							name="Unsolicited Responses"
                         />
 				    </li>
                     <li style={ {visibility: 'hidden' } }>
@@ -235,7 +237,8 @@ class AdvancedSearch extends React.Component {
                             onSelect={ this.props.onChange }
                         />
 					</li>
-                    <li><DropdownBox 
+                    <li><DropdownBox
+                            type="multiple"
 							id="service-order-subtype"
                             name="service-order-subtype"
 							title="Service Order Subtype"
@@ -243,16 +246,16 @@ class AdvancedSearch extends React.Component {
                             onSelect={ this.props.onChange }
                         />
 					</li>
-                    <li><DropdownBox 
+                    <li><TextBox 
 							id="service-order-number"
                             name="service-order-number"
-							title="Service Order Number"
-                            listItems={ listItems }
-                            onSelect={ this.props.onChange }
+							value="Service Order Number"
+                            onChange={ this.props.onChange }
                         />
 					</li>
                     <li>
-						<DropdownBox 
+						<DropdownBox
+                            type="multiple"
 							id="cr-code"
                             name="cr-code"
 							title="CR Code"
@@ -294,7 +297,7 @@ class SearchTransactionsSection extends React.Component {
         
         super();
         this.state = {
-            enableAdvancedSearch: false,
+            enableAdvancedSearch: true,
             toggleSearchModeText: 'Advanced Search'
         };
         

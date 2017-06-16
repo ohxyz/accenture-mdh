@@ -9,7 +9,21 @@
 	color: $defaultFontColor;
 	font-family: $defaultFontFamily;
 	font-size: $font-m;
-    height: 52px;
+    height: $defaultBoxHeight;
+}
+
+.check-box {
+    
+    border-radius: $defaultBorderRadius;
+	border: 1px solid $defaultColor;
+	padding: 18px 12px;
+    box-sizing: border-box;
+	color: $defaultFontColor;
+    box-sizing: border-box;
+	font-family: $defaultFontFamily;
+	font-size: $font-m;
+    height: $defaultBoxHeight;
+    
 }
 
 .dropdown-box {
@@ -102,6 +116,8 @@
 		border-bottom-left-radius: $defaultBorderRadius;
 		border-bottom-right-radius: $defaultBorderRadius;
 		background-color: white;
+        max-height: 187px;
+        overflow: scroll;
 		
 	}
 	
