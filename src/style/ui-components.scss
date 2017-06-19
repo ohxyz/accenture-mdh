@@ -356,9 +356,20 @@
                 height: auto;
             }
             
-            .number-per-page.is-opened {
+            .num-per-page.is-opened {
                 border-bottom-right-radius: 0;
             }
+            
+                .num-per-page .dropdown-header {
+                    margin-right: -1px;
+                    border-right: $defaultBorder;
+                    border-top-right-radius: $defaultBorderRadius;
+                    border-bottom-right-radius: $defaultBorderRadius;
+                }
+                
+                    .num-per-page.is-opened .dropdown-header {
+                        border-bottom-right-radius: 0;
+                    }
             
                 .num-per-page .dropdown-list {
                     box-shadow: $defaultBoxShadow;
