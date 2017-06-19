@@ -222,42 +222,43 @@ class DropdownBox extends React.Component {
     renderDropdownList() {
         
         return (
-            
-            <ul className="dropdown-list">
-                { 
-                    this.props.listItems.map( item => {
-                        
-                        let className = 'dropdown-list-item ';
-                        
-                        if ( this.type === 'multiple' ) {
-                        
-                            className += this.itemsSelected.indexOf( item ) >= 0
-                                ? 'item-selected'
-                                : '';
-                        }
+            <div className="dropdown-content">
+                <ul className="dropdown-list">
+                    { 
+                        this.props.listItems.map( item => {
+                            
+                            let className = 'dropdown-list-item ';
+                            
+                            if ( this.type === 'multiple' ) {
+                            
+                                className += this.itemsSelected.indexOf( item ) >= 0
+                                    ? 'item-selected'
+                                    : '';
+                            }
 
-                        return ( 
-                            <DropdownListItem
-                                className={ className }
-                                key={ item } 
-                                item={ item }
-                                type={ this.type }
-                                onClick={ ( event ) => {
-                                    
-                                    this.handleItemSelected( event );
-                                    this.props.onSelect( event, this.itemsSelected );
-                                } }
-                            />
-                        );
-                        
-                    } )
-                }
-                { this.renderDropdownListFooter() }
-            </ul>
+                            return ( 
+                                <DropdownListItem
+                                    className={ className }
+                                    key={ item } 
+                                    item={ item }
+                                    type={ this.type }
+                                    onClick={ ( event ) => {
+                                        
+                                        this.handleItemSelected( event );
+                                        this.props.onSelect( event, this.itemsSelected );
+                                    } }
+                                />
+                            );
+                            
+                        } )
+                    }
+                </ul>
+                { this.renderDropdownContentFooter() }
+            </div>
         )
     }
     
-    renderDropdownListFooter() {
+    renderDropdownContentFooter() {
         
         if ( this.type === 'single' || this.type === 'basic' ) {
             
@@ -271,10 +272,10 @@ class DropdownBox extends React.Component {
             : numOfSelected + ' item selected';
         
         return (
-            <li className="dropdown-list-footer">
+            <div className="dropdown-content-footer">
                 <span className="num-of-selected">{ selectedLiteral }</span>
                 <span className="done" onClick={ this.handleDone }>Done</span>
-            </li>
+            </div>
         );
     }
 

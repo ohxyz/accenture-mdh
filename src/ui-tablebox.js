@@ -80,7 +80,7 @@ class TableData extends React.Component {
         
         let target = event.target;
         
-        if ( event.target !== event.currentTarget ) {
+        if ( target !== event.currentTarget ) {
             
             target = event.currentTarget;
         }
