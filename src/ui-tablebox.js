@@ -40,8 +40,7 @@ class TableData extends React.Component {
     constructor( props ) {
         
         super( props );
-        
-        this.columnNameClicked = '';
+
         this.handleClick = this.handleClick.bind( this );
     }
     
@@ -86,7 +85,6 @@ class TableData extends React.Component {
             target = event.currentTarget;
         }
 
-        this.columnNameClicked = target.textContent;
         this.props.onClick( event );
         
     }
@@ -97,12 +95,15 @@ class TableData extends React.Component {
         let rowType = this.props.type;
         let sortOrder = this.props.sortOrder;
         let labelClassName = '';
+        let sortedColumnName = this.props.sortedColumnName;
         
         if ( rowType === 'header' ) {
-
+            
+            console.log( this.props.sortedColumnName );
+            
             sortIcon = this.renderSortIconInactive();
             
-            if ( this.props.data === this.columnNameClicked ) {
+            if ( this.props.data === sortedColumnName ) {
                 
                 labelClassName = 'table-column-sorted';
                 
@@ -113,10 +114,7 @@ class TableData extends React.Component {
                 else if ( sortOrder === DESCEND ) {
                     
                     sortIcon = this.renderSortIconDown();
-                }
-                
-                this.columnNameClicked = '';
-                
+                }      
             }
         }
         
@@ -148,6 +146,7 @@ class TableRow extends React.Component {
                        data={ columnName }
                        onClick={ this.props.onClick }
                        sortOrder={ this.props.sortOrder }
+                       sortedColumnName={ this.props.sortedColumnName }
          
             />
         )
@@ -196,12 +195,15 @@ class TableBoxMain extends React.Component {
 
     renderHeader() {
         
+        // console.log( 'col', this.props.sortedColumnName );
+        
         return (
             
             <TableRow type="header"
                       sortOrder={ this.props.sortOrder }
                       rowData={ this.rows[0] }
                       onClick={ this.props.onSort }
+                      sortedColumnName={ this.props.sortedColumnName }
             />
         )
     }
@@ -220,7 +222,7 @@ class TableBoxMain extends React.Component {
     }
     
     render() {
-        
+
         this.rows = this.props.tableRows;
 
         if ( this.rows.length === 0 ) {
@@ -428,7 +430,7 @@ class TableBox extends React.Component {
             : this.rowsAll.slice( sliceStart, sliceEnd );
         
         this.totalPage = Math.ceil( numberOfRowsInTotal / this.numberPerPage );
-            
+        
         return (
         
             <div className="table-box">
@@ -441,6 +443,7 @@ class TableBox extends React.Component {
                     sortOrder={ this.sortOrder }
                     tableRows={ this.rowsDisplayed }
                     onSort={ this.handleSort }
+                    sortedColumnName={ this.currentSortedColumnName }
                 />
                 <TableBoxFooter
                     className="clearfix"
