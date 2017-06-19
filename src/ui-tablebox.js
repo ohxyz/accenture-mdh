@@ -94,18 +94,16 @@ class TableData extends React.Component {
         let sortIcon;
         let rowType = this.props.type;
         let sortOrder = this.props.sortOrder;
-        let labelClassName = '';
+        let spanClassName = '';
         let sortedColumnName = this.props.sortedColumnName;
         
         if ( rowType === 'header' ) {
-            
-            console.log( this.props.sortedColumnName );
             
             sortIcon = this.renderSortIconInactive();
             
             if ( this.props.data === sortedColumnName ) {
                 
-                labelClassName = 'table-column-sorted';
+                spanClassName = 'table-column-sorted';
                 
                 if ( sortOrder === ASCEND ) {
                 
@@ -120,10 +118,10 @@ class TableData extends React.Component {
         
         return (
             
-            <label className={ labelClassName } onClick={ this.handleClick } >
+            <span className={ spanClassName } onClick={ this.handleClick } >
                 { this.props.data }
                 { sortIcon }
-            </label>
+            </span>
         );
     }
 }
@@ -260,23 +258,23 @@ class TableBoxFooter extends React.Component {
                     />
                 </div>
                 <div className="pager">
-                    <label className="pager-prev"
+                    <span className="pager-prev"
                            onClick={ this.props.onPreviousClick } 
                     >
                         &lt;
-                    </label>
-                    <label className="pager-current">
+                    </span>
+                    <span className="pager-current">
                         { 
                             this.props.currentPageNumber 
                                 + ' of ' 
                                 + this.props.totalNumberOfPage 
                         }
-                    </label>
-                    <label className="pager-next"
+                    </span>
+                    <span className="pager-next"
                            onClick={ this.props.onNextClick }
                     >
                         &gt;
-                    </label>
+                    </span>
                 </div>
             </div>
         );
