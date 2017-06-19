@@ -146,8 +146,10 @@
         }
         
             .dropdown-list {   
-                max-height: 187px;
+                max-height: 185px; /* Magic Number */
                 overflow: scroll;
+                border-bottom-left-radius: $defaultBorderRadius;
+                border-bottom-right-radius: $defaultBorderRadius;
             }
             
             .dropdown-list > li {
@@ -352,7 +354,7 @@
                 border-radius: 0;
                 border-top-right-radius: $defaultBorderRadius;
                 border-bottom-right-radius: $defaultBorderRadius;
-                
+                height: auto;
             }
             
             .number-per-page.is-opened {
@@ -375,10 +377,7 @@
                     
                     padding: 16px 0;
                 }
-            
-                    .num-per-page .dropdown-list > li {
-                        border-top: 1px solid rgba( 0, 0, 0, 0.1 );
-                    }
+
                     
         .pager {
             float: right;
