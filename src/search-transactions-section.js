@@ -259,7 +259,7 @@ class AdvancedSearch extends React.Component {
 							id="cr-code"
                             name="cr-code"
 							title="CR Code"
-                            listItems={ listItems }
+                            
                             onSelect={ this.props.onChange }
                         />
 				    </li>

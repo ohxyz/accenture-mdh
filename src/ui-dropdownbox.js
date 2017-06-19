@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const UTILS = require( './utils.js' );
 
@@ -42,7 +42,7 @@ class DropdownBox extends React.Component {
         
         this.handleClick = this.handleClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
-        this.closeDropdownList = this.closeDropdownList.bind( this );
+        this.closeDropdownBox = this.closeDropdownBox.bind( this );
         this.handleDone = this.handleDone.bind( this );
         
         this.itemsSelected = this.props.itemsSelected === undefined
@@ -52,6 +52,11 @@ class DropdownBox extends React.Component {
         this.type = this.props.type === undefined
             ? 'single'
             : this.props.type;
+            
+        this.dropdownListElement = null;
+        
+        this.enableDropdownBox = true;
+        
 
         this.state = {
             
@@ -77,6 +82,11 @@ class DropdownBox extends React.Component {
     }
 
     handleClick() {
+            
+        if ( this.enableDropdownBox === false ) {
+            
+            return;
+        }
         
         if ( this.state.isOpenedClass === 'is-opened' ) {
             
@@ -148,7 +158,7 @@ class DropdownBox extends React.Component {
         
     }
     
-    closeDropdownList( ) {
+    closeDropdownBox( ) {
         
         this.setState( {
             
@@ -157,8 +167,8 @@ class DropdownBox extends React.Component {
     }
     
     handleDone() {
-        
-        this.closeDropdownList();
+
+        this.closeDropdownBox();
     }
     
         
@@ -219,13 +229,37 @@ class DropdownBox extends React.Component {
         )
     }
     
-    renderDropdownList() {
+    isDropdownListEmpty() {
         
+        if ( this.props.listItems === undefined 
+                || this.props.listItems.length === 0 ) {
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    renderDropdownContent() {
+        
+        
+        let listItems = this.props.listItems;
+        
+        if ( this.isDropdownListEmpty() ) {
+            
+            this.enableDropdownBox = false;
+            listItems = [];
+        }
+        else {
+            
+            this.enableDropdownBox = true;
+        }
+
         return (
             <div className="dropdown-content">
-                <ul className="dropdown-list">
+                <ul className="dropdown-list" ref={ elem => this.dropdownListElement = elem }>
                     { 
-                        this.props.listItems.map( item => {
+                        listItems.map( item => {
                             
                             let className = 'dropdown-list-item ';
                             
@@ -260,7 +294,8 @@ class DropdownBox extends React.Component {
     
     renderDropdownContentFooter() {
         
-        if ( this.type === 'single' || this.type === 'basic' ) {
+        if ( this.type === 'single' 
+                || this.type === 'basic' ) {
             
             return '';
         }
@@ -292,6 +327,14 @@ class DropdownBox extends React.Component {
     render() {
         
         this.syncSelectedWithListed();
+        
+        let disableDropdownBoxClassName = ''
+        
+        if ( this.isDropdownListEmpty() === true ) {
+            
+            this.enableDropdownBox = false;
+            disableDropdownBoxClassName = 'dropdown-box-disabled';
+        }
 
         let otherClassNames = this.props.otherClassNames === undefined
             ? ''
@@ -302,6 +345,7 @@ class DropdownBox extends React.Component {
             <div id={ this.props.id } 
                  className={ 
                     'dropdown-box '
+                    + disableDropdownBoxClassName + ' '
                     + otherClassNames + ' '
                     + this.state.isOpenedClass + ' '
                     + this.makeSelectedClassName()
@@ -310,7 +354,7 @@ class DropdownBox extends React.Component {
                 ref={ self => this.dom = self }
             >   
                 { this.renderDropdownBoxHeader() }
-                { this.renderDropdownList() }
+                { this.renderDropdownContent() }
             </div>
         );
     }
@@ -438,7 +482,7 @@ class DropdownBoxGroup extends React.Component {
     }
     
     render() {
-
+        // console.log( 'render', this.state.data );
         return (
         
             <ul className="control-list clearfix">
@@ -464,7 +508,7 @@ document.addEventListener( 'mouseup', ( event ) => {
 
         if ( UTILS.isDescendant( event.target, box.dom ) === false ){
             
-            box.closeDropdownList();
+            box.closeDropdownBox();
         }
 
     } );

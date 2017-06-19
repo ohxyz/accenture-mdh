@@ -10,7 +10,7 @@ class DashBoard extends React.Component {
     constructor() {
         
         super();
-
+        
         this.state = {
             
             showSearchResults: true,
@@ -113,7 +113,7 @@ class DashBoard extends React.Component {
             this.handleDropdownBoxChange( event, dropdownBoxSelectedItems );
         }
         
-        console.log( 'search inputs', this.searchInputs );
+        // console.log( 'search inputs', this.searchInputs );
     }
     
     handleDropdownBoxChange( event, selectedItems ) {
@@ -143,7 +143,7 @@ class DashBoard extends React.Component {
         
         return '';
     }
-    
+
     render() {
        
         return (

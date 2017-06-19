@@ -40,8 +40,8 @@ $( '#search-transactions-section' ).ready ( function () {
         $dropdownLists.addClass( 'scrollbar-inner' ).scrollbar();
 
     }
-    
-    initPikaday();
+
+    initPikaday();  
     initScrollBar();
 
 } );
