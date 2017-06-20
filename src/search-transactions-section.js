@@ -170,7 +170,7 @@ class AdvancedSearch extends React.Component {
     
     render() {
        
-        const style = this.props.display 
+        const style = this.props.display === true
             ? { display: 'block' } 
             : { display: 'none' };
         
@@ -296,33 +296,37 @@ class SearchTransactionsSection extends React.Component {
     constructor() {
         
         super();
-        this.state = {
-            enableAdvancedSearch: true,
-            toggleSearchModeText: 'Advanced Search'
-        };
-        
         this.toggleSearchModeClick =
             this.toggleSearchModeClick.bind( this );
+        
+        this.enableAdvancedSearch = true;
+        this.searchModeText = '';
+        
+        this.setSearchModeText();
+        
+        this.state = {
+            enableAdvancedSearch: this.enableAdvancedSearch,
+            toggleSearchModeText: this.searchModeText
+        };
+
+    }
+    
+    setSearchModeText() {
+        
+        this.searchModeText = this.enableAdvancedSearch === true
+            ? 'Collapse'
+            : 'Advanced Search';
     }
     
     toggleSearchModeClick() {
+        
+        this.enableAdvancedSearch = !this.enableAdvancedSearch;
+        this.setSearchModeText();
 
-        if ( this.state.enableAdvancedSearch === true ){
+        this.setState( {
             
-            this.setState( { 
-                
-                enableAdvancedSearch: false,
-                toggleSearchModeText: 'Advanced Search'
-            });
-        }
-        else {
-            
-            this.setState( { 
-                
-                enableAdvancedSearch: true,
-                toggleSearchModeText: 'Collapse'
-            });
-        }
+            enableAdvancedSearch: this.enableAdvancedSearch
+        } );
     }
     
     renderQuickSearchButton() {
@@ -342,13 +346,13 @@ class SearchTransactionsSection extends React.Component {
                     onChange={ this.props.onChange }
                 />
                 <AdvancedSearch
-                    display={ this.state.enableAdvancedSearch }
+                    display={ this.enableAdvancedSearch }
                     onChange={ this.props.onChange }
                 />
                 <SearchControls
                     onSearch={ this.props.onSearch }
                     toggleSearchModeClick={ this.toggleSearchModeClick } 
-                    toggleSearchModeText={ this.state.toggleSearchModeText }
+                    toggleSearchModeText={ this.searchModeText }
                 />
             </div>
         )

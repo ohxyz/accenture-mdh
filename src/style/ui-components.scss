@@ -149,6 +149,7 @@
                 overflow: scroll;
                 border-bottom-left-radius: $defaultBorderRadius;
                 border-bottom-right-radius: $defaultBorderRadius;
+                overflow-x: hidden;
             }
             
             .dropdown-list > li {
