@@ -29,12 +29,74 @@
 	font-size: $font-m;
     height: $defaultBoxHeight;
     cursor: pointer;
+    user-select: none;
 }
 
 .check-box.is-checked {
     
     color: $defaultInputColor;
 }
+
+.datepick-box {
+    
+    display: block;
+	padding: 0;
+	border-radius: $defaultBorderRadius;
+	position: relative;
+	border: $defaultBorder;
+	background-color: white;
+    box-sizing: border-box;
+    height: $defaultBoxHeight;
+    color: $defaultFontColor;
+    position: relative;
+}
+    .datepick-header {
+        
+        padding-left: 12px;
+        padding-right: 12px;
+        cursor: pointer;
+    }
+        
+        .datepick-picked {
+            
+            border: none;
+            font-size: 14px;
+            color: $defaultInputColor;
+            margin-top: 2px;
+            margin-left: 1px;
+            padding-bottom: 6px;
+            width: 100%;
+        }
+        
+        .datepick-title {
+            padding: 8px 0 4px 0;
+            font-size: 12px;
+           
+        }
+    
+    .datepick-content {
+        position: absolute;
+        z-index: 10;
+        display: none;
+        border: $defaultBorder;
+        border-top: none;
+        left: -1px;
+        right: -1px;
+        border-bottom-left-radius: $defaultBorderRadius;
+        border-bottom-right-radius: $defaultBorderRadius;
+        padding-bottom: $defaultBorderRadius; /* NOT wrong. Make the radius viewable */
+    }
+    
+    .datepick-box.is-opened {
+        
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+        .datepick-box.is-opened .datepick-content {
+            border-top: $defaultBorder;
+            display: block;
+        }
 
 .dropdown-box {
 	display: block;
@@ -66,7 +128,7 @@
         cursor: default;
     }
     
-        .dropdown-box-disabled .dropdown-name {
+        .dropdown-box-disabled .dropdown-title {
             
             color: $defaultDisabledColor;
         }
@@ -113,18 +175,18 @@
                     margin-top: -6px;
                 }
             
-            .dropdown-name {
+            .dropdown-title {
                 padding: 18px 0;
                 color: $defaultFontColor;
             }
             
-            .is-selected .dropdown-name {
+            .is-selected .dropdown-title {
                 padding: 8px 0 4px 0;
                 font-size: $font-s;
                 
             }
             
-            .is-selected-basic .dropdown-name {
+            .is-selected-basic .dropdown-title {
                 display: none;
             }
             
@@ -389,7 +451,7 @@
                     right: 0;
                 }
                 
-                .num-per-page .dropdown-name {
+                .num-per-page .dropdown-title {
                     
                     padding: 16px 0;
                 }

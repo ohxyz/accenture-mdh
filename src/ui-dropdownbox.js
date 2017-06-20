@@ -225,7 +225,7 @@ class DropdownBox extends React.Component {
                 <div className="dropdown-icon">
                     { this.renderDropdownIcon() }
                 </div>
-                <div className="dropdown-name">{ this.props.title }</div>
+                <div className="dropdown-title">{ this.props.title }</div>
                 <div className="dropdown-selected">
                     { this.makeSelectedLiteralHeader() }
                 </div>

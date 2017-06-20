@@ -4,7 +4,13 @@ $( '#search-transactions-section' ).ready ( function () {
     
     var initPikaday = function () {
 
-        var elemIds = [ 'date-created-from', 'date-created-to' ];
+        var elemIds = [
+        
+            'date-created-from', 
+            'date-created-to'
+        ];
+        
+        var containerClassName = 'dropdown-box-content';
         
         var i18n = {
             
@@ -17,15 +23,39 @@ $( '#search-transactions-section' ).ready ( function () {
             weekdaysShort : [ 'S', 'M', 'T', 'W', 'TH', 'F', 'S' ]
         };
         
-        elemIds.map( function ( id ) {
-        
-            new Pikaday( { 
+        elemIds.forEach( function ( id ) {
+            
+            var datepickBoxElem = document.getElementById( id );
+            var inputElem = datepickBoxElem.querySelector( 'input' );
+            var datepickContentElem = datepickBoxElem.querySelector( '.datepick-content' );
+            
+            var $datepickHeader = $( '.datepick-header', datepickBoxElem );
+            
+            // console.log( $datepickHeader );
+
+            var onSelect = function () {
                 
-                field: document.getElementById( id ),
+                // The click event is defined in React
+                $datepickHeader.click();
+                
+            };
+            
+        
+            new Pikaday( {
+                
+                field: inputElem,
                 
                 format: 'YYYY/MM/DD',
                 
-                i18n: i18n
+                firstDay: 1,
+                
+                i18n: i18n,
+                
+                bound: false,
+                
+                container: datepickContentElem,
+                
+                onSelect: onSelect
             
             } );
         
@@ -39,11 +69,22 @@ $( '#search-transactions-section' ).ready ( function () {
         
         $dropdownLists.addClass( 'scrollbar-inner' ).scrollbar();
 
-    }
+    };
+    
+    var initDatePickers = function () {
+        
+        var elemIds = [ '#date-created-from', '#date-created-to' ];
+        
+        elemIds.forEach( function ( id ) { 
+        
+            $( id ).datepicker();
+            
+        } );
+    };
 
-    initPikaday();  
+    initPikaday();
     initScrollBar();
-
+    // initDatePickers();
 } );
 
 

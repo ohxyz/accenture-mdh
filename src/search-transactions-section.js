@@ -2,7 +2,7 @@ import React from 'react';
 import { DropdownBox, DropdownBoxGroup } from './ui-dropdownbox';
 import { TextBox } from './ui-textbox';
 import { CheckBox } from './ui-checkbox';
-
+import { DatePickBox } from './ui-datepickbox';
 
 class BasicSearch extends React.Component {
     
@@ -56,7 +56,7 @@ class BasicSearch extends React.Component {
                 "CATSChangeAlert": {},
                 "CATSObjectionWithdrawal": {},
                 "CATSChangeWithdrawal": {},
-                /*
+                
                 "CATSObjectionRequest": {},
                 "CATSChangeRequest": {},
                 "CATSChangeResponse": {},
@@ -67,7 +67,7 @@ class BasicSearch extends React.Component {
                 "ReportRequest": {},
                 "ReportResponse": {},
                 "ReplicationRequest": {}
-                */
+                
             }
         };
     }
@@ -209,10 +209,10 @@ class AdvancedSearch extends React.Component {
 						<TextBox value="Place Holder" />
 				    </li>
                     <li>
-                        <TextBox 
+                        <DatePickBox 
                             id="date-created-from" 
                             name="date-created-from"
-                            value="Date Created from"
+                            title="Date Created from"
                             onChange={ this.props.onChange }
                         />
                     </li>
@@ -225,6 +225,16 @@ class AdvancedSearch extends React.Component {
                         />
                     </li>
                     <li><TextBox value="Time Created from" /></li>
+                    <li>
+						<DropdownBox
+                            type="single"
+							id="sending-participants"
+                            name="sending-participants"
+					        title="Date Created From"
+                            listItems={ [ '2017/06/09' ] }
+                            onSelect={ this.props.onChange }
+                        />
+				    </li>
                     <li><TextBox value="Time Created to" /></li>
                     <li>
 						<DropdownBox
@@ -237,7 +247,8 @@ class AdvancedSearch extends React.Component {
                             onSelect={ this.props.onChange }
                         />
 					</li>
-                    <li><DropdownBox
+                    <li>
+                        <DropdownBox
                             type="multiple"
 							id="service-order-subtype"
                             name="service-order-subtype"
@@ -246,7 +257,8 @@ class AdvancedSearch extends React.Component {
                             onSelect={ this.props.onChange }
                         />
 					</li>
-                    <li><TextBox 
+                    <li>
+                        <TextBox 
 							id="service-order-number"
                             name="service-order-number"
 							value="Service Order Number"
