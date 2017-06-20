@@ -1,6 +1,5 @@
 /* Utils */
 
-
 /* App related */
 
 function isDescendant( childElem, parentElem ) {

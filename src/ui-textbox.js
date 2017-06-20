@@ -41,7 +41,7 @@ class TextBox extends React.Component {
         }
         else {
             
-            this.className = 'text-box text-box-filled';
+            this.className = 'text-box is-filled';
         }
         
         this.props.onChange( event );

@@ -40,7 +40,7 @@ class DropdownBox extends React.Component {
         
         super( props );
         
-        this.handleClick = this.handleClick.bind( this );
+        this.handleHeaderClick = this.handleHeaderClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
         this.closeDropdownBox = this.closeDropdownBox.bind( this );
         this.handleDone = this.handleDone.bind( this );
@@ -49,14 +49,18 @@ class DropdownBox extends React.Component {
             ? []
             : this.props.itemsSelected
             
-        this.type = this.props.type === undefined
+        this.type = props.type === undefined
             ? 'single'
             : this.props.type;
-            
+        
+        this.name = props.name === undefined
+            ? ''
+            : props.name;
+        
         this.dropdownListElement = null;
         
         this.enableDropdownBox = true;
-        
+
 
         this.state = {
             
@@ -81,7 +85,7 @@ class DropdownBox extends React.Component {
         }
     }
 
-    handleClick() {
+    handleHeaderClick() {
             
         if ( this.enableDropdownBox === false ) {
             
@@ -216,7 +220,7 @@ class DropdownBox extends React.Component {
         return (
         
             <div className="dropdown-header"
-                 onClick={ this.handleClick } 
+                 onClick={ this.handleHeaderClick } 
             >
                 <div className="dropdown-icon">
                     { this.renderDropdownIcon() }
@@ -279,7 +283,7 @@ class DropdownBox extends React.Component {
                                     onClick={ ( event ) => {
                                         
                                         this.handleItemSelected( event );
-                                        this.props.onSelect( event, this.itemsSelected );
+                                        this.props.onSelect( event, { name: this.name, value: this.itemsSelected } );
                                     } }
                                 />
                             );
@@ -351,6 +355,7 @@ class DropdownBox extends React.Component {
                     + this.makeSelectedClassName()
                 }
                 data-name={ this.props.name }
+                data-items-selected={ this.itemsSelected }
                 ref={ self => this.dom = self }
             >   
                 { this.renderDropdownBoxHeader() }

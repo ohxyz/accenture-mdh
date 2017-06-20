@@ -96,7 +96,7 @@ class DashBoard extends React.Component {
         this.fetchTransactions();
     }
     
-    handleChange( event, dropdownBoxSelectedItems ) {
+    handleChange( event, dropdownBoxAttrs ) {
         
         let target = event.target;
         let targetClassName = target.className;
@@ -110,23 +110,13 @@ class DashBoard extends React.Component {
         }
         else if ( targetClassName.indexOf( 'dropdown-list-item' ) > -1 ) {
             
-            this.handleDropdownBoxChange( event, dropdownBoxSelectedItems );
+            this.searchInputs[ dropdownBoxAttrs.name ] = dropdownBoxAttrs.value;
+
         }
         
-        // console.log( 'search inputs', this.searchInputs );
+        console.log( 'search inputs', this.searchInputs );
     }
-    
-    handleDropdownBoxChange( event, selectedItems ) {
-        // console.log( selectedItems );
-        
-        let target = event.target;
-        let dropdownBoxElement = target.parentElement.parentElement;    
-        let searchObjectPropertyName = dropdownBoxElement.id;
 
-        this.searchInputs[ searchObjectPropertyName ] = selectedItems;
-        
-    }
-    
     renderSearchResultsSection() {
 
         if ( this.state.showSearchResults === true ) {
