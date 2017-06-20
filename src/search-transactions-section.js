@@ -225,16 +225,6 @@ class AdvancedSearch extends React.Component {
                         />
                     </li>
                     <li><TextBox value="Time Created from" /></li>
-                    <li>
-						<DropdownBox
-                            type="single"
-							id="sending-participants"
-                            name="sending-participants"
-					        title="Date Created From"
-                            listItems={ [ '2017/06/09' ] }
-                            onSelect={ this.props.onChange }
-                        />
-				    </li>
                     <li><TextBox value="Time Created to" /></li>
                     <li>
 						<DropdownBox
