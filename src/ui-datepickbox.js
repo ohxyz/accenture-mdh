@@ -66,7 +66,6 @@ class DatepickBox extends React.Component {
     }
     
     toggleCalendar( event ) {
-        console.log( 'c', event.target );
         
         if ( event.target === this.inputBox ) {
             
@@ -74,9 +73,7 @@ class DatepickBox extends React.Component {
         }
         
         this.showCalendar = !this.showCalendar;
-
         this.datePicked = this.inputBox.value;
-        
         this.setDatepickBoxClassName();
         
         this.setState( {
@@ -171,6 +168,14 @@ class DatepickBox extends React.Component {
                 </div>
             </div>
         );
+    }
+    
+    componentDidUpdate() {
+        
+        if ( this.showCalendar === true ) {
+
+            this.inputBox.focus();
+        }
     }
 }
 

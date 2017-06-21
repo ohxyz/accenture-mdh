@@ -1,7 +1,11 @@
-/* Start: Override pikaday */
+@import "variables";
+
+/* START: Override pikaday */
+
 .pika-single {
     
     border: none;
+    font-family: $defaultFontFamily;
     
     .pika-lendar {
         
@@ -26,8 +30,31 @@
     
     option {
         color: $defaultFontColor2;
+        font-family: $defaultFontFamily;
     }
 }
 
+.pika-title {
+    
+    border-bottom: $defaultBorder;
+    height: 40px;
+    margin-left: -9px;
+    margin-right: -11px;
+}
 
-/* End: Override pikaday */
+.pika-table {
+    
+    margin-top: 10px;
+}
+
+.pika-prev, .is-rtl .pika-next {
+    
+    margin-left: 9px;
+}
+
+.pika-next, .is-rtl .pika-prev {
+    
+    margin-right: 11px;
+}
+
+/* END: Override pikaday */

@@ -51,6 +51,7 @@
     color: $defaultFontColor;
     position: relative;
     
+    
     .svg-calendar-icon {
         
         position: absolute;
@@ -104,11 +105,13 @@
         
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        box-shadow: $defaultBoxShadow;
         
         
         & .datepick-content {
             border-top: $defaultBorder;
             display: block;
+            box-shadow: $defaultBoxShadow;
         }
         
         & .datepick-title {

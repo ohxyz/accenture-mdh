@@ -70,21 +70,10 @@ $( '#search-transactions-section' ).ready ( function () {
         $dropdownLists.addClass( 'scrollbar-inner' ).scrollbar();
 
     };
-    
-    var initDatePickers = function () {
-        
-        var elemIds = [ '#date-created-from', '#date-created-to' ];
-        
-        elemIds.forEach( function ( id ) { 
-        
-            $( id ).datepicker();
-            
-        } );
-    };
 
     initPikaday();
     initScrollBar();
-    // initDatePickers();
+    
 } );
 
 
