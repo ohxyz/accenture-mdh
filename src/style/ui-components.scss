@@ -1,14 +1,14 @@
 @import "variables";
 
 .text-box {
-	border-radius: $defaultBorderRadius;
-	border: 1px solid $defaultColor;
-	padding: 16px 12px;
-	box-sizing: border-box;
-	width: 100%;
-	color: $defaultFontColor;
-	font-family: $defaultFontFamily;
-	font-size: $font-m;
+    border-radius: $defaultBorderRadius;
+    border: 1px solid $defaultColor;
+    padding: 16px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    color: $defaultFontColor;
+    font-family: $defaultFontFamily;
+    font-size: $font-m;
     height: $defaultBoxHeight;
 }
 
@@ -20,13 +20,13 @@
 .check-box {
     
     border-radius: $defaultBorderRadius;
-	border: 1px solid $defaultColor;
-	padding: 18px 12px;
+    border: 1px solid $defaultColor;
+    padding: 18px 12px;
     box-sizing: border-box;
-	color: $defaultFontColor;
+    color: $defaultFontColor;
     box-sizing: border-box;
-	font-family: $defaultFontFamily;
-	font-size: $font-m;
+    font-family: $defaultFontFamily;
+    font-size: $font-m;
     height: $defaultBoxHeight;
     cursor: pointer;
     user-select: none;
@@ -37,28 +37,40 @@
     color: $defaultInputColor;
 }
 
+/* START: DatepickBox */
 .datepick-box {
     
     display: block;
-	padding: 0;
-	border-radius: $defaultBorderRadius;
-	position: relative;
-	border: $defaultBorder;
-	background-color: white;
+    padding: 0;
+    border-radius: $defaultBorderRadius;
+    position: relative;
+    border: $defaultBorder;
+    background-color: white;
     box-sizing: border-box;
     height: $defaultBoxHeight;
     color: $defaultFontColor;
     position: relative;
-}
+    
+    .svg-calendar-icon {
+        
+        position: absolute;
+        top: 23%;
+        right: 3%;
+        
+        path{
+        
+            fill: #d8d8d8;
+        }
+    }
+
     .datepick-header {
         
         padding-left: 12px;
         padding-right: 12px;
         cursor: pointer;
-    }
-        
+
         .datepick-picked {
-            
+            display: none;
             border: none;
             font-size: 14px;
             color: $defaultInputColor;
@@ -68,10 +80,11 @@
         }
         
         .datepick-title {
-            padding: 8px 0 4px 0;
-            font-size: 12px;
-           
+            padding: 18px 0;
+            font-size: $defaultFontSize;
+            user-select: none;
         }
+    }
     
     .datepick-content {
         position: absolute;
@@ -81,45 +94,81 @@
         border-top: none;
         left: -1px;
         right: -1px;
+        background-color: white;
         border-bottom-left-radius: $defaultBorderRadius;
         border-bottom-right-radius: $defaultBorderRadius;
         padding-bottom: $defaultBorderRadius; /* NOT wrong. Make the radius viewable */
     }
-    
-    .datepick-box.is-opened {
+
+    &.is-opened {
         
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-    }
-    
-        .datepick-box.is-opened .datepick-content {
+        
+        
+        & .datepick-content {
             border-top: $defaultBorder;
             display: block;
         }
+        
+        & .datepick-title {
+            padding: 8px 0 4px 0;
+            font-size: $font-s;
+        }
+        
+        & .datepick-picked {
+            
+            display: block;
+        }
+        
+        & .svg-calendar-icon path {
+            
+            fill: #2894ea;
+        }
+    }
+    
+    &.is-picked {
+        
+        & .datepick-title {
+            
+            padding: 8px 0 4px 0;
+            font-size: $font-s;
+        }
+        
+        & .datepick-picked {
+            
+            display: block;
+        }
+    }
+    
+    
+}
+/* END: DatepickBox */
 
+/* START: DropdownBox */
 .dropdown-box {
-	display: block;
-	padding: 0;
-	border-radius: $defaultBorderRadius;
-	position: relative;
-	border: $defaultBorder;
-	background-color: white;
-	cursor: pointer;
+    display: block;
+    padding: 0;
+    border-radius: $defaultBorderRadius;
+    position: relative;
+    border: $defaultBorder;
+    background-color: white;
+    cursor: pointer;
     box-sizing: border-box;
     height: $defaultBoxHeight;
-	user-select: none;
+    user-select: none;
 }
-	
-	.dropdown-box.is-opened {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-		box-shadow: $dropdownBoxShadow;
-	}
-	
-	.dropdown-box.is-opened .dropdown-content {
-		display: block;
-		box-shadow: $dropdownBoxShadow;
-	}
+    
+    .dropdown-box.is-opened {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: $dropdownBoxShadow;
+    }
+    
+    .dropdown-box.is-opened .dropdown-content {
+        display: block;
+        box-shadow: $dropdownBoxShadow;
+    }
     
     .dropdown-box.dropdown-box-disabled {
         
@@ -288,10 +337,7 @@
 /* END: DropdownBox */
 
             
-/* START: Table */
-
-
-
+/* START: TableBox */
 .table-box { 
 
 }
@@ -491,4 +537,5 @@
                 border-left: $defaultBorder2;
                 
             }
-    
+            
+/* END: TableBox */

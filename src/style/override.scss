@@ -1,10 +1,33 @@
-
+/* Start: Override pikaday */
 .pika-single {
     
     border: none;
     
-}
     .pika-lendar {
         
         width: 217px;
     }
+}
+
+.pika-button {
+    
+    background-color: transparent;
+    text-align: center;
+}
+
+.pika-table th {
+    
+    color: $defaultFontColor;
+}
+
+.pika-title select {
+    
+    color: $defaultFontColor;
+    
+    option {
+        color: $defaultFontColor2;
+    }
+}
+
+
+/* End: Override pikaday */

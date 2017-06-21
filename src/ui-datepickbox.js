@@ -1,6 +1,8 @@
 import React from 'react';
 
-class DatePickBox extends React.Component {
+const UTILS = require( './utils.js' );
+
+class DatepickBox extends React.Component {
     
     constructor( props ) {
         
@@ -19,10 +21,14 @@ class DatePickBox extends React.Component {
             ? ''
             : props.title;
             
-        this.showCalendar = true;
+        this.showCalendar = false;
         this.datepickBoxClassName = '';
         
         this.setDatepickBoxClassName();
+        
+        this.dom = null;
+        
+        DatepickBox.boxes.push( this );
         
         this.state = {
             
@@ -30,17 +36,31 @@ class DatePickBox extends React.Component {
             showCalendar: this.showCalendar
         };
         
-    } 
+    }
+    
+    isDatePicked() {
+        
+        if ( this.datePicked === '' ) {
+            
+            return false;
+        }
+        
+        return true;
+    }
         
     setDatepickBoxClassName() {
         
+        this.datepickBoxClassName = 'datepick-box';
+        
+        if ( this.isDatePicked() === true ) {
+            
+            this.datepickBoxClassName += ' is-picked';
+        }
+        
         if ( this.showCalendar === true ) {
             
-            this.datepickBoxClassName = 'datepick-box is-opened';
-        }
-        else {
+            this.datepickBoxClassName += ' is-opened';
             
-            this.datepickBoxClassName = 'datepick-box';
         }
         
     }
@@ -48,10 +68,16 @@ class DatePickBox extends React.Component {
     toggleCalendar( event ) {
         console.log( 'c', event.target );
         
-        this.showCalendar = !this.showCalendar;
-        this.setDatepickBoxClassName();
+        if ( event.target === this.inputBox ) {
+            
+            return;
+        }
         
+        this.showCalendar = !this.showCalendar;
+
         this.datePicked = this.inputBox.value;
+        
+        this.setDatepickBoxClassName();
         
         this.setState( {
             
@@ -60,6 +86,17 @@ class DatePickBox extends React.Component {
         } );
         
     }
+    
+    close() {
+        
+        this.showCalendar = false;
+        this.setDatepickBoxClassName();
+        
+        this.setState( {
+            
+            showCalendar: false
+        } );
+    }
 
     handleInputBoxChange( event ) {
         
@@ -67,6 +104,8 @@ class DatePickBox extends React.Component {
         let value = target.value;
         
         this.datePicked = value;
+        
+        this.setDatepickBoxClassName();
         
         this.setState( {
             
@@ -86,6 +125,21 @@ class DatePickBox extends React.Component {
         // this.toggleCalendar();
         console.log( 'focus', value );
     }
+    
+    renderCalendarIcon() {
+        
+        return (
+        
+            <svg className="svg-calendar-icon" viewBox="0 0 34 36.5" width="27" height="27">
+                <path d="M24.3,29.9H9.7c-2,0-3.6-1.6-3.6-3.6V13.1c0-1.6,1.1-3,2.6-3.5V11c0,1.6,1.3,2.9,2.9,2.9h0.7
+                    c1.6,0,2.9-1.3,2.9-2.9V9.5h3.6V11c0,1.6,1.3,2.9,2.9,2.9h0.7c1.6,0,2.9-1.3,2.9-2.9V9.7c1.5,0.5,2.6,1.8,2.6,3.5v13.1
+                    C27.9,28.3,26.3,29.9,24.3,29.9z M24.7,17.2H9.3v7.3c0,1.2,1,2.2,2.2,2.2h10.9c1.2,0,2.2-1,2.2-2.2V17.2z M22.1,12.4
+                    c-1,0-1.8-0.8-1.8-1.8V8.4c0-1,0.8-1.8,1.8-1.8c1,0,1.8,0.8,1.8,1.8v2.2C23.9,11.6,23.1,12.4,22.1,12.4z M11.9,12.4
+                    c-1,0-1.8-0.8-1.8-1.8V8.4c0-1,0.8-1.8,1.8-1.8c1,0,1.8,0.8,1.8,1.8v2.2C13.7,11.6,12.9,12.4,11.9,12.4z"/>
+            </svg>
+        
+        );
+    }
 
     render () {
         
@@ -93,10 +147,13 @@ class DatePickBox extends React.Component {
         
             <div id={ this.props.id } 
                  className={ this.datepickBoxClassName }
+                 ref={ self => this.dom = self }
             >
+                
                 <div className="datepick-header"
                      onClick={ this.toggleCalendar }
                 >
+                    { this.renderCalendarIcon() }
                     <div className="datepick-title">
                         { this.props.title }
                     </div>
@@ -110,7 +167,6 @@ class DatePickBox extends React.Component {
                        ref={ input => this.inputBox = input }
                     />
                 </div>
-                
                 <div className="datepick-content" >
                 </div>
             </div>
@@ -118,4 +174,19 @@ class DatePickBox extends React.Component {
     }
 }
 
-export { DatePickBox };
+DatepickBox.boxes = [];
+
+document.addEventListener( 'mouseup', ( event ) => {
+    
+    DatepickBox.boxes.forEach( ( box ) => {
+
+        if ( UTILS.isDescendant( event.target, box.dom ) === false ){
+            
+            box.close();
+        }
+
+    } );
+    
+} );
+
+export { DatepickBox };

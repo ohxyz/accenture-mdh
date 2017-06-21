@@ -2,7 +2,7 @@ import React from 'react';
 import { DropdownBox, DropdownBoxGroup } from './ui-dropdownbox';
 import { TextBox } from './ui-textbox';
 import { CheckBox } from './ui-checkbox';
-import { DatePickBox } from './ui-datepickbox';
+import { DatepickBox } from './ui-datepickbox';
 
 class BasicSearch extends React.Component {
     
@@ -209,7 +209,7 @@ class AdvancedSearch extends React.Component {
 						<TextBox value="Place Holder" />
 				    </li>
                     <li>
-                        <DatePickBox 
+                        <DatepickBox 
                             id="date-created-from" 
                             name="date-created-from"
                             title="Date Created from"
@@ -217,10 +217,10 @@ class AdvancedSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <TextBox 
+                        <DatepickBox                        
                             id="date-created-to"
                             name="date-created-to"
-                            value="Date Created to" 
+                            title="Date Created to"
                             onChange={ this.props.onChange }
                         />
                     </li>

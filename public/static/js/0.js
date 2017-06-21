@@ -20,7 +20,7 @@ $( '#search-transactions-section' ).ready ( function () {
                               'July', 'August', 'September', 'October', 'November', 'December' ],
             weekdays      : [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 
                               'Thursday', 'Friday', 'Saturday' ],
-            weekdaysShort : [ 'S', 'M', 'T', 'W', 'TH', 'F', 'S' ]
+            weekdaysShort : [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ]
         };
         
         elemIds.forEach( function ( id ) {
@@ -45,7 +45,7 @@ $( '#search-transactions-section' ).ready ( function () {
                 
                 field: inputElem,
                 
-                format: 'YYYY/MM/DD',
+                format: 'YYYY-MM-DD',
                 
                 firstDay: 1,
                 

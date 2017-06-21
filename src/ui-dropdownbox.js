@@ -42,7 +42,7 @@ class DropdownBox extends React.Component {
         
         this.handleHeaderClick = this.handleHeaderClick.bind( this );
         this.handleItemSelected = this.handleItemSelected.bind( this );
-        this.closeDropdownBox = this.closeDropdownBox.bind( this );
+        this.close = this.close.bind( this );
         this.handleDone = this.handleDone.bind( this );
         
         this.itemsSelected = this.props.itemsSelected === undefined
@@ -72,7 +72,7 @@ class DropdownBox extends React.Component {
         this.dom = null;
         this.value = this.itemsSelected;
         
-        DropdownBox.dropdownBoxes.push( this );
+        DropdownBox.boxes.push( this );
     }
     
     syncSelectedWithListed() {
@@ -162,7 +162,7 @@ class DropdownBox extends React.Component {
         
     }
     
-    closeDropdownBox( ) {
+    close( ) {
         
         this.setState( {
             
@@ -172,7 +172,7 @@ class DropdownBox extends React.Component {
     
     handleDone() {
 
-        this.closeDropdownBox();
+        this.close();
     }
     
         
@@ -505,15 +505,15 @@ class DropdownBoxGroup extends React.Component {
 }
 
 /* Global events */
-DropdownBox.dropdownBoxes = [];
+DropdownBox.boxes = [];
 
 document.addEventListener( 'mouseup', ( event ) => {
     
-    DropdownBox.dropdownBoxes.forEach( ( box ) => {
+    DropdownBox.boxes.forEach( ( box ) => {
 
         if ( UTILS.isDescendant( event.target, box.dom ) === false ){
             
-            box.closeDropdownBox();
+            box.close();
         }
 
     } );
