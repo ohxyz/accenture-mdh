@@ -1,0 +1,112 @@
+@import "_variables";
+
+/* START: DatepickBox */
+.datepick-box {
+    
+    display: block;
+    padding: 0;
+    border-radius: $defaultBorderRadius;
+    position: relative;
+    border: $defaultBorder;
+    background-color: white;
+    box-sizing: border-box;
+    height: $defaultBoxHeight;
+    color: $defaultFontColor;
+    position: relative;
+    
+    
+    .svg-calendar-icon {
+        
+        position: absolute;
+        top: 23%;
+        right: 3%;
+        
+        path{
+        
+            fill: #d8d8d8;
+        }
+    }
+
+    .datepick-header {
+        
+        padding-left: 12px;
+        padding-right: 12px;
+        cursor: pointer;
+
+        .datepick-picked {
+            display: none;
+            border: none;
+            font-size: 14px;
+            color: $defaultInputColor;
+            margin-top: 2px;
+            padding-bottom: 6px;
+            width: 100%;
+        }
+        
+        .datepick-title {
+            padding: 18px 0;
+            font-size: $defaultFontSize;
+            user-select: none;
+        }
+    }
+    
+    .datepick-content {
+        position: absolute;
+        z-index: 10;
+        display: none;
+        border: $defaultBorder;
+        border-top: none;
+        left: -1px;
+        right: -1px;
+        background-color: white;
+        border-bottom-left-radius: $defaultBorderRadius;
+        border-bottom-right-radius: $defaultBorderRadius;
+        padding-bottom: $defaultBorderRadius; /* NOT wrong. Make the radius viewable */
+    }
+
+    &.is-opened {
+        
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: $defaultBoxShadow;
+        
+        
+        & .datepick-content {
+            border-top: $defaultBorder;
+            display: block;
+            box-shadow: $defaultBoxShadow;
+        }
+        
+        & .datepick-title {
+            padding: 8px 0 4px 0;
+            font-size: $font-s;
+        }
+        
+        & .datepick-picked {
+            
+            display: block;
+        }
+        
+        & .svg-calendar-icon path {
+            
+            fill: #2894ea;
+        }
+    }
+    
+    &.is-picked {
+        
+        & .datepick-title {
+            
+            padding: 8px 0 4px 0;
+            font-size: $font-s;
+        }
+        
+        & .datepick-picked {
+            
+            display: block;
+        }
+    }
+    
+    
+}
+/* END: DatepickBox */

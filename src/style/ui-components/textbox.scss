@@ -1,0 +1,18 @@
+@import "_variables";
+
+.text-box {
+    border-radius: $defaultBorderRadius;
+    border: 1px solid $defaultColor;
+    padding: 16px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    color: $defaultFontColor;
+    font-family: $defaultFontFamily;
+    font-size: $font-m;
+    height: $defaultBoxHeight;
+}
+
+.text-box.is-filled {
+    
+    color: $defaultInputColor;
+}
