@@ -1,6 +1,25 @@
 @import "mdh-variables";
 
-/* START: Override pikaday */
+
+
+/* START: jQuery Scrollbar */
+
+.scrollbar-inner > .scroll-element.scroll-y {
+    height: 85%;
+    right: 5px;
+    top: 13px;
+    width: 5px;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_track {
+    
+    background-color: transparent;
+}
+
+/* END: jQuery Scrollbar */
+
+
+/* START: Override Pikaday */
 
 .pika-single {
     
@@ -57,4 +76,4 @@
     margin-right: 11px;
 }
 
-/* END: Override pikaday */
+/* END: Override Pikaday */

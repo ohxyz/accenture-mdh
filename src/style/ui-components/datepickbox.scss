@@ -86,11 +86,7 @@
             
             display: block;
         }
-        
-        & .svg-calendar-icon path {
-            
-            fill: #2894ea;
-        }
+
     }
     
     &.is-picked {
@@ -104,6 +100,12 @@
         & .datepick-picked {
             
             display: block;
+        }
+        
+                
+        & .svg-calendar-icon path {
+            
+            fill: #2894ea;
         }
     }
     
