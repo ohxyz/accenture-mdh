@@ -45,6 +45,8 @@ class DashBoard extends React.Component {
         };
         
         this.fetchTransactions();
+        
+        DashBoard.dashboard = this;
     }
     
     handleFetch( json ) {
@@ -96,22 +98,39 @@ class DashBoard extends React.Component {
         this.fetchTransactions();
     }
     
-    handleChange( event, dropdownBoxAttrs ) {
+    handleChange( eventOrElement, boxAttrs ) {
+
+        let targetElement = eventOrElement.currentTarget === undefined
+            ? eventOrElement
+            : eventOrElement.currentTarget;
+
+        // let target = event.currentTarget;
+        let targetClassName = targetElement.className;
         
-        let target = event.target;
-        let targetClassName = target.className;
+        console.log( 'target', targetElement );
         
         if ( targetClassName.indexOf( 'text-box' ) > -1 ) {
             
-            let searchObjectPropertyName = target.name;
-            let value = target.value;
+            let searchObjectPropertyName = targetElement.name;
+            let value = targetElement.value;
 
             this.searchInputs[ searchObjectPropertyName ] = value;
+            
         }
         else if ( targetClassName.indexOf( 'dropdown-list-item' ) > -1 ) {
             
+            let dropdownBoxAttrs = boxAttrs;
             this.searchInputs[ dropdownBoxAttrs.name ] = dropdownBoxAttrs.value;
-
+        }
+        else if ( targetClassName.indexOf( 'check-box' ) > -1 ) {
+            
+            let checkBoxAttrs = boxAttrs;
+            this.searchInputs[ checkBoxAttrs.name ] = checkBoxAttrs.isChecked;
+        }
+        else if ( targetClassName.indexOf( 'datepick-picked' ) > -1 ) {
+            
+            let datepickBoxAttrs = boxAttrs;
+            this.searchInputs[ datepickBoxAttrs.name ] = datepickBoxAttrs.value;
         }
         
         console.log( 'search inputs', this.searchInputs );
@@ -150,5 +169,16 @@ class DashBoard extends React.Component {
         )
     }
 }
+
+
+document.addEventListener( 'DOMContentLoaded' , () => {
+    
+    window[ 'COMPONENTS' ] = window[ 'COMPONENTS' ] === undefined
+        ? {}
+        : window[ 'COMPONENTS' ];
+
+    window[ 'COMPONENTS' ].dashboard = DashBoard.dashboard;
+    
+} );
 
 export { DashBoard };

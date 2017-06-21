@@ -1,7 +1,7 @@
 @import "_variables";
 
 .check-box {
-    
+    position: relative;
     border-radius: $defaultBorderRadius;
     border: 1px solid $defaultColor;
     padding: 18px 12px;
@@ -13,9 +13,34 @@
     height: $defaultBoxHeight;
     cursor: pointer;
     user-select: none;
+
+    .svg-check-box-icon {
+    
+        position: absolute;
+        right: 4%;
+        top: 36%;
+        
+        path {
+            
+            fill: #d8d8d8;
+        }
+    }
+    
+    &.is-checked {
+    
+        color: $defaultInputColor;
+        
+        .svg-check-box-icon {
+            
+            polygon {
+            
+                fill: #2894ea;
+            }
+        }
+            
+    }
+        
 }
 
-.check-box.is-checked {
-    
-    color: $defaultInputColor;
-}
+
+

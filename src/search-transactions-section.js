@@ -202,7 +202,9 @@ class AdvancedSearch extends React.Component {
                     <li>
 						<CheckBox
 							id="unsolicited-responses"
-							name="Unsolicited Responses"
+							name="unsolicited-responses"
+                            title="Unsolicited Responses"
+                            onClick={ this.props.onChange }
                         />
 				    </li>
                     <li style={ {visibility: 'hidden' } }>

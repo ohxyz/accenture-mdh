@@ -27,7 +27,10 @@ class DatepickBox extends React.Component {
         this.setDatepickBoxClassName();
         
         this.dom = null;
-        
+        this.name = props.name === undefined
+            ? ''
+            : props.name;
+
         DatepickBox.boxes.push( this );
         
         this.state = {
@@ -35,7 +38,7 @@ class DatepickBox extends React.Component {
             datePicked: this.datePicked,
             showCalendar: this.showCalendar
         };
-        
+
     }
     
     isDatePicked() {
@@ -95,14 +98,24 @@ class DatepickBox extends React.Component {
         } );
     }
 
-    handleInputBoxChange( event ) {
+    handleInputBoxChange( ) {
+        console.log( 'changed' );
         
-        let target = event.target;
-        let value = target.value;
-        
-        this.datePicked = value;
+        // let target = this.inputBox;
+        this.datePicked = this.inputBox.value;
         
         this.setDatepickBoxClassName();
+        
+        if ( this.props.onChange !== undefined ) {
+            
+            this.props.onChange( this.inputBox, { 
+            
+                name: this.props.name,
+                value: this.datePicked
+                
+            } );
+                
+        }
         
         this.setState( {
             
@@ -118,9 +131,8 @@ class DatepickBox extends React.Component {
         let value = target.value;
         
         this.datePicked = value;
-        
-        // this.toggleCalendar();
-        console.log( 'focus', value );
+
+        // console.log( 'focus', value );
     }
     
     renderCalendarIcon() {
@@ -161,7 +173,7 @@ class DatepickBox extends React.Component {
                        name={ this.props.name }
                        onChange={ this.handleInputBoxChange }
                        onFocus={ this.handleInputBoxFocus }
-                       ref={ input => this.inputBox = input }
+                       ref={ self => this.inputBox = self }
                     />
                 </div>
                 <div className="datepick-content" >
@@ -193,5 +205,16 @@ document.addEventListener( 'mouseup', ( event ) => {
     } );
     
 } );
+
+document.addEventListener( 'DOMContentLoaded' , () => {
+    
+    window[ 'COMPONENTS' ] = window[ 'COMPONENTS' ] === undefined
+        ? {}
+        : window[ 'COMPONENTS' ];
+
+    window[ 'COMPONENTS' ].datepickBoxes = DatepickBox.boxes;
+    
+} );
+
 
 export { DatepickBox };

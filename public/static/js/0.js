@@ -30,14 +30,20 @@ $( '#search-transactions-section' ).ready ( function () {
             var datepickContentElem = datepickBoxElem.querySelector( '.datepick-content' );
             
             var $datepickHeader = $( '.datepick-header', datepickBoxElem );
+            var $inputBox = $( inputElem );
             
             // console.log( $datepickHeader );
 
-            var onSelect = function () {
+            var onSelect = function ( ) {
                 
                 // The click event is defined in React
                 $datepickHeader.click();
+                console.log( $inputBox );
                 
+                // $inputBox.prop( 'value', 0 );
+                // $inputBox.click();
+                console.log( COMPONENTS );
+                COMPONENTS.datepickBoxes[0].handleInputBoxChange();
             };
             
         
