@@ -7,6 +7,8 @@ const ASCEND = 'ascend';
 const DESCEND = 'descend';
 const INACTIVE = '';
 
+const ROW_TYPE_HEADER = 'header';
+
 class TableBoxHeader extends React.Component {
     
     renderCustomiseButton() {
@@ -42,6 +44,8 @@ class TableData extends React.Component {
         super( props );
 
         this.handleClick = this.handleClick.bind( this );
+        
+        this.rowType = this.props.type;
     }
     
     renderSortIconUp() {
@@ -78,15 +82,11 @@ class TableData extends React.Component {
     
     handleClick( event ) {
         
-        let target = event.target;
-        
-        if ( target !== event.currentTarget ) {
+        if ( this.rowType === ROW_TYPE_HEADER ) {
             
-            target = event.currentTarget;
+            this.props.onClick( event );
         }
 
-        this.props.onClick( event );
-        
     }
     
     render() {
@@ -97,7 +97,7 @@ class TableData extends React.Component {
         let spanClassName = '';
         let sortedColumnName = this.props.sortedColumnName;
         
-        if ( rowType === 'header' ) {
+        if ( rowType === ROW_TYPE_HEADER ) {
             
             sortIcon = this.renderSortIconInactive();
             
@@ -162,7 +162,7 @@ class TableRow extends React.Component {
     
     render() {
         
-        if ( this.type === 'header' ) {
+        if ( this.type === ROW_TYPE_HEADER ) {
             
             return (
                 
@@ -211,10 +211,19 @@ class TableBoxMain extends React.Component {
         // console.log( 'tablerows', this.rows );
         
         return (
+        
             this.rows.map( ( row, index ) => {
                 // console.log( row, index );
                  
-                return <TableRow type="row" key={ index } rowData={ row } /> 
+                return (
+                
+                    <TableRow type="row" 
+                              key={ index } 
+                              rowData={ row }
+                    />
+                    
+                );
+                
             } )
         );
     }

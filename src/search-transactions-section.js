@@ -230,7 +230,7 @@ class AdvancedSearch extends React.Component {
                         <TextBox title="Time Created from" />
                     </li>
                     <li>
-                        <TextBox/> 
+                        <TextBox title="Time Created to" /> 
                     </li>
                     <li>
 						<DropdownBox
