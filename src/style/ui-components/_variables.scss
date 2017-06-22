@@ -15,22 +15,25 @@ $dropdownPadding: 16px 12px;
 $dropdownBoxShadow: 3px 3px 5px 0 #eee;
 
 $defaultFontSize: 14px;
-$defaultColor: #d4d4d4;
+$default-color: #d4d4d4;
+
 $defaultInputColor: #3a4350;
-$defaultBorder: 1px solid $defaultColor;
-$defaultBorder2: 1px solid rgba( 0, 0, 0, 0.1 );
-$defaultBoxShadow: 0px 2px 4px 0 rgba( 174, 176, 177, 0.3 );
-$defaultFontColor: #9f9f9f;
-$defaultFontColor2: #2a2a2a;
-$defaultBorderRadius: 6px;
-$defaultFontFamily: "Open Sans", arial, sans-serif;
+$default-border: 1px solid $default-color;
+
+$default-border2: 1px solid rgba( 0, 0, 0, 0.1 );
+$default-box-shadow: 0px 2px 4px 0 rgba( 174, 176, 177, 0.3 );
+$default-font-color: #9f9f9f;
+$default-font-color2: #2a2a2a;
+$default-border-radius: 6px;
+
 $defaultBoxHeight: 52px;
 $defaultDisabledColor: #e9e9e9;
-$defaultBoxShadow: 3px 3px 5px 0 #eee;
 $defaultBoxTitlePadding: 8px 0 4px 0;
 
 $fontFamilyBold: "Open Sans Bold", arial, sans-serif;
+
 $font-family-bold: "Open Sans Bold", arial, sans-serif;
+$default-font-family: "Open Sans", arial, sans-serif;
 
 $tablePadding: 24px;
 $fontBoldColor: #2a2a2a;

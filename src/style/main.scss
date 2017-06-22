@@ -119,8 +119,8 @@ header {
         }
         
         #basic-search {
-            margin-top: 16px;
-            padding-bottom: 24px;
+            margin: 0;
+            padding: $search-section-padding;
         }
         
             .control-list {
@@ -138,16 +138,16 @@ header {
                     vertical-align: top;
                 }
                 
-                
-        #advanced-search {
-            padding-top: 24px;
+        #advanced-search-section {
+            padding: $search-section-padding;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
-            margin-bottom: 24px;
         }
         
 
     #search-controls {
-
+        
+        margin-top: 20px;
+        
     }
         #clear-all-fields {
             float: left;

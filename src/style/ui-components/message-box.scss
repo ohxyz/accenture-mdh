@@ -1,32 +1,74 @@
 /* START: Message Box */
 
+$horizontal-padding: 20px;
+$vertical-padding: 20px;
+
 .message-box {
-    
-    padding: 0 12px;
+
+    border: $default-border;
+    border-radius: $default-border-radius;
+    box-shadow: $default-box-shadow;
     
     &.message-box-error {
         
         color: #fb3f62;
-        font-family: $font-family-bold;
-    }
-    
-    .message-box-title {
         
-        padding: 8px 0;
-        font-size: $font-medium;
     }
     
-    .message-box-subtitle {
+    .message-box-header {
         
-        padding: 8px 0;
-        font-size: $font-small;
-        color: $defaultFontColor;
+        padding-top: $vertical-padding;
+        padding-bottom: 0;
+        padding-left: $horizontal-padding;
+        padding-right: $horizontal-padding;
+        position: relative;
+        
+        .svg-message-box-close-icon {
+            
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            
+            path {
+                
+                fill: #cfcfcf;
+            }
+            
+            &:hover {
+                
+                path {
+                    
+                    fill: #95caf4;
+                }
+            }
+        }
+        
+        .message-box-title {
+            
+            padding: 2px 0;
+            font-size: $font-medium;
+            font-family: $font-family-bold;;
+        }
+        
+        .message-box-subtitle {
+            
+            padding: 2px 0;
+            font-size: $font-small;
+            color: $default-font-color;
+
+        }
+
     }
-    
+
     .message-box-content {
-        
-        padding: 8px 0;
         font-size: $font-small;
+        padding-top: 12px;
+        padding-bottom: $vertical-padding;
+        padding-left: $horizontal-padding;
+        padding-right: $horizontal-padding;
     }
     
 }

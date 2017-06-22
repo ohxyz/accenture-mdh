@@ -37,9 +37,9 @@
 
     .table-box-main {
         background-color: white;
-        box-shadow: $defaultBoxShadow;
+        box-shadow: $default-box-shadow;
         padding: 12px 0;
-        border-radius: $defaultBorderRadius;
+        border-radius: $default-border-radius;
         margin-bottom: 12px;
         border: $defaultBorder;
     }
@@ -117,10 +117,10 @@
         .table-box-footer .per-page {
             float: left;
             background-color: white;
-            border-radius: $defaultBorderRadius;
+            border-radius: $default-border-radius;
             padding-left: 12px;
-            color: $defaultFontColor;
-            box-shadow: $defaultBoxShadow;
+            color: $default-font-color;
+            box-shadow: $default-box-shadow;
             border: $defaultBorder;
             height: 46px;
         }
@@ -132,8 +132,8 @@
                 border: none;
                 border-left: 1px solid rgba( 0, 0, 0, 0.1 );
                 border-radius: 0;
-                border-top-right-radius: $defaultBorderRadius;
-                border-bottom-right-radius: $defaultBorderRadius;
+                border-top-right-radius: $default-border-radius;
+                border-bottom-right-radius: $default-border-radius;
                 height: auto;
             }
             
@@ -144,8 +144,8 @@
                 .num-per-page .dropdown-header {
                     margin-right: -1px;
                     border-right: $defaultBorder;
-                    border-top-right-radius: $defaultBorderRadius;
-                    border-bottom-right-radius: $defaultBorderRadius;
+                    border-top-right-radius: $default-border-radius;
+                    border-bottom-right-radius: $default-border-radius;
                 }
                 
                     .num-per-page.is-opened .dropdown-header {
@@ -173,10 +173,10 @@
             float: right;
             padding: 16px 0;
             background-color: white;
-            border-radius: $defaultBorderRadius;
-            box-shadow: $defaultBoxShadow;
+            border-radius: $default-border-radius;
+            box-shadow: $default-box-shadow;
             border: $defaultBorder;
-            color: $defaultFontColor;
+            color: $default-font-color;
         }
             
             .pager-prev, .pager-next, .pager-current {

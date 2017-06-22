@@ -1,11 +1,11 @@
 @import "_variables";
 
 .text-box {
-    border-radius: $defaultBorderRadius;
+    border-radius: $default-border-radius;
     border: $defaultBorder;
     padding: 0 12px;
     box-sizing: border-box;
-    color: $defaultFontColor;
+    color: $default-font-color;
 
     font-size: $font-m;
     height: $defaultBoxHeight;
@@ -18,7 +18,7 @@
     
     .text-box-filled {
         
-        font-family: $defaultFontFamily;
+        font-family: $default-font-family;
         width: 100%;
         display: none;
         border: none;

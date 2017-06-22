@@ -3,6 +3,7 @@ import { DropdownBox, DropdownBoxGroup } from './ui-dropdown-box';
 import { TextBox } from './ui-text-box';
 import { CheckBox } from './ui-check-box';
 import { DatepickBox } from './ui-datepick-box';
+import { MessageBox } from './ui-message-box';
 
 class BasicSearch extends React.Component {
     
@@ -178,7 +179,7 @@ class AdvancedSearch extends React.Component {
         
         return (
 
-            <div id="advanced-search" style={ style} >
+            <div id="advanced-search-section" style={ style} >
                 <ul className="control-list clearfix">
                     <li>
 						<DropdownBox
@@ -356,6 +357,12 @@ class SearchTransactionsSection extends React.Component {
                 <AdvancedSearch
                     display={ this.enableAdvancedSearch }
                     onChange={ this.props.onChange }
+                />
+                <MessageBox
+                    type="error"
+                    title="Error message"
+                    subtitle="Error message information"
+                    content="Lots of errors found !"
                 />
                 <SearchControls
                     onSearch={ this.props.onSearch }

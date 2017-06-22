@@ -4,7 +4,7 @@
 .dropdown-box {
     display: block;
     padding: 0;
-    border-radius: $defaultBorderRadius;
+    border-radius: $default-border-radius;
     position: relative;
     border: $defaultBorder;
     background-color: white;
@@ -48,7 +48,7 @@
         
             .dropdown-box.is-opened .dropdown-header {
                 
-                border-bottom: 1px solid $defaultColor;
+                border-bottom: 1px solid $default-color;
                 
             }
         
@@ -80,7 +80,7 @@
             
             .dropdown-title {
                 padding: 18px 0;
-                color: $defaultFontColor;
+                color: $default-font-color;
             }
             
             .is-selected .dropdown-title {
@@ -95,7 +95,7 @@
             
             .is-selected-basic .dropdown-selected {
                 padding: 18px 0;
-                color: $defaultFontColor;
+                color: $default-font-color;
             }
             
             .is-selected .dropdown-selected {
@@ -114,23 +114,23 @@
             border-left: $defaultBorder;
             border-right: $defaultBorder;
             border-bottom: $defaultBorder;
-            border-bottom-left-radius: $defaultBorderRadius;
-            border-bottom-right-radius: $defaultBorderRadius;
+            border-bottom-left-radius: $default-border-radius;
+            border-bottom-right-radius: $default-border-radius;
             background-color: white;
         }
         
             .dropdown-list {   
                 max-height: 185px; /* Magic Number */
                 overflow: scroll;
-                border-bottom-left-radius: $defaultBorderRadius;
-                border-bottom-right-radius: $defaultBorderRadius;
+                border-bottom-left-radius: $default-border-radius;
+                border-bottom-right-radius: $default-border-radius;
                 overflow-x: hidden;
             }
             
             .dropdown-list > li {
                 position: relative;
                 padding: $dropdownPadding;
-                border-bottom: 1px solid $defaultColor;
+                border-bottom: 1px solid $default-color;
                 color: #2a2a2a;
             }
             
@@ -168,7 +168,7 @@
             }
             
                 .dropdown-content-footer .num-of-selected {
-                    color: $defaultFontColor;
+                    color: $default-font-color;
                     font-size: $font-s;
                 }
                 
@@ -180,7 +180,7 @@
                     border: 1px solid #1d92ed;
                     color: #1d92ed;
                     padding: 5px 15px;
-                    border-radius: $defaultBorderRadius;
+                    border-radius: $default-border-radius;
                     
                 }
                 

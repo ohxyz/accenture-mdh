@@ -5,13 +5,13 @@
     
     display: block;
     padding: 0;
-    border-radius: $defaultBorderRadius;
+    border-radius: $default-border-radius;
     position: relative;
     border: $defaultBorder;
     background-color: white;
     box-sizing: border-box;
     height: $defaultBoxHeight;
-    color: $defaultFontColor;
+    color: $default-font-color;
     position: relative;
     
     
@@ -60,22 +60,22 @@
         left: -1px;
         right: -1px;
         background-color: white;
-        border-bottom-left-radius: $defaultBorderRadius;
-        border-bottom-right-radius: $defaultBorderRadius;
-        padding-bottom: $defaultBorderRadius; /* NOT wrong. Make the radius viewable */
+        border-bottom-left-radius: $default-border-radius;
+        border-bottom-right-radius: $default-border-radius;
+        padding-bottom: $default-border-radius; /* NOT wrong. Make the radius viewable */
     }
 
     &.is-opened {
         
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        box-shadow: $defaultBoxShadow;
+        box-shadow: $default-box-shadow;
         
         
         & .datepick-content {
             border-top: $defaultBorder;
             display: block;
-            box-shadow: $defaultBoxShadow;
+            box-shadow: $default-box-shadow;
         }
         
         & .datepick-title {
