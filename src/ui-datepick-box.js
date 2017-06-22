@@ -21,7 +21,7 @@ class DatepickBox extends React.Component {
             ? ''
             : props.title;
             
-        this.showCalendar = false;
+        this.showCalendar = true;
         this.datepickBoxClassName = '';
         
         this.setDatepickBoxClassName();
