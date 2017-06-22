@@ -4,6 +4,10 @@ $font-s: 12px;
 $font-m: 14px;
 $font-l: 20px;
 
+$font-small: 12px;
+$font-medium: 14px;
+$font-large: 20px;
+
 
 $textBoxPaddingTop: 8px;
 $textBoxHeight: 52px;
@@ -24,6 +28,7 @@ $defaultFontFamily: "Open Sans", arial, sans-serif;
 $defaultBoxHeight: 52px;
 $defaultDisabledColor: #e9e9e9;
 $defaultBoxShadow: 3px 3px 5px 0 #eee;
+$defaultBoxTitlePadding: 8px 0 4px 0;
 
 $fontFamilyBold: "Open Sans Bold", arial, sans-serif;
 $tablePadding: 24px;

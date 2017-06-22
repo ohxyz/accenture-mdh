@@ -2,17 +2,49 @@
 
 .text-box {
     border-radius: $defaultBorderRadius;
-    border: 1px solid $defaultColor;
-    padding: 16px 12px;
+    border: $defaultBorder;
+    padding: 0 12px;
     box-sizing: border-box;
-    width: 100%;
     color: $defaultFontColor;
-    font-family: $defaultFontFamily;
+
     font-size: $font-m;
     height: $defaultBoxHeight;
+
+    .text-box-title {
+        display: block;
+        font-size: $font-medium;
+        padding: 18px 0;
+    }
+    
+    .text-box-filled {
+        
+        font-family: $defaultFontFamily;
+        width: 100%;
+        display: none;
+        border: none;
+        font-size: $font-medium;
+        color: $defaultInputColor;
+        margin-top: 2px;
+        width: 100%;
+    }
+    
+    &.is-focused, &.is-filled {
+        
+        .text-box-filled {
+            
+            display: block;
+        }
+        
+        .text-box-title {
+            padding: $defaultBoxTitlePadding;
+            font-size: $font-small;
+        }
+        
+        .text-box-filled {
+            
+            color: $defaultInputColor;
+        }
+    }
+
 }
 
-.text-box.is-filled {
-    
-    color: $defaultInputColor;
-}

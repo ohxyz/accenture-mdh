@@ -135,21 +135,21 @@ class BasicSearch extends React.Component {
                     <li>
                         <TextBox id="nmi-mirn"
                                  name="nmi-mirn"
-                                 value="NMI / MIRN"
+                                 title="NMI / MIRN"
                                  onChange={ this.props.onChange }
                         />
                     </li>
                     <li>
                         <TextBox id="transaction-id"
                                  name="transaction-id"
-                                 value="Transaction ID"
+                                 title="Transaction ID"
                                  onChange={ this.props.onChange }
                         />
                     </li>
                     <li>
                         <TextBox id="message-id"
                                  name="message-id"
-                                 value="Message ID"
+                                 title="Message ID"
                                  onChange={ this.props.onChange }
                         />
                     </li>
@@ -226,8 +226,12 @@ class AdvancedSearch extends React.Component {
                             onChange={ this.props.onChange }
                         />
                     </li>
-                    <li><TextBox value="Time Created from" /></li>
-                    <li><TextBox value="Time Created to" /></li>
+                    <li>
+                        <TextBox title="Time Created from" />
+                    </li>
+                    <li>
+                        <TextBox/> 
+                    </li>
                     <li>
 						<DropdownBox
                             type="multiple"
@@ -253,7 +257,7 @@ class AdvancedSearch extends React.Component {
                         <TextBox 
 							id="service-order-number"
                             name="service-order-number"
-							value="Service Order Number"
+							title="Service Order Number"
                             onChange={ this.props.onChange }
                         />
 					</li>
