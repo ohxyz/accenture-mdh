@@ -139,7 +139,7 @@ class DatepickBox extends React.Component {
         
         return (
         
-            <svg className="svg-calendar-icon" viewBox="0 0 34 36.5" width="27" height="27">
+            <svg className="svg-calendar-icon" viewBox="0 0 34 36.5">
                 <path d="M24.3,29.9H9.7c-2,0-3.6-1.6-3.6-3.6V13.1c0-1.6,1.1-3,2.6-3.5V11c0,1.6,1.3,2.9,2.9,2.9h0.7
                     c1.6,0,2.9-1.3,2.9-2.9V9.5h3.6V11c0,1.6,1.3,2.9,2.9,2.9h0.7c1.6,0,2.9-1.3,2.9-2.9V9.7c1.5,0.5,2.6,1.8,2.6,3.5v13.1
                     C27.9,28.3,26.3,29.9,24.3,29.9z M24.7,17.2H9.3v7.3c0,1.2,1,2.2,2.2,2.2h10.9c1.2,0,2.2-1,2.2-2.2V17.2z M22.1,12.4

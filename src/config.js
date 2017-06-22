@@ -2,8 +2,8 @@
 
 const GLOBAL = {
     
-    enableAdvancedSearch: false,
-    showSearchResults: false
+    enableAdvancedSearch: true,
+    showSearchResults: true
 };
 
 export { GLOBAL };
