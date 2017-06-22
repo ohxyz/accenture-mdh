@@ -2,20 +2,16 @@ import React from 'react';
 import { SearchTransactionsSection } from './search-transactions-section';
 import { SearchResultsSection } from './search-results-section';
 import 'whatwg-fetch';
+import { GLOBAL } from './config.js';
 
 const AJAX = require( './ajax' );
+const UTILS = require( './utils' );
 
 class DashBoard extends React.Component {
     
     constructor() {
         
         super();
-        
-        this.state = {
-            
-            showSearchResults: true,
-            searchResults: []
-        };
         
         this.handleSearch = this.handleSearch.bind( this );
         this.handleFetch = this.handleFetch.bind( this );
@@ -44,8 +40,19 @@ class DashBoard extends React.Component {
             'cr-code': '',
         };
         
-        this.fetchTransactions();
+        this.showSearchResults = GLOBAL.showSearchResults;
         
+        if ( this.showSearchResults === true ) {
+            
+            this.fetchTransactions();
+        }
+        
+        this.state = {
+            
+            showSearchResults: GLOBAL.showSearchResults,
+            searchResults: []
+        };
+
         DashBoard.dashboard = this;
     }
     
@@ -173,9 +180,7 @@ class DashBoard extends React.Component {
 
 document.addEventListener( 'DOMContentLoaded' , () => {
     
-    window[ 'COMPONENTS' ] = window[ 'COMPONENTS' ] === undefined
-        ? {}
-        : window[ 'COMPONENTS' ];
+    window[ 'COMPONENTS' ] = UTILS.setDefault( window[ 'COMPONENTS' ], {} );
 
     window[ 'COMPONENTS' ].dashboard = DashBoard.dashboard;
     

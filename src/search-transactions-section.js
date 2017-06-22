@@ -4,6 +4,7 @@ import { TextBox } from './ui-text-box';
 import { CheckBox } from './ui-check-box';
 import { DatepickBox } from './ui-datepick-box';
 import { MessageBox } from './ui-message-box';
+import { GLOBAL } from './config.js'; 
 
 class BasicSearch extends React.Component {
     
@@ -308,7 +309,7 @@ class SearchTransactionsSection extends React.Component {
         this.toggleSearchModeClick =
             this.toggleSearchModeClick.bind( this );
         
-        this.enableAdvancedSearch = true;
+        this.enableAdvancedSearch = GLOBAL.enableAdvancedSearch;
         this.searchModeText = '';
         
         this.setSearchModeText();
