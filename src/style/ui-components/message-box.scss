@@ -1,0 +1,32 @@
+/* START: Message Box */
+
+.message-box {
+    
+    padding: 0 12px;
+    
+    &.message-box-error {
+        
+        color: #fb3f62;
+        font-family: $font-family-bold;
+    }
+    
+    .message-box-title {
+        
+        padding: 8px 0;
+        font-size: $font-medium;
+    }
+    
+    .message-box-subtitle {
+        
+        padding: 8px 0;
+        font-size: $font-small;
+        color: $defaultFontColor;
+    }
+    
+    .message-box-content {
+        
+        padding: 8px 0;
+        font-size: $font-small;
+    }
+    
+}

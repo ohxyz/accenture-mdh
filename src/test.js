@@ -161,7 +161,7 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
         
             let result = UTILS.sortArrayByObjectKey( arr, 'key 1' );
             
-            console.log( arr );
+            // console.log( arr );
         } );
         
         
@@ -169,10 +169,34 @@ describe( 'Utils: getMappedKeys & getMappedObjects', () => {
         
             let result = UTILS.sortArrayByObjectKey( arr, 'key 2' );
             
-            console.log( arr );
+            // console.log( arr );
         } );
         
     } );
     
+    describe( 'Utils: setDefault', () => {
+        
+        it( 'should be 0' , () => { 
+        
+            let result = UTILS.setDefault( undefined, 0 );
+        
+            expect( result ).to.equal( 0 );
+        } );
+        
+        it( 'should be null' , () => { 
+        
+            let result = UTILS.setDefault( undefined, null );
+        
+            expect( result ).to.equal( null );
+        } );
+        
+        it( 'should be an empty object' , () => { 
+        
+            let result = UTILS.setDefault( undefined, {} );
+        
+            expect( result ).to.eql( {} );
+        } );
+
+    } );
     
 } );

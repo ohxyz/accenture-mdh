@@ -1,5 +1,5 @@
 import React from 'react';
-import { DropdownBox } from './ui-dropdownbox';
+import { DropdownBox } from './ui-dropdown-box';
 
 const UTILS = require( './utils.js' );
 

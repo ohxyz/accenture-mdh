@@ -1,6 +1,16 @@
 /* Utils */
 
-/* App related */
+/* START: App related */
+
+function setDefault( defaultValue, otherValue ) {
+    
+    if ( defaultValue === undefined ) {
+        
+        return otherValue;
+    }
+    
+    return defaultValue;
+}
 
 function isDescendant( childElem, parentElem ) {
     
@@ -164,6 +174,8 @@ function sortArrayByObjectKey( options, array ) {
     return array;
 }
 
+/* END: App related */
+
 module.exports = {
     
     isDescendant: isDescendant,
@@ -172,6 +184,6 @@ module.exports = {
     getMappedObjects: getMappedObjects,
     JSONCopy: JSONCopy,
     intersectArrays: intersectArrays,
-    sortArrayByObjectKey: sortArrayByObjectKey
-    
+    sortArrayByObjectKey: sortArrayByObjectKey,
+    setDefault: setDefault
 };

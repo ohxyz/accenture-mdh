@@ -1,8 +1,8 @@
 import React from 'react';
-import { DropdownBox, DropdownBoxGroup } from './ui-dropdownbox';
-import { TextBox } from './ui-textbox';
-import { CheckBox } from './ui-checkbox';
-import { DatepickBox } from './ui-datepickbox';
+import { DropdownBox, DropdownBoxGroup } from './ui-dropdown-box';
+import { TextBox } from './ui-text-box';
+import { CheckBox } from './ui-check-box';
+import { DatepickBox } from './ui-datepick-box';
 
 class BasicSearch extends React.Component {
     
