@@ -147,7 +147,6 @@ class BasicSearch extends React.Component {
                                  name="transaction-id"
                                  title="Transaction ID"
                                  rule={ { name: 'positive-integer' } }
-                                 error="Number required."
                                  onChange={ this.props.onChange }
                         />
                     </li>
@@ -155,6 +154,7 @@ class BasicSearch extends React.Component {
                         <TextBox id="message-id"
                                  name="message-id"
                                  title="Message ID"
+                                 rule={ { name: 'alphanumeric-underscore-dash' } }
                                  onChange={ this.props.onChange }
                         />
                     </li>
@@ -263,6 +263,8 @@ class AdvancedSearch extends React.Component {
 							id="service-order-number"
                             name="service-order-number"
 							title="Service Order Number"
+                            rule={ { name: "numeric", min: 1, max: 5 } }
+                            error="1 to 5 digits"
                             onChange={ this.props.onChange }
                         />
 					</li>

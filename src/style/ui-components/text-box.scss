@@ -20,6 +20,7 @@
         display: block;
         font-size: $font-medium;
         padding: 18px 0;
+        user-select: none;
         
         span {
             display: inline-block;

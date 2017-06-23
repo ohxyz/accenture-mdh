@@ -105,17 +105,17 @@ class TextBox extends React.Component {
     validateNumeric() {
         
         let rule = this.validationRule;
-
-        let isValid = validator.isNumeric( this.inputValue );
+        let sanitizedInputValue = this.inputValue.replace( /\s/g, '');
+        let isValid = validator.isNumeric( sanitizedInputValue );
 
         if ( isValid === true ) {
             
-            isValid = ( rule.minLength !== null && this.inputValue.length >= rule.minLength );
+            isValid = ( rule.minLength !== null && sanitizedInputValue.length >= rule.minLength );
         }
 
         if ( isValid === true ) {
             
-            isValid = ( rule.maxLength !== null && this.inputValue.length <= rule.maxLength );
+            isValid = ( rule.maxLength !== null && sanitizedInputValue.length <= rule.maxLength );
         }
 
         if ( isValid === true ) {
@@ -132,17 +132,18 @@ class TextBox extends React.Component {
         
             this.errorMessage = this.isErrorMessageDefined === true
                 ? this.errorMessage
-                : lengthLiteral + ' digits required.';
+                : lengthLiteral + ' digits only';
         }
     }
 
-    
     validatePositiveInteger() {
         
-        let isInteger = validator.isInt( this.inputValue, { min: 0 } )
+        let sanitizedInputValue = this.inputValue.replace( /\s/g, '');
+        
+        let isInteger = validator.isInt( sanitizedInputValue, { min: 0 } )
         
         if ( isInteger === true
-                && parseInt( this.inputValue, 10 ) > 0 )
+                && parseInt( sanitizedInputValue, 10 ) > 0 )
         {
             this.isInputValueValid = true;
         }
@@ -151,13 +152,26 @@ class TextBox extends React.Component {
             this.isInputValueValid = false;
             this.errorMessage = this.isErrorMessageDefined === true
                 ? this.errorMessage
-                : 'Positive number required.';
+                : 'Positive number only';
         }
     }
     
     validateAlphanumericUnderscoreDash() {
         
+        let trimmedInputValue = this.inputValue.trim();
+        let regex = /^[a-zA-Z0-9_-]+$/;
         
+        if ( regex.test( trimmedInputValue ) === true ) {
+            
+            this.isInputValueValid = true;
+        }
+        else {
+            
+            this.isInputValueValid = false;
+            this.errorMessage = this.isErrorMessageDefined === true
+                ? this.errorMessage
+                : 'Letters, numbers, - or _ ';
+        }
     }
 
     handleFocus( event ) {
@@ -179,8 +193,6 @@ class TextBox extends React.Component {
             
             this.validateInputValue();
         }
-        
-        
         
         this.makeClassName();
         

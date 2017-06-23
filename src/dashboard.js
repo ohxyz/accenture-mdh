@@ -114,7 +114,7 @@ class DashBoard extends React.Component {
         // let target = event.currentTarget;
         let targetClassName = targetElement.className;
         
-        console.log( 'target', targetElement );
+        // console.log( 'target', targetElement );
         
         if ( targetClassName.indexOf( 'text-box' ) > -1 ) {
             
@@ -140,7 +140,7 @@ class DashBoard extends React.Component {
             this.searchInputs[ datepickBoxAttrs.name ] = datepickBoxAttrs.value;
         }
         
-        console.log( 'search inputs', this.searchInputs );
+        // console.log( 'search inputs', this.searchInputs );
     }
 
     renderSearchResultsSection() {
