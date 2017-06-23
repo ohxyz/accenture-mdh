@@ -1,19 +1,15 @@
 @import "_variables";
 
-/* START: TableBox */
-.table-box { 
+.table-box {
 
-}
-
-.table-box button{
-    border: $defaultBorder;
-    box-shadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
-}
+    button {
+        border: $defaultBorder;
+        box-shadow: 0px 2px 4px 0 rgba(174, 176, 177, 0.3);
+    }
     
     .table-box-header {
         margin-bottom: 20px;
-    }
-
+        
         .table-box-heading {
             display: inline-block;
             margin-right: 30px;
@@ -34,69 +30,36 @@
         .customise {
             float: right;
         }
-
+    }
+    
     .table-box-main {
+        
         background-color: white;
-        box-shadow: $default-box-shadow;
         padding: 12px 0;
         border-radius: $default-border-radius;
         margin-bottom: 12px;
         border: $defaultBorder;
-    }
-        .table-box-main li{
+        
+        li{
             padding: 0 36px;
             color: #9f9f9f;
             background-color: white;
         }
         
-        .table-box-main li:nth-child(odd) {
+        li:nth-child(odd) {
             
             background-color: rgba( 238, 238, 238, 0.3 );
         }
         
-        .table-box-main li.table-box-main-header {
+        li.table-box-main-header {
             font-family: $font-family-bold;
             border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
             color: $font-bold-color;
             background-color: white;            
 
         }
-            
-            .sort-icon {
-                
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                top: 30%;
-            }
-            
-                .sort-icon-up polygon { 
-                
-                    fill:#D8D8D8; 
-                }
-                
-                .sort-icon-up path {
-                    
-                    fill:#2794EA; 
-                }
-                
-                .sort-icon-inactive path {
-                    
-                    fill:#D8D8D8; 
-                    
-                }
-                
-                .sort-icon-down polygon { 
-                
-                    fill:#D8D8D8; 
-                }
-                
-                .sort-icon-down path {
-                    
-                    fill:#2794EA; 
-                }
-    
-        .table-box-main span {
+        
+        span {
             
             display: inline-block;
             width: 19%;
@@ -105,33 +68,72 @@
             white-space: nowrap;
             margin: 0 0.5%;
             padding: 16px 0;
-            
-        }
-            
-        .table-box-main-header span {
-            position: relative;
-            user-select: none;
-            cursor: pointer;
         }
         
-        .table-column-sorted {
+        .table-box-main-header {
+       
+            span {
+                position: relative;
+                user-select: none;
+                cursor: pointer;
+                
+                &.table-column-sorted {
             
-            color: #2894ea;;
+                    color: #2894ea;;
+                }
+            }
+            
+            .sort-icon {
+                
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                top: 30%;
+                
+                &.sort-icon-up polygon { 
+                
+                    fill:#D8D8D8; 
+                }
+                
+                &.sort-icon-up path {
+                    
+                    fill:#2794EA; 
+                }
+                
+                &.sort-icon-inactive path {
+                    
+                    fill:#D8D8D8; 
+                    
+                }
+                
+                &.sort-icon-down polygon { 
+                
+                    fill:#D8D8D8; 
+                }
+                
+                &.sort-icon-down path {
+                    
+                    fill:#2794EA; 
+                }
+                
+            }
         }
         
+    }
+    
     .table-box-footer {
         height: 400px;
-    }
-        .table-box-footer .per-page {
+        
+        .per-page {
+            
             float: left;
             background-color: white;
             border-radius: $default-border-radius;
             padding-left: 12px;
             color: $default-font-color;
-            box-shadow: $default-box-shadow;
             border: $defaultBorder;
             height: 46px;
-        }
+            
             .num-per-page {
                 
                 margin-left: 20px;
@@ -143,57 +145,58 @@
                 border-top-right-radius: $default-border-radius;
                 border-bottom-right-radius: $default-border-radius;
                 height: auto;
-            }
-            
-            .num-per-page.is-opened {
-                border-bottom-right-radius: 0;
-            }
-            
-                .num-per-page .dropdown-header {
+                
+                &.is-opened {
+                    
+                    border-bottom-right-radius: 0;
+                    box-shadow: none;
+                    
+                    .dropdown-header {
+                        border-bottom-right-radius: 0;
+                    }
+                    
+                    .dropdown-content {
+                        
+                        box-shadow: none;
+                    }
+                }
+                
+                &.is-selected-basic .dropdown-selected {
+                    
+                    padding: 16px 0;
+                }
+                
+                .dropdown-header {
                     margin-right: -1px;
                     border-right: $defaultBorder;
                     border-top-right-radius: $default-border-radius;
                     border-bottom-right-radius: $default-border-radius;
                 }
                 
-                    .num-per-page.is-opened .dropdown-header {
-                        border-bottom-right-radius: 0;
-                    }
-            
-                .num-per-page .dropdown-list {
+                
+                .dropdown-list {
                     border:0;
                     left: 0;
                     right: 0;
                 }
                 
-                .num-per-page .dropdown-title {
+                .dropdown-title {
                     
                     padding: 16px 0;
                 }
-                
-                .num-per-page.is-selected-basic .dropdown-selected {
-                    
-                    padding: 16px 0;
-                }
-
-                    
+            }
+        }
+        
         .pager {
             float: right;
             padding: 16px 0;
             background-color: white;
             border-radius: $default-border-radius;
-            box-shadow: $default-box-shadow;
             border: $defaultBorder;
             color: $default-font-color;
-        }
             
-            .pager-prev, .pager-next, .pager-current {
-                
-                padding: 0 18px;
-            }
-            
+                        
             .pager-prev, .pager-next {
-                
                 user-select: none;
                 cursor: pointer;
             }
@@ -208,4 +211,18 @@
                 
             }
             
-/* END: TableBox */
+            .pager-prev, .pager-next, .pager-current {
+                
+                padding: 0 18px;
+            }
+            
+        }   
+
+    }
+
+}
+
+
+    
+        
+    
