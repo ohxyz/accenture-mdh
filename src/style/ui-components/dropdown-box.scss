@@ -10,35 +10,35 @@
     background-color: white;
     cursor: pointer;
     box-sizing: border-box;
-    height: $defaultBoxHeight;
+    height: $default-box-height;
     user-select: none;
 }
     
     .dropdown-box.is-opened {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        box-shadow: $dropdownBoxShadow;
+        box-shadow: $default-box-shadow;
     }
     
     .dropdown-box.is-opened .dropdown-content {
         display: block;
-        box-shadow: $dropdownBoxShadow;
+        box-shadow: $default-box-shadow;
     }
     
     .dropdown-box.dropdown-box-disabled {
         
-        border: 1px solid $defaultDisabledColor;
+        border: 1px solid $default-disabled-color;
         cursor: default;
     }
     
         .dropdown-box-disabled .dropdown-title {
             
-            color: $defaultDisabledColor;
+            color: $default-disabled-color;
         }
         
             .dropdown-box-disabled .svg-dropdown-icon path {
                 
-                fill: $defaultDisabledColor;
+                fill: $default-disabled-color;
             }
         
         .dropdown-header {
@@ -99,7 +99,7 @@
             }
             
             .is-selected .dropdown-selected {
-                padding: $dropdownPadding;
+                padding: $dropdown-padding;
                 color: #3a4350;
                 padding: 4px 0 8px 0;
                 user-select: none;
@@ -129,7 +129,7 @@
             
             .dropdown-list > li {
                 position: relative;
-                padding: $dropdownPadding;
+                padding: $dropdown-padding;
                 border-bottom: 1px solid $default-color;
                 color: #2a2a2a;
             }

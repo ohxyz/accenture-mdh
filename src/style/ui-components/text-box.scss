@@ -1,6 +1,7 @@
 @import "_variables";
 
 .text-box {
+    
     border-radius: $default-border-radius;
     border: $defaultBorder;
     padding: 0 12px;
@@ -8,14 +9,29 @@
     color: $default-font-color;
 
     font-size: $font-m;
-    height: $defaultBoxHeight;
-
+    height: $default-box-height;
+    
+    input[type="text"] {
+    
+        background-color: transparent;
+    }
+    
     .text-box-title {
         display: block;
         font-size: $font-medium;
         padding: 18px 0;
+        
+        span {
+            display: inline-block;
+            
+            &.text-box-error-message {
+                padding-left: 8px;
+                color: rgba( 255, 0, 0, 0.7 );
+            }
+            
+        }
     }
-    
+
     .text-box-filled {
         
         font-family: $default-font-family;
@@ -23,7 +39,7 @@
         display: none;
         border: none;
         font-size: $font-medium;
-        color: $defaultInputColor;
+        color: $default-input-color;
         margin-top: 2px;
         width: 100%;
     }
@@ -36,14 +52,20 @@
         }
         
         .text-box-title {
-            padding: $defaultBoxTitlePadding;
+            padding: $default-box-title-padding;
             font-size: $font-small;
         }
         
         .text-box-filled {
             
-            color: $defaultInputColor;
+            color: $default-input-color;
         }
+    }
+    
+    &.is-invalid {
+        
+        border: 1px solid rgba( 255, 0, 0, 0.1 );
+        background-color: rgba( 255, 0, 0, 0.05 );
     }
 
 }

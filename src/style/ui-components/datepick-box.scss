@@ -10,10 +10,9 @@
     border: $defaultBorder;
     background-color: white;
     box-sizing: border-box;
-    height: $defaultBoxHeight;
+    height: $default-box-height;
     color: $default-font-color;
     position: relative;
-    
     
     .svg-calendar-icon {
         
@@ -39,7 +38,7 @@
             display: none;
             border: none;
             font-size: 14px;
-            color: $defaultInputColor;
+            color: $default-input-color;
             margin-top: 2px;
             padding-bottom: 6px;
             width: 100%;
@@ -47,7 +46,7 @@
         
         .datepick-title {
             padding: 18px 0;
-            font-size: $defaultFontSize;
+            font-size: $default-font-size;
             user-select: none;
         }
     }

@@ -10,7 +10,7 @@
     box-sizing: border-box;
     font-family: $defaultFontFamily;
     font-size: $font-m;
-    height: $defaultBoxHeight;
+    height: $default-box-height;
     cursor: pointer;
     user-select: none;
 
@@ -30,7 +30,7 @@
     
     &.is-checked {
     
-        color: $defaultInputColor;
+        color: $default-input-color;
         
         .svg-check-box-icon {
             

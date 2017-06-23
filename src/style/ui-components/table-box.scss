@@ -46,12 +46,20 @@
         .table-box-main li{
             padding: 0 36px;
             color: #9f9f9f;
+            background-color: white;
         }
         
-        .table-box-main .table-box-main-header {
-            font-family: $fontFamilyBold;
+        .table-box-main li:nth-child(odd) {
+            
+            background-color: rgba( 238, 238, 238, 0.3 );
+        }
+        
+        .table-box-main li.table-box-main-header {
+            font-family: $font-family-bold;
             border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
-            color: $fontBoldColor;            
+            color: $font-bold-color;
+            background-color: white;            
+
         }
             
             .sort-icon {

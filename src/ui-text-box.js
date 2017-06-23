@@ -1,4 +1,12 @@
 import React from 'react';
+import validator from 'validator';
+
+const UTILS = require( './utils.js' );
+
+const RULE_EMPTY = '';
+const RULE_NUMERIC = 'numeric';
+const RULE_ALPHANUMERIC_UNDERSCORE_DASH = 'alphanumeric-underscore-dash';
+const RULE_POSITIVE_INTEGER = 'positive-integer';
 
 class TextBox extends React.Component {
     
@@ -8,35 +16,56 @@ class TextBox extends React.Component {
         
         this.handleFocus = this.handleFocus.bind( this );
         this.handleTyping = this.handleTyping.bind( this );
-        this.handleClick = this.handleClick.bind( this );
+        this.handleTextBoxClick = this.handleTextBoxClick.bind( this );
         this.handleBlur = this.handleBlur.bind( this );
         
         this.className = '';
         this.textBoxTitleElement = null;
         this.isFocused = false;
         this.inputBox = null;
-        this.inputValue = '';
-        
+
         // Not UUID
         let randomString = Math.random().toString(36).slice(2);
         
+        this.id = UTILS.setDefault( props.id, randomString );
+        this.name = UTILS.setDefault( props.name, randomString );
+        this.title = UTILS.setDefault( props.title, 'Fill in here' );
+        this.inputValue = UTILS.setDefault( props.value, '' );
+                
+        this.isInputValueValid = true;
+        this.allowEmpty = true;
+        this.firstTimeFocused = true;
+        this.isErrorMessageDefined = false;
         
-        this.id = props.id === undefined
-            ? randomString
-            : props.id;
-        
-        this.name = props.name === undefined
-            ? randomString
-            : props.name;
+        if ( props.error === undefined ) {
             
-        this.title = props.title === undefined
-            ? 'Fill in here'
-            : props.title
+            this.errorMessage = 'Error !';
+            this.isErrorMessageDefined = false;
+        }
+        else {
+            
+            this.errorMessage = props.error;
+            this.isErrorMessageDefined = true;
+        }
+        
+        this.requireValidation = props.rule === undefined
+            ? false
+            : true;
+        
+        this.validationRule = null;
 
-        this.inputValue = props.value === undefined
-            ? ''
-            : props.value;
+        if ( this.requireValidation === true ) {
             
+            let rule = {
+            
+                name: UTILS.setDefault( props.rule.name, RULE_EMPTY ),
+                minLength: UTILS.setDefault( props.rule.min, null ),
+                maxLength: UTILS.setDefault( props.rule.max, null )
+            };
+            
+            this.validationRule = rule;
+        }
+
         this.makeClassName();
 
         this.state = {
@@ -46,6 +75,91 @@ class TextBox extends React.Component {
         };
     }
     
+    validateInputValue() {
+        
+        let rule = this.validationRule.name;
+        
+        if ( this.allowEmpty === true && this.inputValue === '' ) {
+            
+            this.isInputValueValid = true;
+        }
+        else if ( rule === RULE_EMPTY ) {
+            
+            this.isInputValueValid = true;
+        }
+        else if ( rule === RULE_POSITIVE_INTEGER ) {
+            
+            this.validatePositiveInteger();
+        }
+        else if ( rule === RULE_NUMERIC ) {
+            
+            this.validateNumeric();
+        }
+        else if ( rule === RULE_ALPHANUMERIC_UNDERSCORE_DASH ) {
+
+            this.validateAlphanumericUnderscoreDash();
+        }
+
+    }
+    
+    validateNumeric() {
+        
+        let rule = this.validationRule;
+
+        let isValid = validator.isNumeric( this.inputValue );
+
+        if ( isValid === true ) {
+            
+            isValid = ( rule.minLength !== null && this.inputValue.length >= rule.minLength );
+        }
+
+        if ( isValid === true ) {
+            
+            isValid = ( rule.maxLength !== null && this.inputValue.length <= rule.maxLength );
+        }
+
+        if ( isValid === true ) {
+            
+            this.isInputValueValid = true;
+        }
+        else {
+            
+            this.isInputValueValid = false;
+
+            let lengthLiteral = ( rule.minLength !== null && rule.minLength === rule.maxLength )
+                ? rule.minLength.toString()
+                : rule.minLength + ' to ' + rule.maxLength;
+        
+            this.errorMessage = this.isErrorMessageDefined === true
+                ? this.errorMessage
+                : lengthLiteral + ' digits required.';
+        }
+    }
+
+    
+    validatePositiveInteger() {
+        
+        let isInteger = validator.isInt( this.inputValue, { min: 0 } )
+        
+        if ( isInteger === true
+                && parseInt( this.inputValue, 10 ) > 0 )
+        {
+            this.isInputValueValid = true;
+        }
+        else {
+            
+            this.isInputValueValid = false;
+            this.errorMessage = this.isErrorMessageDefined === true
+                ? this.errorMessage
+                : 'Positive number required.';
+        }
+    }
+    
+    validateAlphanumericUnderscoreDash() {
+        
+        
+    }
+
     handleFocus( event ) {
         
         let input = event.target;
@@ -57,19 +171,35 @@ class TextBox extends React.Component {
     }
 
     handleBlur() {
-        console.log( 'blurred' )
+        console.log( 'blurred' );
         this.isFocused = false;
+        this.firstTimeFocused = false;
+        
+        if ( this.requireValidation === true ) {
+            
+            this.validateInputValue();
+        }
+        
+        
+        
         this.makeClassName();
         
         this.setState( {
             
             isFocused: false
+            
         } ); 
     }
     
     handleTyping( ) {
         
         this.inputValue = this.inputBox.value;
+        
+        if ( this.requireValidation === true 
+                && this.firstTimeFocused === false ) 
+        {
+            this.validateInputValue();
+        }
 
         this.makeClassName();
         
@@ -99,9 +229,13 @@ class TextBox extends React.Component {
             this.className += ' is-filled';
         }
         
+        if ( this.isInputValueValid === false ) {
+            
+            this.className += ' is-invalid';
+        }
     }
     
-    handleClick( event ) {
+    handleTextBoxClick( event ) {
         
         let target = event.target;
         
@@ -124,6 +258,21 @@ class TextBox extends React.Component {
         } );
         
     }
+    
+    renderErrorMessageIfInvalid() {
+        
+        if ( this.isInputValueValid === false ) {
+
+            return (
+            
+                <span className="text-box-error-message">
+                    { this.errorMessage }
+                </span>
+            )
+        }
+        
+        return '';
+    }
 
     render() {
         
@@ -131,19 +280,21 @@ class TextBox extends React.Component {
         
         return (
             <div className={ this.className } 
-                 onClick={ this.handleClick }
+                 onClick={ this.handleTextBoxClick }
             >
                 <label htmlFor={ inputBoxId } 
                        className="text-box-title"
                        ref={ elem => this.textBoxTitleElement = elem }
                 >
-                    { this.title }
+                    <span>{ this.title }</span>
+                    { this.renderErrorMessageIfInvalid() }
                 </label>
+                
                 <input id={ inputBoxId }
                        type="text"
                        className="text-box-filled"
                        name={ this.name }
-                       defaultValue=""
+                       defaultValue={ this.inputValue }
                        onFocus={ this.handleFocus }
                        onBlur={ this.handleBlur }
                        onChange={ this.handleTyping }
@@ -159,6 +310,7 @@ class TextBox extends React.Component {
             
             this.inputBox.focus();
         }
+        
     }
 }
 

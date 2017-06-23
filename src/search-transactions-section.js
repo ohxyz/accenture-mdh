@@ -138,6 +138,7 @@ class BasicSearch extends React.Component {
                         <TextBox id="nmi-mirn"
                                  name="nmi-mirn"
                                  title="NMI / MIRN"
+                                 rule={ { name: 'numeric', min: 10, max: 10 } }
                                  onChange={ this.props.onChange }
                         />
                     </li>
@@ -145,6 +146,8 @@ class BasicSearch extends React.Component {
                         <TextBox id="transaction-id"
                                  name="transaction-id"
                                  title="Transaction ID"
+                                 rule={ { name: 'positive-integer' } }
+                                 error="Number required."
                                  onChange={ this.props.onChange }
                         />
                     </li>
@@ -269,7 +272,6 @@ class AdvancedSearch extends React.Component {
 							id="cr-code"
                             name="cr-code"
 							title="CR Code"
-                            
                             onSelect={ this.props.onChange }
                         />
 				    </li>
@@ -344,6 +346,20 @@ class SearchTransactionsSection extends React.Component {
         return <button id="quick-search">Quick Search</button>
     }
     
+    renderErroMessage() {
+        
+        return (
+        
+            <MessageBox
+                type="error"
+                title="Error message"
+                subtitle="Error message information"
+                content="Lots of errors found !"
+            />
+            
+        );
+    }
+    
     render() {
         
         return (
@@ -358,12 +374,6 @@ class SearchTransactionsSection extends React.Component {
                 <AdvancedSearch
                     display={ this.enableAdvancedSearch }
                     onChange={ this.props.onChange }
-                />
-                <MessageBox
-                    type="error"
-                    title="Error message"
-                    subtitle="Error message information"
-                    content="Lots of errors found !"
                 />
                 <SearchControls
                     onSearch={ this.props.onSearch }
