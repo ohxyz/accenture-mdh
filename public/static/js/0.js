@@ -50,18 +50,13 @@ $( '#search-transactions-section' ).ready ( function () {
             new Pikaday( {
                 
                 field: inputElem,
-                
-                format: 'YYYY-MM-DD',
-                
+                format: 'YYYY-MM-DD', 
                 firstDay: 1,
-                
                 i18n: i18n,
-                
                 bound: false,
-                
                 container: datepickContentElem,
-                
-                onSelect: onSelect
+                onSelect: onSelect,
+                keyboardInput: false
             
             } );
         
@@ -69,16 +64,46 @@ $( '#search-transactions-section' ).ready ( function () {
         
     }
     
-    var initScrollBar = function () {
+    var initPerfectScrollbar = function () {
         
-        var $dropdownLists = $( '.dropdown-list' );
+        var containers = document.querySelectorAll( '.dropdown-list' );
         
-        $dropdownLists.addClass( 'scrollbar-inner' ).scrollbar();
+        
+        containers.forEach( function ( container ) {
+            
+            Ps.initialize( container, {
+                
+               suppressScrollX: true
+                
+            } );
+            
+            var $scrollBarY = $( '.ps__scrollbar-y', container );
+            var $innerBar = $( '<div class="inner-bar-of-scrollbar">' );
+            var $container = $( container );
 
-    };
+            $scrollBarY.append( $innerBar );
+            
+            var $dropdownBox = $container.parent().parent();
+            var $dropdownHeader = $dropdownBox.find( '.dropdown-header' );
+            
+            $dropdownHeader.click( function () {
+                
+                // NOTE: If it has "is-opened" class, that means the dropdown list is opened
+                //       So, the click event will close the dropdown-list
+                if ( $dropdownBox.hasClass( 'is-opened' ) === false ) {
+                    
+                    window.setTimeout( function() {
+                        
+                        Ps.update( container );
+                    }, 0);
+                }
+            } );
+
+        } );
+    }
 
     initPikaday();
-    initScrollBar();
+    initPerfectScrollbar();
     
 } );
 

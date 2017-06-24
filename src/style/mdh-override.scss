@@ -1,23 +1,28 @@
 @import "mdh-variables";
 
-
-
-/* START: jQuery Scrollbar */
-
-.scrollbar-inner > .scroll-element.scroll-y {
-    height: 85%;
-    right: 5px;
-    top: 13px;
-    width: 5px;
-}
-
-.scrollbar-inner > .scroll-element .scroll-element_track {
+/* START: Scrollbar */
+.dropdown-list {
     
-    background-color: transparent;
+    position: relative;
+    bottom: -1px; /* Hide scrollbar's bottom line */
+    
 }
 
-/* END: jQuery Scrollbar */
+.dropdown-content-footer {
+    
+    background-color: white; /* Hide scrollbar's bottom line */
+}
 
+.inner-bar-of-scrollbar {
+    
+    background-color: $defaultColor;
+    position: relative;
+    height: 80%;
+    top: 10%;
+    border-radius: 6px;
+}
+
+/* END: Scrollbar */
 
 /* START: Override Pikaday */
 
