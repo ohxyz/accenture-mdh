@@ -1,7 +1,7 @@
 @import "_variables";
 
 /* START: DatepickBox */
-.datepick-box {
+.date-box {
     
     display: block;
     padding: 0;
@@ -13,6 +13,11 @@
     height: $default-box-height;
     color: $default-font-color;
     position: relative;
+    
+    input[type=text] {
+        
+        background-color: transparent;
+    }
     
     .svg-calendar-icon {
         
@@ -28,13 +33,13 @@
         }
     }
 
-    .datepick-header {
+    .date-box-header {
         
         padding-left: 12px;
         padding-right: 12px;
         cursor: pointer;
 
-        .datepick-picked {
+        .date-box-picked {
             display: none;
             border: none;
             font-size: 14px;
@@ -44,14 +49,25 @@
             width: 100%;
         }
         
-        .datepick-title {
+        .date-box-title {
             padding: 18px 0;
             font-size: $default-font-size;
             user-select: none;
+            
+            span {
+                
+                display: inline-block;
+                
+                &.date-box-error-message {
+                    padding-left: 8px;
+                    color: $default-invalid-font-color;
+                }
+            
+            } 
         }
     }
     
-    .datepick-content {
+    .date-box-content {
         position: absolute;
         z-index: 10;
         padding-top: 4px;
@@ -70,21 +86,21 @@
         
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        box-shadow: $default-box-shadow;
+        box-shadow: 2px 2px 2px 0 rgba( 0, 0, 0, 0.1 );
         
         
-        & .datepick-content {
+        & .date-box-content {
             border-top: $defaultBorder;
             display: block;
             box-shadow: $default-box-shadow;
         }
         
-        & .datepick-title {
+        & .date-box-title {
             padding: 8px 0 4px 0;
             font-size: $font-s;
         }
         
-        & .datepick-picked {
+        & .date-box-picked {
             
             display: block;
         }
@@ -93,13 +109,13 @@
     
     &.is-picked {
         
-        & .datepick-title {
+        & .date-box-title {
             
             padding: 8px 0 4px 0;
             font-size: $font-s;
         }
         
-        & .datepick-picked {
+        & .date-box-picked {
             
             display: block;
         }
@@ -108,6 +124,43 @@
         & .svg-calendar-icon path {
             
             fill: #2894ea;
+        }
+    }
+    
+    &.is-invalid {
+        
+        border: 1px solid $default-invalid-border-color;
+        background-color: $default-invalid-background-color;
+        
+        &.is-opened {
+            
+            border-bottom: none;
+        }
+        
+        & .date-box-content {
+            
+            background-color: $default-invalid-background-color;
+            border: 1px solid $default-invalid-border-color;
+        }
+        
+        & .pika-single {
+            
+            background-color: $default-invalid-background-color;
+        }
+        
+        & .pika-label {
+            
+            background-color: transparent;
+        }
+        
+        & .pika-title {
+            
+            border-bottom: 1px solid $default-invalid-border-color;
+        }
+        
+        & .svg-calendar-icon path {
+            
+            fill: $default-invalid-font-color;
         }
     }
     

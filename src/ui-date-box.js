@@ -1,4 +1,5 @@
 import React from 'react';
+import validator from 'validator';
 
 const UTILS = require( './utils.js' );
 
@@ -12,25 +13,32 @@ class DateBox extends React.Component {
         this.handleInputBoxFocus = this.handleInputBoxFocus.bind( this );
         
         this.inputBox = null;
-        
-        this.datePicked = props.value === undefined
-            ? ''
-            : props.value;
-        
-        this.title = props.title === undefined
-            ? ''
-            : props.title;
+       
+        this.datePicked = UTILS.setDefault( props.value, '' );
+        this.title = UTILS.setDefault( props.title, '' );
+        this.name = UTILS.setDefault( props.name, '' );
+        this.allowEmpty = true;
+        this.isValidDate = true;
             
         this.showCalendar = false;
         this.DateBoxClassName = '';
         
+        this.isErrorMessageDefined = false;
+        
+        if ( props.error === undefined ) {
+            
+            this.errorMessage = 'yyyy-mm-dd';
+            this.isErrorMessageDefined = false;
+        }
+        else {
+            
+            this.errorMessage = props.error;
+            this.isErrorMessageDefined = true;
+        }
+        
         this.setDateBoxClassName();
         
         this.dom = null;
-        this.name = props.name === undefined
-            ? ''
-            : props.name;
-
         DateBox.boxes.push( this );
         
         this.state = {
@@ -53,7 +61,7 @@ class DateBox extends React.Component {
         
     setDateBoxClassName() {
         
-        this.DateBoxClassName = 'datepick-box';
+        this.DateBoxClassName = 'date-box';
         
         if ( this.isDatePicked() === true ) {
             
@@ -64,6 +72,11 @@ class DateBox extends React.Component {
             
             this.DateBoxClassName += ' is-opened';
             
+        }
+        
+        if ( this.isValidDate === false ) {
+            
+            this.DateBoxClassName += ' is-invalid';
         }
         
     }
@@ -97,13 +110,28 @@ class DateBox extends React.Component {
             showCalendar: false
         } );
     }
+    
+    validateDate() {
+        
+        let sanitizedDate = this.datePicked.replace( /\s/g, '').slice( 0, 10 );
+        
+        if ( this.allowEmpty === true && sanitizedDate === '' ) {
+            
+            this.isValidDate = true;
+        }
+        else { 
+            // February 30 returns true
+            this.isValidDate = validator.isISO8601( sanitizedDate );
+        }
+        
+    }
 
     handleInputBoxChange( ) {
         console.log( 'changed' );
         
-        // let target = this.inputBox;
         this.datePicked = this.inputBox.value;
         
+        this.validateDate();
         this.setDateBoxClassName();
         
         if ( this.props.onChange !== undefined ) {
@@ -149,6 +177,21 @@ class DateBox extends React.Component {
         
         );
     }
+    
+    renderErrorMessageIfInvalid() {
+        
+        if ( this.isValidDate === false ) {
+
+            return (
+            
+                <span className="date-box-error-message">
+                    { this.errorMessage }
+                </span>
+            )
+        }
+        
+        return '';
+    }
 
     render () {
         
@@ -159,15 +202,16 @@ class DateBox extends React.Component {
                  ref={ self => this.dom = self }
             >
                 
-                <div className="datepick-header"
+                <div className="date-box-header"
                      onClick={ this.toggleCalendar }
                 >
                     { this.renderCalendarIcon() }
-                    <div className="datepick-title">
-                        { this.props.title }
+                    <div className="date-box-title">
+                        <span>{ this.props.title }</span>
+                        { this.renderErrorMessageIfInvalid() }
                     </div>
                     <input id={ this.props.id + '-input-box' }
-                       className="datepick-picked"
+                       className="date-box-picked"
                        type="text"
                        value={ this.datePicked }
                        name={ this.props.name }
@@ -176,7 +220,7 @@ class DateBox extends React.Component {
                        ref={ self => this.inputBox = self }
                     />
                 </div>
-                <div className="datepick-content" >
+                <div className="date-box-content" >
                 </div>
             </div>
         );
@@ -212,7 +256,7 @@ document.addEventListener( 'DOMContentLoaded' , () => {
         ? {}
         : window[ 'COMPONENTS' ];
 
-    window[ 'COMPONENTS' ].DateBoxes = DateBox.boxes;
+    window[ 'COMPONENTS' ].dateBoxes = DateBox.boxes;
     
 } );
 
