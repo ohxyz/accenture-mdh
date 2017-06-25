@@ -103,6 +103,9 @@
                 color: #3a4350;
                 padding: 4px 0 8px 0;
                 user-select: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
         .dropdown-content {

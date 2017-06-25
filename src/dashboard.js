@@ -136,8 +136,8 @@ class DashBoard extends React.Component {
         }
         else if ( targetClassName.indexOf( 'datepick-picked' ) > -1 ) {
             
-            let datepickBoxAttrs = boxAttrs;
-            this.searchInputs[ datepickBoxAttrs.name ] = datepickBoxAttrs.value;
+            let DateBoxAttrs = boxAttrs;
+            this.searchInputs[ DateBoxAttrs.name ] = DateBoxAttrs.value;
         }
         
         // console.log( 'search inputs', this.searchInputs );
@@ -181,7 +181,6 @@ class DashBoard extends React.Component {
 document.addEventListener( 'DOMContentLoaded' , () => {
     
     window[ 'COMPONENTS' ] = UTILS.setDefault( window[ 'COMPONENTS' ], {} );
-
     window[ 'COMPONENTS' ].dashboard = DashBoard.dashboard;
     
 } );

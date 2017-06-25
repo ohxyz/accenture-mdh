@@ -2,101 +2,14 @@ import React from 'react';
 import { DropdownBox, DropdownBoxGroup } from './ui-dropdown-box';
 import { TextBox } from './ui-text-box';
 import { CheckBox } from './ui-check-box';
-import { DatepickBox } from './ui-datepick-box';
+import { DateBox } from './ui-date-box';
 import { MessageBox } from './ui-message-box';
-import { GLOBAL } from './config.js'; 
+import { GLOBAL, LOCAL_DATA } from './config';
 
 class BasicSearch extends React.Component {
-    
-    constructor() {
-        
-        super();
-                
-        this.cascadedData = {
-            
-            "Group A": {
-                
-                "Group A Type 1": {
-                    "A1 Status I": true,
-                    "A1 Status II": true,
-                    "A1 Status III": true
-                },
-                
-                "Group A Type 2": {
-                    "A2 Status I": true,
-                    "A2 Status II": true,
-                    "A2 Status III": true
-                } 
-            },
-            
-            "Group B": {
-                
-                "Group B Type 1": {
-                    "B1 Status I": true,
-                    "B1 Status II": true,
-                    "B1 Status III": true
-                },
-                
-                "Group B Type 2": {
-                    "B2 Status I": true,
-                    "B2 Status II": true,
-                    "B2 Status III": true
-                } 
-            }
-        }
-        
-        this.transactionCategory = {
-            
-            "SORD": {
-                
-                "ServiceOrderRequest": {},
-                "ServiceOrderResponse": {},
-            },
-            
-            "CATS": {
-                
-                "CATSChangeAlert": {},
-                "CATSObjectionWithdrawal": {},
-                "CATSChangeWithdrawal": {},
-                
-                "CATSObjectionRequest": {},
-                "CATSChangeRequest": {},
-                "CATSChangeResponse": {},
-                "CATSDataRequest": {},
-                "CATSObjectionResponse": {},
-                "TransactionAcknowledgement": {},
-                "CATSNotification": {},
-                "ReportRequest": {},
-                "ReportResponse": {},
-                "ReplicationRequest": {}
-                
-            }
-        };
-    }
 
     render() {
-        
-        const listItems = [ 'Basic One', 'Basic Two', 'Basic Three' ];
-        const attrsOfDropdownBoxes = 
-        [
-            {
-                type: 'multiple',
-                id: 'transaction-group',
-                name: 'transaction-group',
-                title: 'Transaction Group',
-                listItems: listItems
-            },
-            
-            
-            {        
-                type: 'multiple',
-                id: 'transaction-type',
-                name: 'transaction-type',
-                title: 'Transaction Type',
-                listItems: listItems
-            },
-        ];
-                        
+              
         const transactionStatus = [
             'Completed',
             'Requested',
@@ -160,8 +73,8 @@ class BasicSearch extends React.Component {
                     </li>
                 </ul>
                 <DropdownBoxGroup
-                    children={ attrsOfDropdownBoxes }
-                    data={ this.transactionCategory }
+                    children={ LOCAL_DATA.attrsOfDropdownBoxes }
+                    data={ LOCAL_DATA.transactionCategory }
                     onChange={ this.props.onChange }
                     otherDropdownBoxes={ otherDropdownBoxes }
                 />                    
@@ -191,7 +104,7 @@ class AdvancedSearch extends React.Component {
 							id="sending-participants"
                             name="sending-participants"
 					        title="Sending Participant"
-                            listItems={ listItems }
+                            listItems={ LOCAL_DATA.sendingParticipants }
                             onSelect={ this.props.onChange }
                         />
 				    </li>
@@ -200,7 +113,7 @@ class AdvancedSearch extends React.Component {
 							id="receiving-participants"
                             name="receiving-participants"
 							title="Receiving Participant"
-                            listItems={ listItems }
+                            listItems={ LOCAL_DATA.receivingParticipants }
                             onSelect={ this.props.onChange }
                         />
 				    </li>
@@ -216,7 +129,7 @@ class AdvancedSearch extends React.Component {
 						<TextBox value="Place Holder" />
 				    </li>
                     <li>
-                        <DatepickBox 
+                        <DateBox 
                             id="date-created-from" 
                             name="date-created-from"
                             title="Date Created from"
@@ -224,7 +137,7 @@ class AdvancedSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <DatepickBox                        
+                        <DateBox                        
                             id="date-created-to"
                             name="date-created-to"
                             title="Date Created to"
@@ -243,8 +156,7 @@ class AdvancedSearch extends React.Component {
 							id="service-order-type"
                             name="service-order-type"
 							title="Service Order Type"
-                            itemsSelected={ ['Advanced Two', 'Advanced Three'] }
-                            listItems={ listItems }
+                            listItems={ LOCAL_DATA.serviceOrderType }
                             onSelect={ this.props.onChange }
                         />
 					</li>
@@ -254,7 +166,7 @@ class AdvancedSearch extends React.Component {
 							id="service-order-subtype"
                             name="service-order-subtype"
 							title="Service Order Subtype"
-                            listItems={ listItems }
+                            listItems={ LOCAL_DATA.serviceOrderSubtype }
                             onSelect={ this.props.onChange }
                         />
 					</li>
