@@ -8,6 +8,14 @@
     
 }
 
+/* Hide scrollbar's bottom line */
+.dropdown-content-footer {
+    
+    background-color: white; 
+    border-bottom-left-radius: $defaultBorderRadius;
+    border-bottom-right-radius: $defaultBorderRadius;
+}
+
 .inner-bar-of-scrollbar {
     
     background-color: $defaultColor;
