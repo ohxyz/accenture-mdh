@@ -27,7 +27,7 @@
     
     .dropdown-box.dropdown-box-disabled {
         
-        border: 1px solid $default-disabled-color;
+        border: 1px dashed $default-disabled-color;
         cursor: default;
     }
     

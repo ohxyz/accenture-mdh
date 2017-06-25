@@ -11,6 +11,7 @@ class DateBox extends React.Component {
         this.toggleCalendar = this.toggleCalendar.bind( this );
         this.handleInputBoxChange = this.handleInputBoxChange.bind( this );
         this.handleInputBoxFocus = this.handleInputBoxFocus.bind( this );
+        this.handleInputBoxBlur = this.handleInputBoxBlur.bind( this );
         
         this.inputBox = null;
        
@@ -21,7 +22,7 @@ class DateBox extends React.Component {
         this.isValidDate = true;
             
         this.showCalendar = false;
-        this.DateBoxClassName = '';
+        this.dateBoxClassName = '';
         
         this.isErrorMessageDefined = false;
         
@@ -61,22 +62,22 @@ class DateBox extends React.Component {
         
     setDateBoxClassName() {
         
-        this.DateBoxClassName = 'date-box';
+        this.dateBoxClassName = 'date-box';
         
         if ( this.isDatePicked() === true ) {
             
-            this.DateBoxClassName += ' is-picked';
+            this.dateBoxClassName += ' is-picked';
         }
         
         if ( this.showCalendar === true ) {
             
-            this.DateBoxClassName += ' is-opened';
+            this.dateBoxClassName += ' is-opened';
             
         }
         
         if ( this.isValidDate === false ) {
             
-            this.DateBoxClassName += ' is-invalid';
+            this.dateBoxClassName += ' is-invalid';
         }
         
     }
@@ -163,6 +164,19 @@ class DateBox extends React.Component {
         // console.log( 'focus', value );
     }
     
+    handleInputBoxBlur( ) {
+        
+        // this.validateDate();
+        // this.setDateBoxClassName();
+        
+        this.setState( {
+            
+            isValidDate: this.isValidDate
+            
+        } );
+        
+    }
+    
     renderCalendarIcon() {
         
         return (
@@ -198,10 +212,9 @@ class DateBox extends React.Component {
         return (
         
             <div id={ this.props.id } 
-                 className={ this.DateBoxClassName }
+                 className={ this.dateBoxClassName }
                  ref={ self => this.dom = self }
             >
-                
                 <div className="date-box-header"
                      onClick={ this.toggleCalendar }
                 >
@@ -217,6 +230,7 @@ class DateBox extends React.Component {
                        name={ this.props.name }
                        onChange={ this.handleInputBoxChange }
                        onFocus={ this.handleInputBoxFocus }
+                       onBlur={ this.handleInputBoxBlur }
                        ref={ self => this.inputBox = self }
                     />
                 </div>
@@ -252,10 +266,7 @@ document.addEventListener( 'mouseup', ( event ) => {
 
 document.addEventListener( 'DOMContentLoaded' , () => {
     
-    window[ 'COMPONENTS' ] = window[ 'COMPONENTS' ] === undefined
-        ? {}
-        : window[ 'COMPONENTS' ];
-
+    window[ 'COMPONENTS' ] = UTILS.setDefault( window[ 'COMPONENTS' ], {} )
     window[ 'COMPONENTS' ].dateBoxes = DateBox.boxes;
     
 } );
