@@ -166,8 +166,8 @@ class DateBox extends React.Component {
     
     handleInputBoxBlur( ) {
         
-        // this.validateDate();
-        // this.setDateBoxClassName();
+        this.validateDate();
+        this.setDateBoxClassName();
         
         this.setState( {
             
