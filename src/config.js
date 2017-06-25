@@ -68,9 +68,7 @@ const DEMO = {
             
         }
     },
-    
-    listItems: [ 'Basic One', 'Basic Two', 'Basic Three' ],
-    
+
     attrsOfDropdownBoxes: [
     
         {
@@ -91,7 +89,9 @@ const DEMO = {
         },
     ],
     
-    sendingParticipants: [ 'Multinet', 'ORIGINUSR', 'Australian Energy Market Operator', 'Origin', 'Jemena' ],
+    listItems: [ 'Basic One', 'Basic Two', 'Basic Three' ],
+    
+    sendingParticipants: [ 'Multinet', 'ORIGINUSR', 'Origin', 'Jemena', 'Australian Energy Market Operator'],
     
     receivingParticipants: [ 'Envestra', 'Origin', 'Central Ranges (Tamworth)' ],
     

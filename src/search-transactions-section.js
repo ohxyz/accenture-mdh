@@ -92,8 +92,6 @@ class AdvancedSearch extends React.Component {
             ? { display: 'block' } 
             : { display: 'none' };
         
-        const listItems = [ 'Advanced One', 'Advanced Two', 'Advanced Three', 'Adv 4', 'Adv V' ];
-        
         return (
 
             <div id="advanced-search-section" style={ style} >
