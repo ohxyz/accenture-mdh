@@ -77,7 +77,8 @@ class DashBoard extends React.Component {
         
         this.setState( {
             
-            searchResults: records
+            searchResults: records,
+            showSearchResults: true
         } );
         
     }
@@ -94,13 +95,7 @@ class DashBoard extends React.Component {
     }
     
     handleSearch( event ) {
-        
-        this.setState( {
-            
-            showSearchResults: true
-            
-        } );
-        
+
         console.log( 'on search', this.searchInputs );
         this.fetchTransactions();
     }

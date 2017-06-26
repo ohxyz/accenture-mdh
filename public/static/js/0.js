@@ -57,45 +57,83 @@ $( '#search-transactions-section' ).ready ( function () {
         } );
         
     }
+
     
     var initPerfectScrollbar = function () {
         
-        var containers = document.querySelectorAll( '.dropdown-list' );
+        function addInnerBar( scrollbarContainer ) {
+                
+            var $scrollBarY = $( '.ps__scrollbar-y', scrollbarContainer );
+            var $innerBar = $( '<div class="inner-bar-of-scrollbar">' );
+            $scrollBarY.append( $innerBar );
+
+        };
         
+        function asyncUpdateScrollBar( scrollbarContainer ) {
+                               
+            window.setTimeout( function() {
+                
+                Ps.update( scrollbarContainer );
+            }, 0 );
+        }
+
+        var scrollbarContainers = document.querySelectorAll( '.dropdown-list' );
         
-        containers.forEach( function ( container ) {
+        scrollbarContainers.forEach( function ( scrollbarContainer ) {
             
-            Ps.initialize( container, {
+            Ps.initialize( scrollbarContainer, {
                 
                suppressScrollX: true
                 
             } );
             
-            var $scrollBarY = $( '.ps__scrollbar-y', container );
-            var $innerBar = $( '<div class="inner-bar-of-scrollbar">' );
-            var $container = $( container );
-
-            $scrollBarY.append( $innerBar );
+            addInnerBar( scrollbarContainer );
             
-            var $dropdownBox = $container.parent().parent();
+            var $scrollbarContainer = $( scrollbarContainer );
+            var $dropdownBox = $scrollbarContainer.parent().parent();
             var $dropdownHeader = $dropdownBox.find( '.dropdown-header' );
-            
+
             $dropdownHeader.click( function () {
                 
                 // NOTE: If it has "is-opened" class, that means the dropdown list is opened
                 //       So, the click event will close the dropdown-list
                 if ( $dropdownBox.hasClass( 'is-opened' ) === false ) {
-                    
-                    window.setTimeout( function() {
-                        
-                        Ps.update( container );
-                    }, 0);
+
+                    asyncUpdateScrollBar( scrollbarContainer );
                 }
             } );
 
         } );
-    }
+                    
+        /* START: For dynamically generated DropdownBox */
 
+        var isScrollBarInitialized = false;
+        
+        $( 'body' ).on( 'click', '.dropdown-box', function ( event ) {
+            
+            var scrollbarContainer = $( '.dropdown-list', this ).get( 0 );
+            var $elem = $( this );
+
+            if ( isScrollBarInitialized === false ) {
+
+                Ps.initialize( scrollbarContainer, {
+                
+                    suppressScrollX: true
+                    
+                } );
+                
+                addInnerBar( scrollbarContainer );
+                asyncUpdateScrollBar( scrollbarContainer );
+                
+                isScrollBarInitialized = true;
+            }
+            
+
+        } );
+        
+        /* END: For dynamic generated DropdownBox */ 
+    }
+    
     initPikaday();
     initPerfectScrollbar();
     

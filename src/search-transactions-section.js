@@ -9,17 +9,7 @@ import { GLOBAL, LOCAL_DATA } from './config';
 class BasicSearch extends React.Component {
 
     render() {
-              
-        const transactionStatus = [
-            'Completed',
-            'Requested',
-            'Cancelled',
-            'Objected',
-            'Pending Acknowledgement',
-            'PACN',
-            'Rejected'
-        ];
-        
+
         const otherDropdownBoxes = [
         
             {
@@ -27,7 +17,7 @@ class BasicSearch extends React.Component {
                 id: "transaction-status",
                 name: "transaction-status",
                 title: "Transaction Status",
-                listItems: transactionStatus,
+                listItems: LOCAL_DATA.transactionStatus,
                 onChange: this.props.onChange
             }
         

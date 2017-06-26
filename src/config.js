@@ -2,8 +2,8 @@
 
 const GLOBAL = {
     
-    enableAdvancedSearch: true,
-    showSearchResults: true
+    enableAdvancedSearch: false,
+    showSearchResults: false
 };
 
 const DEMO = {
@@ -87,6 +87,17 @@ const DEMO = {
             title: 'Transaction Type',
             listItems: this.listItems
         },
+    ],
+    
+    transactionStatus: [
+    
+        'Completed',
+        'Requested',
+        'Cancelled',
+        'Objected',
+        'Pending Acknowledgement',
+        'PACN',
+        'Rejected'
     ],
     
     listItems: [ 'Basic One', 'Basic Two', 'Basic Three' ],
