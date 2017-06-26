@@ -115,16 +115,22 @@ class DateBox extends React.Component {
     validateDate() {
         
         let sanitizedDate = this.datePicked.replace( /\s/g, '').slice( 0, 10 );
+        let isValid = false;
         
         if ( this.allowEmpty === true && sanitizedDate === '' ) {
             
-            this.isValidDate = true;
+            isValid = true;
         }
-        else { 
+        else if ( sanitizedDate.length !== 10 ) {
+        
+            isValid = false;
+        }
+        else {
             // February 30 returns true
-            this.isValidDate = validator.isISO8601( sanitizedDate );
+            isValid = validator.isISO8601( sanitizedDate );
         }
         
+        this.isValidDate = isValid;
     }
 
     handleInputBoxChange( ) {
