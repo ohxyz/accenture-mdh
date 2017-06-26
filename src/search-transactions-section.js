@@ -185,6 +185,47 @@ class AdvancedSearch extends React.Component {
 
 class SearchControls extends React.Component {
     
+    renderSearchButtonIcon() {
+        
+        return (
+        
+            <svg className="svg-search-button-icon" viewBox="0 0 34 36.5">
+                <path d="M28.4,26.6l-4.7-4.7c2.5-3.9,2.1-9.2-1.4-12.7c-4-4-10.4-4-14.4,0c-4,4-4,10.4,0,14.4
+                    c3.4,3.4,8.8,3.9,12.7,1.4l4.7,4.7c0.9,0.9,2.2,0.9,3.1,0C29.3,28.8,29.3,27.4,28.4,26.6z M19.7,20.9c-2.5,2.5-6.6,2.5-9.1,0
+                    c-2.5-2.5-2.5-6.6,0-9.1c2.5-2.5,6.6-2.5,9.1,0C22.2,14.4,22.2,18.4,19.7,20.9z"/>
+            </svg>
+        )
+    }
+    
+    renderSearchButtonLoadingIcon() {
+        
+        return (
+        
+            <svg className="svg-search-button-loading-icon" viewBox="0 0 100 100" >
+                <g transform="translate(25 25)">
+                    <rect x="-20" y="-20" rx="4" ry="4" opacity="0.9">
+                        <animateTransform attributeName="transform" type="scale" from="1.5" to="1" repeatCount="indefinite" begin="0s" dur="2s" calcMode="spline" keySplines="0.2 0.8 0.2 0.8" keyTimes="0;1"/>
+                    </rect>
+                </g>
+                <g transform="translate(75 25)">
+                    <rect x="-20" y="-20" rx="4" ry="4" opacity="0.8">
+                        <animateTransform attributeName="transform" type="scale" from="1.5" to="1" repeatCount="indefinite" begin="0.2s" dur="2s" calcMode="spline" keySplines="0.2 0.8 0.2 0.8" keyTimes="0;1"/>
+                    </rect>
+                </g>
+                <g transform="translate(25 75)">
+                    <rect x="-20" y="-20" rx="4" ry="4" opacity="0.7">
+                        <animateTransform attributeName="transform" type="scale" from="1.5" to="1" repeatCount="indefinite" begin="0.6s" dur="2s" calcMode="spline" keySplines="0.2 0.8 0.2 0.8" keyTimes="0;1"/>
+                    </rect>
+                </g>
+                <g transform="translate(75 75)">
+                    <rect x="-20" y="-20" rx="4" ry="4" opacity="0.6">
+                        <animateTransform attributeName="transform" type="scale" from="1.5" to="1" repeatCount="indefinite" begin="0.4s" dur="2s" calcMode="spline" keySplines="0.2 0.8 0.2 0.8" keyTimes="0;1"/>
+                    </rect>
+                </g>
+            </svg>
+        )
+    }
+    
     render() {
         
         return (
@@ -193,7 +234,9 @@ class SearchControls extends React.Component {
                 <button id="search-button"
                         onClick={ this.props.onSearch } 
                 >
-                    Search
+                    { /*this.renderSearchButtonIcon()*/ }
+                    { this.renderSearchButtonLoadingIcon() }
+                    <span className="search-button-text">Search</span>
                 </button>
                 <label id="toggle-search-mode" 
                        onClick={ this.props.toggleSearchModeClick }

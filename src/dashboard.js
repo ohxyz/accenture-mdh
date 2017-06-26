@@ -1,8 +1,8 @@
 import React from 'react';
+import 'whatwg-fetch';
 import { SearchTransactionsSection } from './search-transactions-section';
 import { SearchResultsSection } from './search-results-section';
-import 'whatwg-fetch';
-import { GLOBAL } from './config.js';
+import { GLOBAL, LOCAL_DATA } from './config.js';
 
 const AJAX = require( './ajax' );
 const UTILS = require( './utils' );
@@ -17,28 +17,7 @@ class DashBoard extends React.Component {
         this.handleFetch = this.handleFetch.bind( this );
         this.handleChange = this.handleChange.bind( this );
         
-        this.searchInputs = {
-            
-            'fuel-type': [ 'Gas' ],
-            'nmi-mirn': '',
-            'transaction-id': '',
-            'message-id': '',
-            'transaction-group': [ 'SORD', 'CATS' ],
-            'transaction-type': [ 'ServiceOrderRequest', 'CATSObjectionWithdrawal' ],
-            'transaction-status': [ 'Completed', 'PACN' ],
-            
-            'sending-participant': '',
-            'receiving-participant': '',
-            'unsolicited-responses': false,
-            'date-created-from': '',
-            'date-created-to': '',
-            'time-created-from': '',
-            'time-created-to': '',
-            'service-order-type': [],
-            'service-order-subtype': [],
-            'service-order-number': [],
-            'cr-code': '',
-        };
+        this.searchInputs = LOCAL_DATA.defaultSearchInputs;
         
         this.showSearchResults = GLOBAL.showSearchResults;
         

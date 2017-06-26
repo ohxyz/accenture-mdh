@@ -1,0 +1,118 @@
+#dashboard {
+
+}
+    
+#search-transactions-section {
+    margin-bottom: 30px;
+    
+}
+
+    #search-transactions-content {
+        position: relative;
+        
+    }
+
+        #quick-search {
+            position: absolute;
+            top: 14px;
+            right: 0;
+            color: #1d92ed;
+        }
+        
+        #basic-search {
+            margin: 0;
+            padding: $search-section-padding;
+        }
+        
+            .control-list {
+                width: 101%;
+                
+            }
+
+                .control-list > li{
+                    /*float: left;*/
+                    display: inline-block;
+                    width: 24%;
+                    margin-right: 1%;
+                    margin-top: 6px;
+                    margin-bottom: 6px;
+                    vertical-align: top;
+                }
+                
+        #advanced-search-section {
+            padding: $search-section-padding;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+
+    #search-controls {
+        
+        margin-top: 20px;
+        
+    }
+        #clear-all-fields {
+            float: left;
+            margin-top: 14px;
+            display: inline-block;
+            text-decoration: underline;
+            color: $defaultFontColor;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        #toggle-search-mode {
+            font-family: "Open Sans Bold";
+            float: right;
+            margin-right: 40px;
+            margin-top: 14px;
+            display: inline-block;
+            text-decoration: underline;
+            color: #2894ea;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        #search-button {
+            
+            position: relative;
+            float: right;
+            color: white;
+            background-color: #7ace4c;
+            border: 1px solid #7ace4c;
+            
+            .svg-search-button-icon {
+                
+                position: absolute;
+                top: 11px;
+                left: 16px;
+                width: 20px;
+                height: 20px;
+                fill: white;
+            }
+            
+            .svg-search-button-loading-icon {
+                
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                top: 11px;
+                left: 16px;
+                
+                rect {
+                    width: 38%;
+                    height: 38%;
+                    fill: white;
+                    
+                }
+            }
+            
+            .search-button-text {
+                
+                margin-left: 20px;
+            }
+        }
+    
+#search-results-section {
+    background-color: #edf0f2;
+    padding-top: 30px;
+}

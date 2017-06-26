@@ -1,12 +1,37 @@
 /* Global configuration */
 
+
+/* Some are for dev/test purposes */
 const GLOBAL = {
     
-    enableAdvancedSearch: false,
-    showSearchResults: false
+    enableAdvancedSearch: true,
+    showSearchResults: true,
 };
 
 const DEMO = {
+    
+    defaultSearchInputs: {
+   
+        'fuel-type': [ 'Gas' ],
+        'nmi-mirn': '',
+        'transaction-id': '',
+        'message-id': '',
+        'transaction-group': [ 'SORD', 'CATS' ],
+        'transaction-type': [ 'ServiceOrderRequest', 'CATSObjectionWithdrawal' ],
+        'transaction-status': [ 'Completed', 'PACN' ],
+        
+        'sending-participant': '',
+        'receiving-participant': '',
+        'unsolicited-responses': false,
+        'date-created-from': '',
+        'date-created-to': '',
+        'time-created-from': '',
+        'time-created-to': '',
+        'service-order-type': [],
+        'service-order-subtype': [],
+        'service-order-number': [],
+        'cr-code': '',
+    },
     
     cascadedData: {
             
