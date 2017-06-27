@@ -4,8 +4,8 @@
 /* Some are for dev/test purposes */
 const GLOBAL = {
     
-    enableAdvancedSearch: true,
-    showSearchResults: true,
+    enableAdvancedSearch: false,
+    showSearchResults: false,
 };
 
 const DEMO = {
@@ -127,7 +127,7 @@ const DEMO = {
     
     listItems: [ 'Basic One', 'Basic Two', 'Basic Three' ],
     
-    sendingParticipants: [ 'Multinet', 'ORIGINUSR', 'Origin', 'Jemena', 'Australian Energy Market Operator'],
+    sendingParticipants: [ 'Multinet', 'ORIGINUSR', 'Origin', 'Jemena', 'Australian Energy Market Operator' ],
     
     receivingParticipants: [ 'Envestra', 'Origin', 'Central Ranges (Tamworth)' ],
     

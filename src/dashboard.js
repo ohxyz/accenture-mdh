@@ -21,6 +21,8 @@ class DashBoard extends React.Component {
         
         this.showSearchResults = GLOBAL.showSearchResults;
         
+        this.searchResults = [];
+        
         if ( this.showSearchResults === true ) {
             
             this.fetchTransactions();
@@ -29,7 +31,7 @@ class DashBoard extends React.Component {
         this.state = {
             
             showSearchResults: GLOBAL.showSearchResults,
-            searchResults: []
+
         };
 
         DashBoard.dashboard = this;
@@ -54,9 +56,10 @@ class DashBoard extends React.Component {
 
         } );
         
+        this.searchResults = records;
+        
         this.setState( {
-            
-            searchResults: records,
+
             showSearchResults: true
         } );
         
@@ -125,7 +128,7 @@ class DashBoard extends React.Component {
             
                 <section id="search-results-section" >
                     <SearchResultsSection 
-                        searchResults={ this.state.searchResults }
+                        searchResults={ this.searchResults }
                     />
                 </section>
             );

@@ -185,7 +185,21 @@ class AdvancedSearch extends React.Component {
 
 class SearchControls extends React.Component {
     
-    renderSearchButtonIcon() {
+    constructor( props ) {
+        
+        super( props );
+        
+        this.handleSearch = this.handleSearch.bind( this );
+        
+        this.isSearchStarted = false;
+        this.state = {
+            
+            isSearching: false
+        }
+        
+    }
+    
+    renderSearchButtonStaticIcon() {
         
         return (
         
@@ -194,7 +208,7 @@ class SearchControls extends React.Component {
                     c3.4,3.4,8.8,3.9,12.7,1.4l4.7,4.7c0.9,0.9,2.2,0.9,3.1,0C29.3,28.8,29.3,27.4,28.4,26.6z M19.7,20.9c-2.5,2.5-6.6,2.5-9.1,0
                     c-2.5-2.5-2.5-6.6,0-9.1c2.5-2.5,6.6-2.5,9.1,0C22.2,14.4,22.2,18.4,19.7,20.9z"/>
             </svg>
-        )
+        );
     }
     
     renderSearchButtonLoadingIcon() {
@@ -226,16 +240,47 @@ class SearchControls extends React.Component {
         )
     }
     
+    renderSearchButtonIcon() {
+        
+        if ( this.isSearchStarted === true ) {
+            
+            return this.renderSearchButtonLoadingIcon();
+            
+        }
+        else {
+            
+            return this.renderSearchButtonStaticIcon();
+        }
+    }
+    
+    handleSearch() {
+        
+        if ( this.isSearchStarted === true ) {
+            
+            return ;
+        }
+
+        this.isSearchStarted = true;
+        
+        this.props.onSearch();
+    
+        this.setState( {
+            
+            isSearching: true
+        } );
+        
+    }
+    
     render() {
         
         return (
             <div id="search-controls" className="clearfix">
                 <label id="clear-all-fields">Clear All Fields</label>
                 <button id="search-button"
-                        onClick={ this.props.onSearch } 
+                        onClick={ this.handleSearch } 
                 >
-                    { /*this.renderSearchButtonIcon()*/ }
-                    { this.renderSearchButtonLoadingIcon() }
+                    { this.renderSearchButtonIcon() }
+                   
                     <span className="search-button-text">Search</span>
                 </button>
                 <label id="toggle-search-mode" 
