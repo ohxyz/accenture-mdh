@@ -12,15 +12,13 @@ class DashBoard extends React.Component {
     constructor() {
         
         super();
-        
-        this.handleSearch = this.handleSearch.bind( this );
+
         this.handleFetch = this.handleFetch.bind( this );
         this.handleChange = this.handleChange.bind( this );
         
         this.searchInputs = LOCAL_DATA.defaultSearchInputs;
         
         this.showSearchResults = GLOBAL.showSearchResults;
-        
         this.searchResults = [];
         
         if ( this.showSearchResults === true ) {
@@ -57,10 +55,12 @@ class DashBoard extends React.Component {
         } );
         
         this.searchResults = records;
+        this.isSearching = false;
         
         this.setState( {
 
-            showSearchResults: true
+            showSearchResults: true,
+            isSearching: false
         } );
         
     }
@@ -75,13 +75,7 @@ class DashBoard extends React.Component {
 
         AJAX.fetchTransactions( this.handleFetch, this.handleFetchError );
     }
-    
-    handleSearch( event ) {
 
-        console.log( 'on search', this.searchInputs );
-        this.fetchTransactions();
-    }
-    
     handleChange( eventOrElement, boxAttrs ) {
 
         let targetElement = eventOrElement.currentTarget === undefined
@@ -136,16 +130,17 @@ class DashBoard extends React.Component {
         
         return '';
     }
-
+    
     render() {
-       
+
         return (
             <div id="dashboard">
                 <section id="search-transactions-section">
                     <SearchTransactionsSection
                         defaultInputValues={ this.searchInputs }
-                        onSearch={ this.handleSearch }
+                        
                         onChange={ this.handleChange }
+                        searchInputs={ this.searchInputs }
                     />
                 </section>
                 { this.renderSearchResultsSection() }

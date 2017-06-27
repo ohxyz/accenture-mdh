@@ -191,7 +191,7 @@ class SearchControls extends React.Component {
         
         this.handleSearch = this.handleSearch.bind( this );
         
-        this.isSearchStarted = false;
+        this.isSearching = false;
         this.state = {
             
             isSearching: false
@@ -242,7 +242,7 @@ class SearchControls extends React.Component {
     
     renderSearchButtonIcon() {
         
-        if ( this.isSearchStarted === true ) {
+        if ( this.isSearching === true ) {
             
             return this.renderSearchButtonLoadingIcon();
             
@@ -255,32 +255,17 @@ class SearchControls extends React.Component {
     
     handleSearch() {
         
-        if ( this.isSearchStarted === true ) {
-            
-            return ;
-        }
+        console.log( 'in button', this.props.searchInputs );
 
-        this.isSearchStarted = true;
-        
-        this.props.onSearch();
-    
-        this.setState( {
-            
-            isSearching: true
-        } );
-        
     }
-    
+
     render() {
         
         return (
             <div id="search-controls" className="clearfix">
                 <label id="clear-all-fields">Clear All Fields</label>
-                <button id="search-button"
-                        onClick={ this.handleSearch } 
-                >
+                <button id="search-button" onClick={ this.handleSearch } >
                     { this.renderSearchButtonIcon() }
-                   
                     <span className="search-button-text">Search</span>
                 </button>
                 <label id="toggle-search-mode" 
@@ -351,7 +336,7 @@ class SearchTransactionsSection extends React.Component {
     }
     
     render() {
-        
+
         return (
             <div id="search-transactions-content" className="section-box">
                 { /* this.renderQuickSearchButton() */ }
@@ -366,9 +351,9 @@ class SearchTransactionsSection extends React.Component {
                     onChange={ this.props.onChange }
                 />
                 <SearchControls
-                    onSearch={ this.props.onSearch }
                     toggleSearchModeClick={ this.toggleSearchModeClick } 
                     toggleSearchModeText={ this.searchModeText }
+                    searchInputs={ this.props.searchInputs }
                 />
             </div>
         )
