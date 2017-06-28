@@ -224,7 +224,6 @@ class SearchControls extends React.Component {
             </svg>
         
         );
-        
     }
     
     renderSearchButton() {

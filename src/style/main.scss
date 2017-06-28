@@ -80,23 +80,28 @@ header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1 );
 
     #top-nav {
-        margin-bottom: -2px;
-    }
 
-    #top-nav li {
-        display: inline-block;
-        width: 17%;
-        margin-right: 5%;
-        padding-top: 24px;
-        padding-bottom: 12px;
-        font-family: "Open Sans Bold";
-        font-size: 16px;
-        color: $fontBoldColor;
-    }
-    
-        #top-nav .inactive {
-            color: #9f9f9f;
+        margin-bottom: -2px;
+
+        a {
+            font-family: "Open Sans Bold";
+            font-size: 16px;
+            color: $defaultFontColor;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            width: 17%;
+            margin-right: 5%;
+            padding-top: 24px;
+            padding-bottom: 12px;
+            cursor: pointer;
+
+            &.active {
+
+                color: $defaultFontColor2;
+            }
         }
+    }
 }
 
         
