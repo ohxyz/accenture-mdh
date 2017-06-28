@@ -7,7 +7,7 @@ import { GLOBAL, LOCAL_DATA } from './config';
 const AJAX = require( './ajax' );
 const UTILS = require( './utils' );
 
-class DashBoard extends React.Component {
+class Dashboard extends React.Component {
     
     constructor() {
         
@@ -35,7 +35,7 @@ class DashBoard extends React.Component {
 
         };
 
-        DashBoard.dashboard = this;
+        Dashboard.dashboard = this;
     }
     
     handleFetch( json ) {
@@ -168,14 +168,15 @@ class DashBoard extends React.Component {
             </div>
         )
     }
+
 }
 
 
 document.addEventListener( 'DOMContentLoaded' , () => {
     
     window[ 'COMPONENTS' ] = UTILS.setDefault( window[ 'COMPONENTS' ], {} );
-    window[ 'COMPONENTS' ].dashboard = DashBoard.dashboard;
+    window[ 'COMPONENTS' ].dashboard = Dashboard.dashboard;
     
 } );
 
-export { DashBoard };
+export { Dashboard };

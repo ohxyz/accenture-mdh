@@ -7,11 +7,24 @@ import {
     Redirect
 } from 'react-router-dom';
 
-import { DashBoard } from './dashboard';
+import { Dashboard } from './dashboard';
 import { Reports } from './reports';
 import './style/index.css';
 
 class AppRouter extends React.Component {
+
+    renderNavLink( linkName ) {
+        
+        let firstLetterCapitalized = linkName[0].toUpperCase() + linkName.slice( 1 );
+
+        return (
+            <NavLink id={ linkName } to={ '/' + linkName } activeClassName="active">
+                <span>{ firstLetterCapitalized }</span>
+            </NavLink>
+
+        )
+
+    }
 
     render() {
 
@@ -21,17 +34,13 @@ class AppRouter extends React.Component {
                 <div>
                     <header>
                         <nav id="top-nav" className="section-box">
-                            <NavLink id="dashboard" to="/dashboard" activeClassName="active">
-                                <span>Dashboard</span>
-                            </NavLink>
-                            <NavLink id="reports" to="/reports" activeClassName="active">
-                                <span>Reports</span>
-                            </NavLink>
+                            { this.renderNavLink( 'dashboard' ) }
+                            { this.renderNavLink( 'reports' ) }
                         </nav>
                     </header>
 
                     <Redirect from="/" to="dashboard" />
-                    <Route path="/dashboard" component={ DashBoard } />
+                    <Route path="/dashboard" component={ Dashboard } />
                     <Route path="/reports" component={ Reports } />
                 </div>
             </Router>
@@ -40,7 +49,7 @@ class AppRouter extends React.Component {
 }
 
 class App extends React.Component {
-      
+    
     render () {
         
         return (

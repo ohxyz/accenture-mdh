@@ -12,6 +12,7 @@ class DateBox extends React.Component {
         this.handleInputBoxChange = this.handleInputBoxChange.bind( this );
         this.handleInputBoxFocus = this.handleInputBoxFocus.bind( this );
         this.handleInputBoxBlur = this.handleInputBoxBlur.bind( this );
+        this.handleClickOutside = this.handleClickOutside.bind( this );
         
         this.inputBox = null;
        
@@ -253,6 +254,29 @@ class DateBox extends React.Component {
             this.inputBox.focus();
         }
     }
+
+    handleClickOutside( event ) {
+
+        if ( UTILS.isDescendant( event.target, this.dom ) === false ){
+                        
+            this.close();
+        }
+    }
+
+    componentDidMount() {
+
+        document.addEventListener( 'mouseup', this.handleClickOutside );
+        
+        console.log( 1, window );
+        window.initPikaday();
+
+    }
+    
+    componentWillUnmount() {
+
+        document.removeEventListener( 'mouseup', this.handleClickOutside );
+
+    } 
 }
 
 DateBox.boxes = [];
@@ -262,8 +286,8 @@ document.addEventListener( 'mouseup', ( event ) => {
     DateBox.boxes.forEach( ( box ) => {
 
         if ( UTILS.isDescendant( event.target, box.dom ) === false ){
-            
-            box.close();
+            //console.log( box );
+            // box.close();
         }
 
     } );

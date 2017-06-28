@@ -46,3 +46,22 @@ if (!Array.prototype.fill) {
     }
   });
 }
+
+function isDescendant( childElem, parentElem ) {
+    
+    let node = childElem.parentNode;
+    while ( node !== null ) {
+        
+        if ( node === parentElem ) {
+            return true;
+        }
+        
+        node = node.parentNode;
+    }
+    
+    return false;
+}
+
+BROWSER_SIDE_UTILS = {
+    isDescendant: isDescendant
+};

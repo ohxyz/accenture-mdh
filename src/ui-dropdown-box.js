@@ -44,6 +44,8 @@ class DropdownBox extends React.Component {
         this.handleItemSelected = this.handleItemSelected.bind( this );
         this.close = this.close.bind( this );
         this.handleDone = this.handleDone.bind( this );
+
+        this.handleClickOutside = this.handleClickOutside.bind( this );
         
         this.itemsSelected = this.props.itemsSelected === undefined
             ? []
@@ -363,6 +365,26 @@ class DropdownBox extends React.Component {
             </div>
         );
     }
+
+    handleClickOutside( event ) {
+
+        if ( UTILS.isDescendant( event.target, this.dom ) === false ){
+                        
+            this.close();
+        }
+    }
+
+    componentDidMount() {
+
+        document.addEventListener( 'mouseup', this.handleClickOutside );
+
+    }
+    
+    componentWillUnmount() {
+
+        document.removeEventListener( 'mouseup', this.handleClickOutside );
+
+    } 
 }
 
 class DropdownBoxGroup extends React.Component {
@@ -506,18 +528,6 @@ class DropdownBoxGroup extends React.Component {
 
 /* Global events */
 DropdownBox.boxes = [];
-
-document.addEventListener( 'mouseup', ( event ) => {
-    
-    DropdownBox.boxes.forEach( ( box ) => {
-
-        if ( UTILS.isDescendant( event.target, box.dom ) === false ){
-            
-            box.close();
-        }
-
-    } );
-} );
 
 export { DropdownBox, DropdownBoxGroup };
 
