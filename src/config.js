@@ -133,7 +133,9 @@ const DEMO = {
     
     serviceOrderType: [ 'Service Connection Request', 'Unknown Type' ],
     
-    serviceOrderSubtype: [ 'Subtype 1', 'Subtype B', 'Subtype III' ]
+    serviceOrderSubtype: [ 'Subtype 1', 'Subtype B', 'Subtype III' ],
+    
+    crCode: [ 'Update Next Scheduled Read Date - Retro', 'Change Retailer - Move-In', 'Change Multiple Roles' ]
     
 };
 

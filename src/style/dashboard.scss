@@ -80,6 +80,8 @@
             background-color: #7ace4c;
             border: 1px solid #7ace4c;
             
+
+            
             .svg-search-button-icon {
                 
                 position: absolute;
@@ -90,26 +92,27 @@
                 fill: white;
             }
             
-            .svg-search-button-loading-icon {
-                
-                position: absolute;
-                width: 18px;
-                height: 18px;
-                top: 11px;
-                left: 16px;
-                
-                rect {
-                    width: 38%;
-                    height: 38%;
-                    fill: white;
-                    
-                }
-            }
-            
             .search-button-text {
                 
                 margin-left: 20px;
+                
             }
+            
+            &.is-searching {
+                
+                .svg-search-button-icon {
+                    
+                    top: 10px;
+                }
+                
+                .search-button-text {
+                    
+                    font-size: 13px;
+                }
+            }
+            
+            
+
         }
     
 #search-results-section {

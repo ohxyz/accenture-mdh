@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import { SearchTransactionsSection } from './search-transactions-section';
 import { SearchResultsSection } from './search-results-section';
-import { GLOBAL, LOCAL_DATA } from './config.js';
+import { GLOBAL, LOCAL_DATA } from './config';
 
 const AJAX = require( './ajax' );
 const UTILS = require( './utils' );
@@ -12,13 +12,15 @@ class DashBoard extends React.Component {
     constructor() {
         
         super();
-
+        
+        this.handleSearch = this.handleSearch.bind( this );
         this.handleFetch = this.handleFetch.bind( this );
         this.handleChange = this.handleChange.bind( this );
         
         this.searchInputs = LOCAL_DATA.defaultSearchInputs;
         
         this.showSearchResults = GLOBAL.showSearchResults;
+        this.isSearching = false;
         this.searchResults = [];
         
         if ( this.showSearchResults === true ) {
@@ -29,6 +31,7 @@ class DashBoard extends React.Component {
         this.state = {
             
             showSearchResults: GLOBAL.showSearchResults,
+            isSearching: false
 
         };
 
@@ -75,7 +78,25 @@ class DashBoard extends React.Component {
 
         AJAX.fetchTransactions( this.handleFetch, this.handleFetchError );
     }
-
+    
+    handleSearch( event ) {
+        
+        if ( this.isSearching === true ) {
+            return;
+        }
+        
+        this.isSearching = true;
+        
+        this.setState( {
+            
+            isSearching: true  
+            
+        } );
+        
+        console.log( 'on search', this.searchInputs );
+        this.fetchTransactions();
+    }
+    
     handleChange( eventOrElement, boxAttrs ) {
 
         let targetElement = eventOrElement.currentTarget === undefined
@@ -130,7 +151,7 @@ class DashBoard extends React.Component {
         
         return '';
     }
-    
+
     render() {
 
         return (
@@ -138,9 +159,9 @@ class DashBoard extends React.Component {
                 <section id="search-transactions-section">
                     <SearchTransactionsSection
                         defaultInputValues={ this.searchInputs }
-                        
+                        onSearch={ this.handleSearch }
                         onChange={ this.handleChange }
-                        searchInputs={ this.searchInputs }
+                        isSearching={ this.isSearching }
                     />
                 </section>
                 { this.renderSearchResultsSection() }
