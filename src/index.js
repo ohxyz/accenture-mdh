@@ -9,7 +9,9 @@ import {
 
 import { Dashboard } from './dashboard';
 import { Reports } from './reports';
+import { PATH } from './config';
 import './style/index.css';
+
 
 class AppRouter extends React.Component {
 
@@ -18,7 +20,7 @@ class AppRouter extends React.Component {
         let firstLetterCapitalized = linkName[0].toUpperCase() + linkName.slice( 1 );
 
         return (
-            <NavLink id={ linkName } to={ '/' + linkName } activeClassName="active">
+            <NavLink id={ linkName } to={ PATH + '/' + linkName } activeClassName="active">
                 <span>{ firstLetterCapitalized }</span>
             </NavLink>
 
@@ -38,10 +40,11 @@ class AppRouter extends React.Component {
                             { this.renderNavLink( 'reports' ) }
                         </nav>
                     </header>
-
-                    <Redirect from="/" to="dashboard" />
-                    <Route path="/dashboard" component={ Dashboard } />
-                    <Route path="/reports" component={ Reports } />
+                    
+                    <Redirect from="/" to={ PATH } />
+                    <Redirect from={ PATH } to={ PATH + '/dashboard' } />
+                    <Route path={ PATH + '/dashboard'} component={ Dashboard } />
+                    <Route path={ PATH + '/reports'} component={ Reports } />
                 </div>
             </Router>
         );

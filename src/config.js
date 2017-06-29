@@ -2,6 +2,8 @@
 
 
 /* Some are for dev/test purposes */
+const PATH = '/mdh';
+
 const GLOBAL = {
     
     enableAdvancedSearch: true,
@@ -146,4 +148,4 @@ const DEMO = {
 
 const LOCAL_DATA = DEMO;
 
-export { GLOBAL, LOCAL_DATA };
+export { GLOBAL, LOCAL_DATA, PATH };

@@ -274,11 +274,16 @@ class SearchControls extends React.Component {
         this.props.onSearch();
     }
     
+    renderClearAllFields() {
+        
+        return <label id="clear-all-fields">Clear All Fields</label>
+    }
+    
     render() {
 
         return (
             <div id="search-controls" className="clearfix">
-                <label id="clear-all-fields">Clear All Fields</label>
+                { /* this.renderClearAllFields() */ }
                 { this.renderSearchButton() }
                 <label id="toggle-search-mode" 
                        onClick={ this.props.toggleSearchModeClick }
