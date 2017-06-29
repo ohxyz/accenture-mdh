@@ -103,10 +103,7 @@ class Dashboard extends React.Component {
             ? eventOrElement
             : eventOrElement.currentTarget;
 
-        // let target = event.currentTarget;
         let targetClassName = targetElement.className;
-        
-        // console.log( 'target', targetElement );
         
         if ( targetClassName.indexOf( 'text-box' ) > -1 ) {
             
@@ -126,7 +123,8 @@ class Dashboard extends React.Component {
             let checkBoxAttrs = boxAttrs;
             this.searchInputs[ checkBoxAttrs.name ] = checkBoxAttrs.isChecked;
         }
-        else if ( targetClassName.indexOf( 'datepick-picked' ) > -1 ) {
+        else if ( targetClassName.indexOf( 'date-box-picked' ) > -1 ) {
+            
             
             let DateBoxAttrs = boxAttrs;
             this.searchInputs[ DateBoxAttrs.name ] = DateBoxAttrs.value;
@@ -140,7 +138,6 @@ class Dashboard extends React.Component {
         if ( this.state.showSearchResults === true ) {
         
             return (
-            
                 <section id="search-results-section" >
                     <SearchResultsSection 
                         searchResults={ this.searchResults }
@@ -168,7 +165,6 @@ class Dashboard extends React.Component {
             </div>
         )
     }
-
 }
 
 

@@ -13,6 +13,7 @@ class DateBox extends React.Component {
         this.handleInputBoxFocus = this.handleInputBoxFocus.bind( this );
         this.handleInputBoxBlur = this.handleInputBoxBlur.bind( this );
         this.handleClickOutside = this.handleClickOutside.bind( this );
+        this.handleDatePicked = this.handleDatePicked.bind( this );
         
         this.inputBox = null;
        
@@ -134,7 +135,7 @@ class DateBox extends React.Component {
         this.isValidDate = isValid;
     }
 
-    handleInputBoxChange( ) {
+    handleInputBoxChange() {
         console.log( 'changed' );
         
         this.datePicked = this.inputBox.value;
@@ -142,11 +143,13 @@ class DateBox extends React.Component {
         this.validateDate();
         this.setDateBoxClassName();
         
+        // console.log( this.datePicked );
+        
         if ( this.props.onChange !== undefined ) {
             
             this.props.onChange( this.inputBox, { 
             
-                name: this.props.name,
+                name: this.name,
                 value: this.datePicked
                 
             } );
@@ -262,13 +265,17 @@ class DateBox extends React.Component {
             this.close();
         }
     }
+    
+    handleDatePicked() {
+        
+        this.handleInputBoxChange();
+        this.close();
+    }
 
     componentDidMount() {
-
+  
+        window.EXTERNAL_SCRIPTS.initPikaday( this.dom, this.handleDatePicked  );
         document.addEventListener( 'mouseup', this.handleClickOutside );
-        
-        console.log( 1, window );
-        window.initPikaday();
 
     }
     
@@ -280,19 +287,6 @@ class DateBox extends React.Component {
 }
 
 DateBox.boxes = [];
-
-document.addEventListener( 'mouseup', ( event ) => {
-    
-    DateBox.boxes.forEach( ( box ) => {
-
-        if ( UTILS.isDescendant( event.target, box.dom ) === false ){
-            //console.log( box );
-            // box.close();
-        }
-
-    } );
-    
-} );
 
 document.addEventListener( 'DOMContentLoaded' , () => {
     

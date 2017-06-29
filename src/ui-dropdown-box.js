@@ -63,7 +63,6 @@ class DropdownBox extends React.Component {
         
         this.enableDropdownBox = true;
 
-
         this.state = {
             
             isOpenedClass: '',
@@ -375,7 +374,10 @@ class DropdownBox extends React.Component {
     }
 
     componentDidMount() {
-
+        
+        let scrollbarContainer = this.dom.querySelector( '.dropdown-list' );
+        
+        window.EXTERNAL_SCRIPTS.initScrollbar( scrollbarContainer );
         document.addEventListener( 'mouseup', this.handleClickOutside );
 
     }
@@ -384,7 +386,7 @@ class DropdownBox extends React.Component {
 
         document.removeEventListener( 'mouseup', this.handleClickOutside );
 
-    } 
+    }
 }
 
 class DropdownBoxGroup extends React.Component {

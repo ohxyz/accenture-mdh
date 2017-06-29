@@ -4,7 +4,7 @@
 /* Some are for dev/test purposes */
 const GLOBAL = {
     
-    enableAdvancedSearch: false,
+    enableAdvancedSearch: true,
     showSearchResults: false,
 };
 

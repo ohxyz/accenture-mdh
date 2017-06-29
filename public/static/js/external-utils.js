@@ -61,7 +61,8 @@ function isDescendant( childElem, parentElem ) {
     
     return false;
 }
-
+/*
 BROWSER_SIDE_UTILS = {
     isDescendant: isDescendant
 };
+*/
