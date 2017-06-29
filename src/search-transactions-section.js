@@ -33,7 +33,7 @@ class BasicSearch extends React.Component {
                             name="fuel-type"
 							title="Fuel Type"
                             itemsSelected={ this.props.defaultInputValues[ 'fuel-type' ] }
-                            listItems={ [ 'Gas', 'Electricity' ] }
+                            listItems={ LOCAL_DATA.fuelTypes }
                             onSelect={ this.props.onChange }
 						/>
                     </li>
@@ -133,10 +133,22 @@ class AdvancedSearch extends React.Component {
                         />
                     </li>
                     <li>
-                        <TextBox title="Time Created from" />
+                        <TextBox 
+                            id="time-created-from"
+                            name="time-created-from"
+                            title="Time Created from"
+                            rule={ { name: 'time' } }
+                            onChange={ this.props.onChange }
+                        />
                     </li>
                     <li>
-                        <TextBox title="Time Created to" /> 
+                        <TextBox 
+                            id="time-created-to"
+                            name="time-created-to"
+                            title="Time Created to"
+                            rule={ { name: 'time' } }
+                            onChange={ this.props.onChange }
+                        />
                     </li>
                     <li>
 						<DropdownBox
@@ -255,13 +267,11 @@ class SearchControls extends React.Component {
                 </button>
             )
         }
-
     }
     
     handleSearch() {
 
         this.props.onSearch();
-        
     }
     
     render() {

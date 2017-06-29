@@ -7,6 +7,7 @@ const RULE_EMPTY = '';
 const RULE_NUMERIC = 'numeric';
 const RULE_ALPHANUMERIC_UNDERSCORE_DASH = 'alphanumeric-underscore-dash';
 const RULE_POSITIVE_INTEGER = 'positive-integer';
+const RULE_TIME = 'time';
 
 class TextBox extends React.Component {
     
@@ -25,13 +26,16 @@ class TextBox extends React.Component {
         this.inputBox = null;
 
         // Not UUID
-        let randomString = Math.random().toString(36).slice(2);
+        let randomString = Math.random().toString( 36 ).slice( 2 );
         
         this.id = UTILS.setDefault( props.id, randomString );
         this.name = UTILS.setDefault( props.name, randomString );
         this.title = UTILS.setDefault( props.title, 'Fill in here' );
         this.inputValue = UTILS.setDefault( props.value, '' );
-                
+
+        this.inputBoxId = this.id + '-input-text';
+        this.classNamePrefix = 'text-box';
+
         this.isInputValueValid = true;
         this.allowEmpty = true;
         this.firstTimeFocused = true;
@@ -73,6 +77,7 @@ class TextBox extends React.Component {
             isFocused: this.isFocused,
             value: this.inputValue
         };
+        
     }
     
     validateInputValue() {
@@ -98,6 +103,10 @@ class TextBox extends React.Component {
         else if ( rule === RULE_ALPHANUMERIC_UNDERSCORE_DASH ) {
 
             this.validateAlphanumericUnderscoreDash();
+        }
+        else if ( rule === RULE_TIME ) {
+            
+            this.validateTime();
         }
 
     }
@@ -173,6 +182,28 @@ class TextBox extends React.Component {
                 : 'Letters, numbers, - or _ ';
         }
     }
+    
+    validateTime() {
+        
+        let trimmedTime = this.inputValue.replace( /\s/g, '');
+        let regex = /^([0-1][0-9]|2[0-3])(:|\.)([0-5][0-9])$/;
+        let isValid = false;
+
+        isValid = ( trimmedTime.length === 5 );
+        isValid = regex.test( trimmedTime );
+        
+        if ( isValid === true ) {
+            
+            this.isInputValueValid = true;
+        }
+        else {
+            
+            this.isInputValueValid = false;
+            this.errorMessage = this.isErrorMessageDefined === true
+                ? this.errorMessage
+                : 'HH.mm eg. 23.01';
+        }
+    }
 
     handleFocus( event ) {
         
@@ -229,7 +260,7 @@ class TextBox extends React.Component {
     
     makeClassName() {
         
-        this.className = 'text-box';
+        this.className = this.classNamePrefix;
         
         if ( this.isFocused === true ) {
             
@@ -273,11 +304,13 @@ class TextBox extends React.Component {
     
     renderErrorMessageIfInvalid() {
         
+        let className = this.classNamePrefix + '-error-message';
+        
         if ( this.isInputValueValid === false ) {
 
             return (
             
-                <span className="text-box-error-message">
+                <span className={ className }>
                     { this.errorMessage }
                 </span>
             )
@@ -285,26 +318,33 @@ class TextBox extends React.Component {
         
         return '';
     }
+    
+    renderAdditionalContent() {
+        
+        return '';
+    }
 
     render() {
         
-        let inputBoxId = this.id + '-input-text';
-        
+        let labelClassName = this.classNamePrefix + '-title';
+        let inputClassName = this.classNamePrefix + '-filled';
+
         return (
             <div className={ this.className } 
                  onClick={ this.handleTextBoxClick }
             >
-                <label htmlFor={ inputBoxId } 
-                       className="text-box-title"
+                { this.renderAdditionalContent() }
+                <label htmlFor={ this.inputBoxId } 
+                       className={ labelClassName }
                        ref={ elem => this.textBoxTitleElement = elem }
                 >
                     <span>{ this.title }</span>
                     { this.renderErrorMessageIfInvalid() }
                 </label>
                 
-                <input id={ inputBoxId }
+                <input id={ this.inputBoxId }
                        type="text"
-                       className="text-box-filled"
+                       className={ inputClassName }
                        name={ this.name }
                        defaultValue={ this.inputValue }
                        onFocus={ this.handleFocus }

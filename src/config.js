@@ -9,7 +9,7 @@ const GLOBAL = {
 };
 
 const DEMO = {
-    
+
     defaultSearchInputs: {
    
         'fuel-type': [ 'Gas' ],
@@ -32,6 +32,11 @@ const DEMO = {
         'service-order-number': [],
         'cr-code': '',
     },
+    
+    fuelTypes: [
+        'Gas',
+        'Electricity'
+    ],
     
     cascadedData: {
             

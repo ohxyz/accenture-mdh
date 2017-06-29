@@ -1,73 +1,80 @@
 @import "_variables";
 
-.text-box {
-    
-    border-radius: $default-border-radius;
-    border: $defaultBorder;
-    padding: 0 12px;
-    box-sizing: border-box;
-    color: $default-font-color;
+/* 
+ * TimeBox shares some styles as TextBox. 
+ * TimeBox defines other styles in ui-time-box.scss
+ */
 
-    font-size: $font-m;
-    height: $default-box-height;
+
+@each $box in text-box, time-box {
     
-    input[type="text"] {
-    
-        background-color: transparent;
-    }
-    
-    .text-box-title {
-        display: block;
-        font-size: $font-medium;
-        padding: 18px 0;
-        user-select: none;
+    .#{$box} {
+        border-radius: $default-border-radius;
+        border: $defaultBorder;
+        padding: 0 12px;
+        box-sizing: border-box;
+        color: $default-font-color;
+
+        font-size: $font-m;
+        height: $default-box-height;
         
-        span {
-            display: inline-block;
+        input[type="text"] {
+        
+            background-color: transparent;
+        }
+        
+        .#{$box}-title {
+            display: block;
+            font-size: $font-medium;
+            padding: 18px 0;
+            user-select: none;
             
-            &.text-box-error-message {
-                padding-left: 8px;
-                color: $default-invalid-font-color;
+            span {
+                display: inline-block;
+                
+                &.text-box-error-message {
+                    padding-left: 8px;
+                    color: $default-invalid-font-color;
+                }
+                
+            }
+        }
+
+        .#{$box}-filled {
+            
+            font-family: $default-font-family;
+            width: 100%;
+            display: none;
+            border: none;
+            font-size: $font-medium;
+            color: $default-input-color;
+            margin-top: 2px;
+            width: 100%;
+        }
+        
+        &.is-focused, &.is-filled {
+            
+            .text-box-filled {
+                
+                display: block;
             }
             
-        }
-    }
-
-    .text-box-filled {
-        
-        font-family: $default-font-family;
-        width: 100%;
-        display: none;
-        border: none;
-        font-size: $font-medium;
-        color: $default-input-color;
-        margin-top: 2px;
-        width: 100%;
-    }
-    
-    &.is-focused, &.is-filled {
-        
-        .text-box-filled {
+            .#{$box}-title {
+                padding: $default-box-title-padding;
+                font-size: $font-small;
+            }
             
-            display: block;
+            .#{$box}-filled {
+                
+                color: $default-input-color;
+            }
         }
         
-        .text-box-title {
-            padding: $default-box-title-padding;
-            font-size: $font-small;
-        }
-        
-        .text-box-filled {
+        &.is-invalid {
             
-            color: $default-input-color;
+            border: 1px solid $default-invalid-border-color;
+            background-color: $default-invalid-background-color;
         }
-    }
-    
-    &.is-invalid {
-        
-        border: 1px solid $default-invalid-border-color;
-        background-color: $default-invalid-background-color;
-    }
 
+    }
 }
-
