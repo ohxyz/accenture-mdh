@@ -1,8 +1,7 @@
 /* Global configuration */
 
-
 /* Some are for dev/test purposes */
-const PATH = '/mdh';
+const PATH = '';
 
 const GLOBAL = {
     

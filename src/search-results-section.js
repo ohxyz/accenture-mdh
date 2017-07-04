@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableBox } from './ui-table-box';
+import { TableBox } from './ui-box/ui-box';
 import 'whatwg-fetch';
 
 class SearchResultsSection extends React.Component {

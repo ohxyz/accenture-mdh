@@ -10,7 +10,9 @@ import {
 import { Dashboard } from './dashboard';
 import { Reports } from './reports';
 import { PATH } from './config';
-import './style/index.css';
+// import './style/index.css';
+
+import './mdh-index.css';
 
 
 class AppRouter extends React.Component {

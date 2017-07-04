@@ -1,10 +1,13 @@
 import React from 'react';
-import { DropdownBox, DropdownBoxGroup } from './ui-dropdown-box';
-import { TextBox } from './ui-text-box';
-import { CheckBox } from './ui-check-box';
-import { DateBox } from './ui-date-box';
-import { MessageBox } from './ui-message-box';
+import { 
+    TextBox, 
+    CheckBox, 
+    DateBox, 
+    MessageBox, 
+    DropdownBox, 
+    DropdownBoxGroup } from './ui-box/ui-box';
 import { GLOBAL, LOCAL_DATA } from './config';
+
 
 class BasicSearch extends React.Component {
 
