@@ -5,7 +5,12 @@ class Reports extends React.Component {
     render() {
 
         return (
-            <div className="section-box">Empty page</div>
+            <section id="reports-section" className="section-box">
+                <div>Under construction</div>
+                <div>Under construction</div>
+                <div>Under construction</div>
+                <div>Under construction</div>
+            </section>
         );
     }
 }

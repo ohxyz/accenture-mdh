@@ -105,8 +105,30 @@ header {
             &.active {
 
                 color: $defaultFontColor2;
+                border-bottom: 2px solid #1d92ed;
             }
         }
+    }
+}
+
+#reports-section {
+    
+    div {
+        
+        margin-right: 1%;
+        margin-bottom: 1%;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 20px;
+        text-transform: uppercase;
+        border: 2px dashed #eeeeee;
+        height: 200px;
+        width: 49%;
+        color: #eeeeee;
+        padding-top: 90px;
+        box-sizing: border-box;
+        border-radius: $defaultBorderRadius;
     }
 }
 /* START: MDH */
