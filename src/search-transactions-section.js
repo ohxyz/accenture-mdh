@@ -5,7 +5,7 @@ import {
     DateBox, 
     MessageBox, 
     DropdownBox, 
-    DropdownBoxGroup } from './ui-box/ui-box';
+    DropdownBoxGroup } from './ui-box';
 import { GLOBAL, LOCAL_DATA } from './config';
 
 
